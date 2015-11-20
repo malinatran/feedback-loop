@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tyrion ftw</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script src="app.js"></script>
+</head>
+  <body>
+  <!-- Title -->
+  <h2>Exit ticket, but better.</h2>
+
+  <!-- Display container; append results here -->
+  <div id="display-container"></div>
+
+  <!-- Splash page -->
+  <div id="login-btn"><a href="#">Login</a></div>
+  <div id="signup-btn"><a href="#">Sign up</a></div>
+  <div id="logout-btn" style="display:none"><a href="#">Logout</a></div>
+
+  <!-- User's dashboard -->
+ <!--  Will include: 
+  1. Fill out new survey with editing & deleting options
+  2. View aggregate of survey results
+  3. View my surveys -->
+
+  <!-- Login template -->
+  <template id="login-template">
+    <div id="login-container">
+      <h4>Login</h4>
+      <p>Username: <input name="username"/></p>
+      <p>Password: <input name="password"/></p>
+      <button id="login-submit-btn">Submit</button>
+    </div>
+  </template>
+
+  <!-- Signup template -->
+  <template id="signup-template">
+    <div id="signup-container">
+      <h4>Sign Up</h4>
+      <p>My name is <input name="name"/>.</p>
+      <p>Username: <input name="username"/></p>
+      <p>Password: <input name="password"/></p>
+      <button id="signup-submit-btn">Submit</button>
+    </div>
+  </template>
+
+  </body>
+</html>
