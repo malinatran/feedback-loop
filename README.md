@@ -1,5 +1,6 @@
-Working name: Feedback Loop
-Group name: Team Tyrion
+## Working name: Feedback Loop
+Team Tyrion
+
 Group members:
 * Malina Tran
 * Mike Wiesenhart
