@@ -8,7 +8,7 @@ var app = express();
 
 // Models
 var User = require('./models/user.js');
-var Form = require('./models/form.js');
+var SurveyResponse = require('./models/surveyresponse.js');
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +17,7 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 // Database
-mongoose.connect('mongodb://localhost/ga-classroom');
+mongoose.connect('mongodb://localhost/feedbackloop');
 
 // Listener
 app.listen(port);
@@ -37,6 +37,8 @@ app.post('/users', function(req, res) {
       res.statusCode = 503;
     } else {
       console.log('User created');
+      // User is logged in until user explicitly clicks logout, even if page is refreshed or window is closed
+      // maxAge is set to one year
       res.cookie('loggedInId', user.id, { maxAge:31556952000 }).send(user);
     }
   });

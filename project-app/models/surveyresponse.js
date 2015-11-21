@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var FormSchema = new mongoose.Schema({
+var SurveyResponseSchema = new mongoose.Schema({
   date: Date,
   teaching_quality: Number,
   comfort_level: Number,
@@ -13,5 +13,5 @@ var FormSchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-var Form = mongoose.model('Form', FormSchema);
-module.exports = Form;
+var SurveyResponse = mongoose.model('SurveyResponse', SurveyResponseSchema);
+module.exports = SurveyResponse;
