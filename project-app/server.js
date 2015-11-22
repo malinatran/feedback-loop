@@ -107,9 +107,12 @@ app.post('/users/:id/surveys', function(req, res){
 
 app.get('/user/surveys', function(req,res){
 // grabbing user_id from cookies
-  user_id_pull = req.cookies.loggedinId
+  user_id_pull = req.cookies.loggedInId
+  console.log(user_id_pull)
 // finding responses w/ user id
   SurveyResponse.find({"user":user_id_pull}).then(function(surveys){
+    console.log("get surveys")
+    console.log(surveys)
     res.send(surveys)
   });
 });
