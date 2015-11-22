@@ -146,12 +146,14 @@ $(function() {
       happy_hr_suggestion: happy_hr_suggestion,
     };
 
-  // sending request
+  // sending post request
+  // document.cookie is irrelevant.  It grabs the user's _id from the cookie on the server side
     $.ajax({
       url: "http://localhost:3000/users/"+document.cookie+"/surveys",
       method: "POST",
       data: surveyResponseData
     }).done(viewDashboard);
+    // directs to dashboard
   }
 
   // 6. showUserSurveys
@@ -171,16 +173,18 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
+    // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for(var i=0;i<data.length;i++) {
       $('#display-container').append(template(data[i]));
-    var link = $('.view-survey').last();
-      console.log(link)
-      link.off("click")
+      // adding event listener to view survey button
+      var link = $('.view-survey').last();
+      console.log(link);
       link.click(function(){
-      var id = $(this).parent().attr('data-id');
-      console.log(id);
-      getUserViewSurvey(id);
+        // grab id from parent element
+        var id = $(this).parent().attr('data-id');
+        console.log(id);
+        getUserViewSurvey(id);
     });
 
 
@@ -212,11 +216,12 @@ $(function() {
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
-
+    // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
 
     var link = $('.edit-survey');
+    // add eventlistener to edit survey
     link.click(function(){
       var id = $(this).parent().attr('data-id');
       console.log(id);
@@ -240,15 +245,17 @@ $(function() {
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
-
+    // Handlebars compiling template for editing survey
     var template = Handlebars.compile($("#survey-edit-template").html());
     $('#display-container').append(template(data));
+    // Event listener to subment edit
     $('.edit-survey-submit').click(function(){
-      saveUpdate();
+      updateSurveyResponse();
     });
   }
 
 // 8c. Put request with survey edit form
+// Grabbing form values
   var updateSurveyResponse = function(){
     var date = $("input[name='date']").val();
     var id = $("input[name='_id']").val();
@@ -269,7 +276,7 @@ $(function() {
       feeling: feeling,
       happy_hr_suggestion: happy_hr_suggestion,
     };
-
+    // sending put request with object data
     $.ajax({
       url: "http://localhost:3000/surveys/"+id,
       method: "PUT",

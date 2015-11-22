@@ -66,13 +66,14 @@ app.get('/surveys', function(req, res){
 // Create surveyResponse (Peter)
 app.post('/users/:id/surveys', function(req, res){
   console.log(req.cookies.loggedInId)
-
+// find user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
     if(err) {
       console.log(err);
     } else {
       console.log(user.survey_responses)
 
+      // setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
         teaching_quality: req.body.teaching_quality,
@@ -85,10 +86,11 @@ app.post('/users/:id/surveys', function(req, res){
       });
 
       // Not pushing to user for some reason...
-      user.survey_responses.push({
-        survey
-      });
-
+      // user.survey_responses.push({
+      //   survey
+      // });
+  
+      // saving survey
       survey.save(function(err) {
         if(err) {
           console.log(err);
