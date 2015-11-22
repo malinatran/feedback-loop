@@ -25,6 +25,11 @@
   1. Fill out new survey with editing & deleting options
   2. View aggregate of survey results
   3. View my surveys -->
+  <div id="view-survey-btn" style="display:none"><a href="#">View My Surveys</a></div>
+  <div id="new-survey-btn" style="display:none"><a href="#">Fill out Survey</a></div>
+
+  <!-- Return home -->
+  <div id="view-dashboard" style="display:none"><a href="#">Back to Dashboard</a></div>
 
   <!-- Login template -->
   <template id="login-template">
@@ -47,5 +52,32 @@
     </div>
   </template>
 
+  <!-- New Survey template -->
+  <template id="new-survey-template">
+    <div id ="new-survey-container">
+      <h4>Submit New Survey</h4>
+      <p>Date:<input type="date" name="date"/>.</p>
+      <p>teaching_quality: <input name="teaching_quality"/></p>
+      <p>comfort_level: <input name="comfort_level"/></p>
+      <p>lesson_score: <input name="lesson_score"/></p>
+      <p>comments: <input name="comments"/></p>
+      <p>feeling: <input name="feeling"/></p>
+      <p>happy_hr_suggestion: <input name="happy_hr_suggestion"/></p>
+      <button id="survey-submit-btn">Submit Survey</button>
+
+    </div>
+  </template>
+
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

@@ -74,12 +74,78 @@ $(function() {
 
   // 4. viewDashboard
   var viewDashboard = function() {
+    console.log(document.cookie)
+    console.log("viewDashboard")
     $('#display-container').empty();
     $('#logout-btn').show();
     $('#login-btn').hide();
     $('#signup-btn').hide();
+    $('#view-survey-btn').show();
+    $('#new-survey-btn').show();
+    $('#view-dashboard').hide()
+    getSurveys();
+    // Display new and view buttons.  And then calls findSurveys function
   };
 
+  // 4a.findSurveys
+  var getSurveys = function(){
+    $.get('/surveys').done(function(data){
+      // Make view template.  Going to just display surveys first and then will go back and have it display averages/comments.
+      renderSurveys(data)
+      console.log(data)
+    })
+  }
+
+  var renderSurveys = function(){
+
+  }
+
+
+  // 5. New Survey
+  // 5a. renderSurveyForm
+  var renderSurveyForm = function(){
+   
+    // console.log("hello")
+    $('#display-container').empty();
+    $('#new-survey-btn').hide();
+    $('#view-dashboard').show()
+    var template = Handlebars.compile($('#new-survey-template').html());
+    $('#display-container').append(template);
+  }
+
+// 5b. createSurveyResponse
+  var createSurveyResponse = function(){
+    console.log('ajax to create instructors')
+    // console.log(document.cookie.value)
+    // pulling values from form and cookie
+    // console.log(id)
+    var date = $("input[name='date']").val();
+    var teaching_quality = $("input[name='teaching_quality']").val();
+    var comfort_level = $("input[name='comfort_level']").val();
+    var lesson_score = $("input[name='lesson_score']").val();
+    var comments = $("input[name='comments']").val();
+    var feeling = $("input[name='feeling']").val();
+    var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
+
+    // setting data object for ajax
+    var surveyResponseData = {
+    date: date,
+    teaching_quality: teaching_quality,
+    comfort_level: comfort_level,
+    lesson_score: lesson_score,
+    comments: comments,
+    feeling: feeling,
+    happy_hr_suggestion: happy_hr_suggestion,
+    };
+
+  // sending request
+    $.ajax({
+    url: "http://localhost:3000/users/"+document.cookie+"/surveys",
+    method: "POST",
+    data: surveyResponseData
+    }).done(viewDashboard);
+
+  }
   // CLICK FUNCTIONS
   // 1a. Login button > renderLoginForm
   $('#login-btn').on('click', renderLoginForm);
@@ -91,11 +157,19 @@ $(function() {
   $('body').on('click', '#signup-submit-btn', submitSignupForm);
   // 3. Logout button > logoutUser
   $('body').on('click', '#logout-btn', logoutUser);
+  // 4a. New Survey button > renderSurveys
+  $('#new-survey-btn').on('click', renderSurveyForm);
+  // 4b. Submit new survey > submitNewSurvey
+  $('body').on('click', '#survey-submit-btn', createSurveyResponse);
+  // 5. Back to dashboard button > viewDashboard
+  $('#view-dashboard').on('click', viewDashboard);
+
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
     viewDashboard();
   };
 
+  // 
 
 });

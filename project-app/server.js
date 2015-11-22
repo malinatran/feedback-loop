@@ -56,11 +56,59 @@ app.post('/login', function(req, res) {
 });
 
 // Show all forms (Peter)
+app.get('/surveys', function(req, res){
+  // add conditional checking res.cookies?
+  SurveyResponse.find().then(function(data){
+    res.send(data)
+  })
 
-// Show form (Peter)
+})
+
+// Create surveyResponse (Peter)
+app.post('/users/:id/surveys', function(req, res){
+  console.log(req.cookies.loggedInId)
+
+  User.findById(req.cookies.loggedInId).then(function(user) {
+
+    var survey = new SurveyResponse({
+    date: req.body.date,
+    teaching_quality: req.body.teaching_quality,
+    comfort_level: req.body.comfort_level,
+    lesson_score: req.body.lesson_score,
+    comments: req.body.comments,
+    feeling: req.body.feeling,
+    happy_hr_suggestion: req.body.happy_hr_suggestion,
+    user: req.cookies.loggedInId,
+    });
+
+    // Not pushing to user for some reason...
+    user.survey_response.push(survey)
+
+    console.log(survey)
+
+    survey.save(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(survey + 'created')
+      res.send(
+        "New Survey Created!"
+      )
+    }
+  });
+    // })
+  });
+})
 
 // View form (Peter)
 
 // Edit form (Peter)
 
 // Delete form (Peter)
+
+
+
+
+
+
+
