@@ -131,22 +131,21 @@ $(function() {
 
     // setting data object for ajax
     var surveyResponseData = {
-    date: date,
-    teaching_quality: teaching_quality,
-    comfort_level: comfort_level,
-    lesson_score: lesson_score,
-    comments: comments,
-    feeling: feeling,
-    happy_hr_suggestion: happy_hr_suggestion,
+      date: date,
+      teaching_quality: teaching_quality,
+      comfort_level: comfort_level,
+      lesson_score: lesson_score,
+      comments: comments,
+      feeling: feeling,
+      happy_hr_suggestion: happy_hr_suggestion,
     };
 
   // sending request
     $.ajax({
-    url: "http://localhost:3000/users/"+document.cookie+"/surveys",
-    method: "POST",
-    data: surveyResponseData
-    }).done(viewDashboard);
-
+      url: "http://localhost:3000/users/"+document.cookie+"/surveys",
+      method: "POST",
+      data: surveyResponseData
+    }).done();
   }
   // CLICK FUNCTIONS
   // 1a. Login button > renderLoginForm
