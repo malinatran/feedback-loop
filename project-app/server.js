@@ -121,7 +121,7 @@ app.get('/user/surveys', function(req,res){
 
 app.get('/surveys/:id', function(req,res){
   console.log(req.params.id)
-  SurveyResponse.findOne(req.params.id).then(function(survey){
+  SurveyResponse.findOne({"_id":req.params.id}).then(function(survey){
     res.send(survey);
   });
 });
@@ -132,7 +132,7 @@ app.put('/surveys/:id', function(req,res){
   console.log("hello")
   console.log(req.params.id)
 
-  SurveyResponse.findOneAndUpdate({_id: req.params.id}, req.body, function(err, survey) {
+  SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
     if(err){
       console.log(err)
     }else{

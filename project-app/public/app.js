@@ -174,15 +174,21 @@ $(function() {
     var template = Handlebars.compile($('#display-user-template').html());
     for(var i=0;i<data.length;i++) {
       $('#display-container').append(template(data[i]));
-    };
-    
-    // View survey listener and call viewSurvey
-    var link = $('.view-survey');
-    link.click(function(){
-      var id = $(this).parent('.display-user-survey-container').attr('data-id');
+    var link = $('.view-survey').last();
+      console.log(link)
+      link.off("click")
+      link.click(function(){
+      var id = $(this).parent().attr('data-id');
       console.log(id);
       getUserViewSurvey(id);
-    })
+    });
+
+
+    }
+    
+    
+    // View survey listener and call viewSurvey
+    
 
    
   }
@@ -212,7 +218,7 @@ $(function() {
 
     var link = $('.edit-survey');
     link.click(function(){
-      var id = $(this).parent('.display-user-survey-container').attr('data-id');
+      var id = $(this).parent().attr('data-id');
       console.log(id);
       getUserEditSurvey(id);
     })
