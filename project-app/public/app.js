@@ -90,14 +90,16 @@ $(function() {
   // 4a.findSurveys
   var getSurveys = function(){
     $.get('/surveys').done(function(data){
-      // Make view template.  Going to just display surveys first and then will go back and have it display averages/comments.
       renderSurveys(data)
       console.log(data)
     })
   }
 
-  var renderSurveys = function(){
-
+  var renderSurveys = function(data){
+    var template = Handlebars.compile($('#display-survey-template').html());
+    for(var i=0;i<data.length;i++) {
+    $('#display-container').append(template(data[i]))
+  }
   }
 
 

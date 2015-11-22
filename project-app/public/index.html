@@ -64,9 +64,23 @@
       <p>feeling: <input name="feeling"/></p>
       <p>happy_hr_suggestion: <input name="happy_hr_suggestion"/></p>
       <button id="survey-submit-btn">Submit Survey</button>
-
     </div>
   </template>
+
+  <!-- All surveys display template -->
+  <template id="display-survey-template">
+    <div id ="display-survey-container">
+      <h3>=================================</h3>
+      <h3>date: {{date}}</h3>
+      <h3>Teaching: {{teaching_quality}}</h3>
+      <h3>comfort: {{comfort_level}}</h3>
+      <h3>lesson: {{lesson_score}}</h3>
+      <h3>comments: {{comments}}</h3>
+      <h3>feeling: {{feeling}}</h3>
+      <h3>happy hour: {{happy_hr_suggestion}}</h3>
+    </div>
+  </template>
+
 
   </body>
 </html>
