@@ -166,11 +166,12 @@ $(function() {
   // 6b.renderUserSurveys
   // renders the user's individual surveys and also attaches "view" and "edit" listeners
   var renderUserSurveys = function(data){
+    console.log("renderUserSUrveys")
     $('#display-container').empty();
     $('#view-survey-btn').hide();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
-    var template = Handlebars.compile($('#display-user-survey-template').html());
+    var template = Handlebars.compile($('#display-user-template').html());
     for(var i=0;i<data.length;i++) {
       $('#display-container').append(template(data[i]));
     };
@@ -183,12 +184,7 @@ $(function() {
       getUserViewSurvey(id);
     })
 
-    var link = $('.edit-survey');
-    link.click(function(){
-      var id = $(this).parent('.display-user-survey-container').attr('data-id');
-      console.log(id);
-      getUserEditSurvey(id);
-    })
+   
   }
 
 // 7. userViewSurvey
@@ -211,8 +207,15 @@ $(function() {
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
 
-    var template = Handlebars.compile($('#display-survey-template').html());
+    var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
+
+    var link = $('.edit-survey');
+    link.click(function(){
+      var id = $(this).parent('.display-user-survey-container').attr('data-id');
+      console.log(id);
+      getUserEditSurvey(id);
+    })
   }
 
 //8. userEditSurvey

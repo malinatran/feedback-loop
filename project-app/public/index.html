@@ -83,13 +83,28 @@
     </div>
   </template>
 
+ <!--Template for User view specific survey page -->
+  <template id="view-user-survey-template">
+    <div id ="display-survey-container" data-id="{{_id}}">
+      <h3>=================================</h3>
+      <h3>date: {{date}}</h3>
+      <h3>Teaching: {{teaching_quality}}</h3>
+      <h3>comfort: {{comfort_level}}</h3>
+      <h3>lesson: {{lesson_score}}</h3>
+      <h3>comments: {{comments}}</h3>
+      <h3>feeling: {{feeling}}</h3>
+      <h3>happy hour: {{happy_hr_suggestion}}</h3>
+      <button class="edit-survey">Edit Survey</button>
+    </div>
+  </template>
+
   <!-- Individual user's surveys -->
-  <template id="display-user-survey-template">
+  <template id="display-user-template">
     <div class ="display-user-survey-container" data-id="{{_id}}">
       <h3>=================================</h3>
       <h3>date: {{date}}</h3>
       <button class="view-survey">View Survey</button>
-      <button class="edit-survey">Edit Survey</button>
+      
     </div>
   </template>
 
@@ -106,6 +121,7 @@
       <p>comments: <input name="comments" value="{{comments}}"/></p>
       <p>feeling: <input name="feeling" value="{{feeling}}"/></p>
       <p>happy_hr_suggestion: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/></p>
+
       <button id="survey-submit-edit-btn">Submit Edit</button>
     </div>
   </template>
