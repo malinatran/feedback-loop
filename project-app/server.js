@@ -86,14 +86,7 @@ app.post('/users/:id/surveys', function(req, res){
 
       // Not pushing to user for some reason...
       user.survey_responses.push({
-        date: req.body.date,
-        teaching_quality: req.body.teaching_quality,
-        comfort_level: req.body.comfort_level,
-        lesson_score: req.body.lesson_score,
-        comments: req.body.comments,
-        feeling: req.body.feeling,
-        happy_hr_suggestion: req.body.happy_hr_suggestion,
-        user: req.cookies.loggedInId,
+        survey
       });
 
       survey.save(function(err) {
@@ -112,7 +105,39 @@ app.post('/users/:id/surveys', function(req, res){
 
 // View form (Peter)
 
+app.get('/user/surveys', function(req,res){
+// grabbing user_id from cookies
+  user_id_pull = req.cookies.loggedinId
+// finding responses w/ user id
+  SurveyResponse.find({"user":user_id_pull}).then(function(surveys){
+    res.send(surveys)
+  });
+});
+
+// Get individual survey
+
+app.get('/surveys/:id', function(req,res){
+  console.log(req.params.id)
+  SurveyResponse.findOne(req.params.id).then(function(survey){
+    res.send(survey);
+  });
+});
+
 // Edit form (Peter)
+
+app.put('/surveys/:id', function(req,res){
+  console.log("hello")
+  console.log(req.params.id)
+
+  SurveyResponse.findOneAndUpdate({_id: req.params.id}, req.body, function(err, survey) {
+    if(err){
+      console.log(err)
+    }else{
+      res.send(survey);
+    }  
+  });
+
+})
 
 // Delete form (Peter)
 
