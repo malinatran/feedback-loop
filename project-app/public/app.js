@@ -228,7 +228,7 @@ $(function() {
     })
   }
 
-
+// 8b. render User Edit form
   var renderUserEditSurvey = function(data){
     $('#display-container').empty();
     $('#view-survey-btn').show();
@@ -242,6 +242,7 @@ $(function() {
     });
   }
 
+// 8c. Put request with survey edit form
   var updateSurveyResponse = function(){
     var date = $("input[name='date']").val();
     var id = $("input[name='_id']").val();
@@ -297,6 +298,7 @@ $(function() {
   // Put listener inside of renderUserSurveys to grab element id
   // 6d. Submit survey update> getUserSurveys
   $('body').on('click', '#survey-submit-edit-btn', updateSurveyResponse);
+  // 6e. Back to view survey > getUserViewSurvey
 
 
   // If user is logged in, go directly to dashboard
