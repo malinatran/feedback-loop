@@ -29,7 +29,6 @@ app.post('/users', function(req, res) {
     name: req.body.name,
     username: req.body.username,
     password_hash: password_hash,
-    forms: []
   });
   user.save(function(err) {
     if (err) {
@@ -56,23 +55,21 @@ app.post('/login', function(req, res) {
 });
 
 // Show all forms (Peter)
-app.get('/surveys', function(req, res){
+app.get('/surveys', function(req, res) {
   // add conditional checking res.cookies?
-  SurveyResponse.find().then(function(data){
+  SurveyResponse.find().then(function(data) {
     res.send(data);
   });
 });
 
 // Create surveyResponse (Peter)
-app.post('/users/:id/surveys', function(req, res){
-  console.log(req.cookies.loggedInId)
+app.post('/users/:id/surveys', function(req, res) {
 // find user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
-      console.log(user.survey_responses)
-
+      console.log(user.survey_responses);
       // setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
@@ -82,73 +79,61 @@ app.post('/users/:id/surveys', function(req, res){
         comments: req.body.comments,
         feeling: req.body.feeling,
         happy_hr_suggestion: req.body.happy_hr_suggestion,
-        user: req.cookies.loggedInId,
+        user: req.cookies.loggedInId
       });
-
-      // Not pushing to user for some reason...
-      // user.survey_responses.push({
-      //   survey
-      // });
-  
       // saving survey
       survey.save(function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(survey + 'created')
-          res.send(
-            "New Survey Created!"
-          );
-        };
+        console.log(survey + 'created');
+        res.send(survey);
       });
     };
   });
 });
 
 // View form (Peter)
-
-app.get('/user/surveys', function(req,res){
+app.get('/user/:id/surveys', function(req,res){
 // grabbing user_id from cookies
-  user_id_pull = req.cookies.loggedInId
-  console.log(user_id_pull)
+  user_id_pull = req.cookies.loggedInId;
+  console.log(user_id_pull);
 // finding responses w/ user id
-  SurveyResponse.find({"user":user_id_pull}).then(function(surveys){
-    console.log("get surveys")
-    console.log(surveys)
-    res.send(surveys)
+  SurveyResponse.find({"user": user_id_pull}).then(function(surveys) {
+    console.log("get surveys");
+    console.log(surveys);
+    res.send(surveys);
   });
 });
 
 // Get individual survey
-
 app.get('/surveys/:id', function(req,res){
-  console.log(req.params.id)
-  SurveyResponse.findOne({"_id":req.params.id}).then(function(survey){
+  console.log(req.params.id);
+  SurveyResponse.findOne({"_id":req.params.id}).then(function(survey) {
     res.send(survey);
   });
 });
 
 // Edit form (Peter)
-
-app.put('/surveys/:id', function(req,res){
-  console.log("hello")
-  console.log(req.params.id)
-
+app.put('/surveys/:id', function(req,res) {
   SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
-    if(err){
+    if(err) {
       console.log(err)
-    }else{
+    } else {
       res.send(survey);
     }  
   });
+});
 
-})
+// View, edit/udpate, and delete user account (Malina)
+app.get('/users/:id', function(req, res) {
+  User.findById(req.cookies.loggedInId, function(err, user) {
+    res.send(user);
+  });
+});
 
-// Delete form (Peter)
-
-
-
-
-
-
-
+app.delete('/users/:id', function(req, res) {
+  User.findById(req.cookies.loggedInId, function(err, user) {
+    user.id(req.body.id).remove();
+    user.save(function(err) {
+      res.send(user);
+    });
+  });
+});
