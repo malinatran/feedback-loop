@@ -75,50 +75,47 @@ $(function() {
   // 4. viewDashboard
   // Show dashboard
   var viewDashboard = function() {
-    console.log(document.cookie)
-    console.log("viewDashboard")
     $('#display-container').empty();
     $('#logout-btn').show();
     $('#login-btn').hide();
     $('#signup-btn').hide();
+    $('#user-profile-btn').show();
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
-    $('#view-dashboard-btn').hide()
+    $('#view-dashboard-btn').hide();
     getSurveys();
-    // Display new and view buttons.  And then calls getSurveys function
+    // Display new and view buttons. And then calls getSurveys function
   };
 
   // 4a.getSurveys
   // get ALL surveys
-  var getSurveys = function(){
-    $.get('/surveys').done(function(data){
+  var getSurveys = function() {
+    $.get('/surveys').done(function(data) {
       renderSurveys(data)
       console.log(data)
-    })
-  }
-// 4b. renderSurveys
-// render ALL surveys
-  var renderSurveys = function(data){
+    });
+  };
+
+  // 4b. renderSurveys
+  // render ALL surveys
+  var renderSurveys = function(data) {
     var template = Handlebars.compile($('#display-survey-template').html());
     for(var i=0;i<data.length;i++) {
-    $('#display-container').append(template(data[i]))
-  }
-  }
+      $('#display-container').append(template(data[i]));
+    };
+  };
 
   // 5. New Survey
   // User submits new survey
   // 5a. renderSurveyForm
   // renders form to create survey
   var renderSurveyForm = function(){
-   
-    // console.log("hello")
     $('#display-container').empty();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show()
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
-  }
-
+  };
 
 // 5b. createSurveyResponse
 // Sends post request with survey form data
@@ -149,7 +146,7 @@ $(function() {
   // sending post request
   // document.cookie is irrelevant.  It grabs the user's _id from the cookie on the server side
     $.ajax({
-      url: "http://localhost:3000/users/"+document.cookie+"/surveys",
+      url: "http://localhost:3000/surveys",
       method: "POST",
       data: surveyResponseData
     }).done(viewDashboard);
@@ -159,59 +156,49 @@ $(function() {
   // 6. showUserSurveys
   // Gets a user's individual surveys
   // 6a. getUserSurvey
-  var getUserSurveys = function(data){
-    $.get('/user/surveys').done(function(data){
-      console.log(data)
-      renderUserSurveys(data)
+  var getUserSurveys = function(data) {
+    $.get('/user/:id/surveys').done(function(data) {
+      renderUserSurveys(data);
     });
   };
   // 6b.renderUserSurveys
   // renders the user's individual surveys and also attaches "view" and "edit" listeners
-  var renderUserSurveys = function(data){
-    console.log("renderUserSUrveys")
+  var renderUserSurveys = function(data) {
     $('#display-container').empty();
     $('#view-survey-btn').hide();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').show();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
-    for(var i=0;i<data.length;i++) {
-      $('#display-container').append(template(data[i]));
-      // adding event listener to view survey button
-      var link = $('.view-survey').last();
-      console.log(link);
-      link.click(function(){
-        // grab id from parent element
-        var id = $(this).parent().attr('data-id');
-        console.log(id);
-        getUserViewSurvey(id);
-    });
-
-
-    }
-    
-    
+      for (var i=0;i<data.length;i++) {
+        $('#display-container').append(template(data[i]));
+        // adding event listener to view survey button
+        var link = $('.view-survey').last();
+        console.log(link);
+        link.click(function() {
+          // grab id from parent element
+          var id = $(this).parent().attr('data-id');
+          console.log(id);
+          getUserViewSurvey(id);
+        });
+      };
     // View survey listener and call viewSurvey
-    
-
-   
-  }
+  };
 
 // 7. userViewSurvey
 // Views a specific survey of of the user
 // 7a. getUserViewSurvey
 // Gets that specific survey
-  var getUserViewSurvey = function(id){
-    $.get('/surveys/'+ id).done(function(data){
-      renderUserViewSurvey(data)
-      console.log(data)
-    })
-  }
+  var getUserViewSurvey = function(id) {
+    $.get('/surveys/'+ id).done(function(data) {
+      renderUserViewSurvey(data);
+      console.log(data);
+    });
+  };
 
 // 7b. renderUserViewSurvey
 // renders that specific survey
-  var renderUserViewSurvey = function(data){
-
+  var renderUserViewSurvey = function(data) {
     $('#display-container').empty();
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
@@ -219,25 +206,24 @@ $(function() {
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
-
     var link = $('.edit-survey');
     // add eventlistener to edit survey
-    link.click(function(){
+    link.click(function() {
       var id = $(this).parent().attr('data-id');
       console.log(id);
       getUserEditSurvey(id);
-    })
-  }
+    });
+  };
 
 //8. userEditSurvey
 // 8a. getUserEditSurvey
 // Gets survey data to display for edit form
-  var getUserEditSurvey = function(id){
-    $.get('/surveys/'+ id).done(function(data){
-      renderUserEditSurvey(data)
-      console.log(data)
-    })
-  }
+  var getUserEditSurvey = function(id) {
+    $.get('/surveys/'+ id).done(function(data) {
+      renderUserEditSurvey(data);
+      console.log(data);
+    });
+  };
 
 // 8b. render User Edit form
   var renderUserEditSurvey = function(data){
@@ -249,14 +235,14 @@ $(function() {
     var template = Handlebars.compile($("#survey-edit-template").html());
     $('#display-container').append(template(data));
     // Event listener to subment edit
-    $('.edit-survey-submit').click(function(){
+    $('.edit-survey-submit').click(function() {
       updateSurveyResponse();
     });
-  }
+  };
 
 // 8c. Put request with survey edit form
 // Grabbing form values
-  var updateSurveyResponse = function(){
+  var updateSurveyResponse = function() {
     var date = $("input[name='date']").val();
     var id = $("input[name='_id']").val();
     var teaching_quality = $("input[name='teaching_quality']").val();
@@ -282,9 +268,22 @@ $(function() {
       method: "PUT",
       data: surveyUpdateData
     }).done(getUserSurveys);
+  };
 
-  }
+  // 9. getUserProfile (Malina)
+  var getUserProfile = function(id) {
+    var id = $(this).attr('data-id');
+    $.get('/users/' + id).done(function(data) {
+      renderUserProfile(data);
+    });
+  };
 
+  var renderUserProfile = function(data) {
+    $('#display-container').empty();
+    $('#view-dashboard-btn').show();
+    var template = Handlebars.compile($("#user-profile-template").html());
+    $('#display-container').append(template(data));
+  };
 
   // CLICK FUNCTIONS
   // 1a. Login button > renderLoginForm
@@ -298,13 +297,13 @@ $(function() {
   // 3. Logout button > logoutUser
   $('body').on('click', '#logout-btn', logoutUser);
   // 4a. New Survey button > renderSurveys
-  $('#new-survey-btn').on('click', renderSurveyForm);
+  $('body').on('click', '#new-survey-btn', renderSurveyForm);
   // 4b. Submit new survey > submitNewSurvey
   $('body').on('click', '#survey-submit-btn', createSurveyResponse);
   // 5. Back to dashboard button > viewDashboard
-  $('#view-dashboard-btn').on('click', viewDashboard);
+  $('body').on('click', '#view-dashboard-btn', viewDashboard);
   // 6a.View my surveys > getUserSurveys
-  $('#view-survey-btn').on('click', getUserSurveys);
+  $('body').on('click', '#view-survey-btn', getUserSurveys);
   // 6b. View individual survey > getUserViewSurvey
   // Put listener inside of renderUserSurveys to grab element id
   // 6c. Edit individual survey >getUserEditSurvey
@@ -312,13 +311,12 @@ $(function() {
   // 6d. Submit survey update> getUserSurveys
   $('body').on('click', '#survey-submit-edit-btn', updateSurveyResponse);
   // 6e. Back to view survey > getUserViewSurvey
-
+  // 7. View user profile > getUserProfile
+  $('body').on('click', '#user-profile-btn', getUserProfile);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
     viewDashboard();
   };
-
-  // 
 
 });
