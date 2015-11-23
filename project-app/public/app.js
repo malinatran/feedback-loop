@@ -83,7 +83,7 @@ $(function() {
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').hide();
-    getSurveys();
+    $('#analytics-btn').show();
     // Display new and view buttons. And then calls getSurveys function
   };
 
@@ -157,7 +157,7 @@ $(function() {
   // Gets a user's individual surveys
   // 6a. getUserSurvey
   var getUserSurveys = function(data) {
-    $.get('/user/:id/surveys').done(function(data) {
+    $.get('/user/surveys').done(function(data) {
       renderUserSurveys(data);
     });
   };
