@@ -270,7 +270,7 @@ $(function() {
     }).done(getUserSurveys);
   };
 
-  // 9. getUserProfile
+  // 9. getUserProfile (Malina)
   var getUserProfile = function(id) {
     var id = $(this).attr('data-id');
     $.get('/users/' + id).done(function(data) {
@@ -280,6 +280,7 @@ $(function() {
 
   var renderUserProfile = function(data) {
     $('#display-container').empty();
+    $('#view-dashboard-btn').show();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
