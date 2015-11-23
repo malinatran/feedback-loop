@@ -127,9 +127,22 @@
   <!-- View user profile -->
   <template id="user-profile-template">
     <div id="user-profile-container" data-id= "{{_id}}">
-      <h4>View User Info</h4>
+      <h4>View User Account</h4>
       <p>Username: {{username}}</p>
       <p>Name: {{name}}</p>
+    </div>
+    <button id="edit-user-profile-btn">Edit Profile</button>
+    <button id="delete-user-profile-btn">Delete Profile</button>
+  </template>
+
+  <!-- Edit user profile -->
+  <template id="edit-user-profile-template">
+    <div id="edit-user-profile-container">
+      <h4>Edit User Account</h4>
+      <p>My name is <input name="name"/>.</p>
+      <p>Username: <input name="username"/></p>
+      <p>Password: <input name="password"/></p>
+      <button id="edit-user-submit-btn">Submit</button>
     </div>
   </template>
 

@@ -91,7 +91,7 @@ app.post('/surveys', function(req, res) {
 });
 
 // View form (Peter)
-app.get('/surveys/:id', function(req,res){
+app.get('/user/surveys', function(req,res){
 // grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);
@@ -106,7 +106,7 @@ app.get('/surveys/:id', function(req,res){
 // Get individual survey
 app.get('/surveys/:id', function(req,res){
   console.log(req.params.id);
-  SurveyResponse.findOne({"_id":req.params.id}).then(function(survey) {
+  SurveyResponse.findOne({"_id": req.params.id}).then(function(survey) {
     res.send(survey);
   });
 });
@@ -129,11 +129,22 @@ app.get('/users/:id', function(req, res) {
   });
 });
 
+app.put('/users/:id', function(req, res) {
+  password_hash = md5(req.body.password);
+  var user = {
+    name: req.body.name,
+    username: req.body.username, 
+    password_hash: password_hash 
+  };
+  // console.log(user);
+  User.findOneAndUpdate(req.cookies.loggedInId, user, function(err, user) {
+    res.send(user);
+  });
+});
+
+// Only deletes original and does not redirect
 app.delete('/users/:id', function(req, res) {
-  User.findById(req.cookies.loggedInId, function(err, user) {
-    user.id(req.body.id).remove();
-    user.save(function(err) {
-      res.send(user);
-    });
+  User.findByIdAndRemove(req.cookies.loggedInId, function(err, user) {
+    console.log('User deleted');
   });
 });
