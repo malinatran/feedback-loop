@@ -270,7 +270,8 @@ $(function() {
     }).done(getUserSurveys);
   };
 
-  // 9. getUserProfile (Malina)
+  // 9. View user's account/profile
+  // 9a. getUserProfile (Malina)
   var getUserProfile = function(id) {
     var id = $(this).attr('data-id');
     $.get('/users/' + id).done(function(data) {
@@ -278,11 +279,49 @@ $(function() {
     });
   };
 
+  // 9b. renderUserProfile (Malina)
   var renderUserProfile = function(data) {
     $('#display-container').empty();
     $('#view-dashboard-btn').show();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
+  };
+
+  // 10. Make changes and update user's profile
+  // 10a. editUserProfile
+  var editUserProfile = function() {
+    $('#display-container').empty();
+    var template = Handlebars.compile($('#edit-user-profile-template').html());
+    $('#display-container').append(template);
+  };
+
+  // 10b. updateUserProfile
+  var updateUserProfile = function() {
+    userId = Cookies.get('loggedInId');
+    var nameInput = $("input[name='name']").val();
+    var usernameInput = $("input[name='username']").val();
+    var passwordInput = $("input[name='password']").val();
+    var user = {
+      name: nameInput,
+      username: usernameInput,
+      password: passwordInput
+    }
+    $.ajax({
+      url: "http://localhost:3000/users/" + userId,
+      method: "PUT",
+      data: user
+    }).done(renderUserProfile(user));
+  };
+
+  // 11. deleteUserProfile
+  var deleteUserProfile = function() {
+    user = Cookies.get('loggedInId');
+    $.ajax({
+      url: "http://localhost:3000/users/" + user,
+      method: "DELETE",
+      data: 'json'
+    }).done(Cookies.remove('loggedInId'));
+    window.location = '/';
   };
 
   // CLICK FUNCTIONS
@@ -311,8 +350,14 @@ $(function() {
   // 6d. Submit survey update> getUserSurveys
   $('body').on('click', '#survey-submit-edit-btn', updateSurveyResponse);
   // 6e. Back to view survey > getUserViewSurvey
-  // 7. View user profile > getUserProfile
+  // 9. View user profile > getUserProfile
   $('body').on('click', '#user-profile-btn', getUserProfile);
+  // 10a. Edit user profile > editUserProfile
+  $('body').on('click', '#edit-user-profile-btn', editUserProfile);
+  // 10b. Update user profile > updateUserProfile
+  $('body').on('click', '#edit-user-submit-btn', updateUserProfile);
+  // 11. Delete user profile > deleteUserProfile
+  $('body').on('click', '#delete-user-profile-btn', deleteUserProfile);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
