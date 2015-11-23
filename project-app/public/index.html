@@ -63,7 +63,7 @@
       <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality"/></p>
       <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level"/></p>
       <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score"/></p>
-      <p>Comments: <input name="comments" type="textarea"/></p>
+      <p>Comments: <textarea name="comments" type="textarea" rows='3' cols='50'></textarea></p>
       <p>I am feeling: <input name="feeling"/>.</p>
       <p>After class, we should have happy hour at: <input name="happy_hr_suggestion"/>.</p>
       <button id="survey-submit-btn">Submit Survey</button>
@@ -103,7 +103,7 @@
   <template id="display-user-template">
     <div class ="display-user-survey-container" data-id="{{_id}}">
       <h3>=================================</h3>
-      <h3>date: {{date}}</h3>
+      <h3>Date: {{date}}</h3>
       <button class="view-survey">View Survey</button>
       
     </div>
