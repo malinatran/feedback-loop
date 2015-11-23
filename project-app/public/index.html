@@ -25,6 +25,13 @@
   1. Fill out new survey with editing & deleting options
   2. View aggregate of survey results
   3. View my surveys -->
+  <div id="view-survey-btn" style="display:none"><a href="#">View My Surveys</a></div>
+  <div id="new-survey-btn" style="display:none"><a href="#">Fill out New Survey</a></div>
+
+  <!-- Return home -->
+  <div id="view-dashboard-btn" style="display:none"><a href="#">Back to Dashboard</a></div>
+  
+
 
   <!-- Login template -->
   <template id="login-template">
@@ -47,5 +54,89 @@
     </div>
   </template>
 
+  <!-- New Survey template -->
+  <template id="new-survey-template">
+    <div id ="new-survey-container">
+      <h4>Submit New Survey</h4>
+      <p>Date:<input type="date" name="date"/>.</p>
+      <p>teaching_quality: <input type = "number" min="1" max="10" step="1" name="teaching_quality"/></p>
+      <p>comfort_level: <input type = "number" min="1" max="10" step="1" name="comfort_level"/></p>
+      <p>lesson_score: <input type = "number" min="1" max="10" step="1" name="lesson_score"/></p>
+      <p>comments: <input name="comments"/></p>
+      <p>feeling: <input name="feeling"/></p>
+      <p>happy_hr_suggestion: <input name="happy_hr_suggestion"/></p>
+      <button id="survey-submit-btn">Submit Survey</button>
+    </div>
+  </template>
+
+  <!-- All surveys display template -->
+  <template id="display-survey-template">
+    <div id ="display-survey-container">
+      <h3>=================================</h3>
+      <h3>date: {{date}}</h3>
+      <h3>Teaching: {{teaching_quality}}</h3>
+      <h3>comfort: {{comfort_level}}</h3>
+      <h3>lesson: {{lesson_score}}</h3>
+      <h3>comments: {{comments}}</h3>
+      <h3>feeling: {{feeling}}</h3>
+      <h3>happy hour: {{happy_hr_suggestion}}</h3>
+    </div>
+  </template>
+
+ <!--Template for User view specific survey page -->
+  <template id="view-user-survey-template">
+    <div id ="display-survey-container" data-id="{{_id}}">
+      <h3>=================================</h3>
+      <h3>date: {{date}}</h3>
+      <h3>Teaching: {{teaching_quality}}</h3>
+      <h3>comfort: {{comfort_level}}</h3>
+      <h3>lesson: {{lesson_score}}</h3>
+      <h3>comments: {{comments}}</h3>
+      <h3>feeling: {{feeling}}</h3>
+      <h3>happy hour: {{happy_hr_suggestion}}</h3>
+      <button class="edit-survey">Edit Survey</button>
+    </div>
+  </template>
+
+  <!-- Individual user's surveys -->
+  <template id="display-user-template">
+    <div class ="display-user-survey-container" data-id="{{_id}}">
+      <h3>=================================</h3>
+      <h3>date: {{date}}</h3>
+      <button class="view-survey">View Survey</button>
+      
+    </div>
+  </template>
+
+  <!-- Update template for Survey -->
+
+  <template id="survey-edit-template">
+    <div class="form">
+      <h4>Edit Survey</h4>
+      <p><input type="hidden" name="date" value="{{date}}"/></p>
+      <p><input type="hidden" name="_id" value="{{_id}}"/></p>
+      <p>teaching_quality: <input type = "number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/></p>
+      <p>comfort_level: <input type = "number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/></p>
+      <p>lesson_score: <input type = "number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/></p>
+      <p>comments: <input name="comments" value="{{comments}}"/></p>
+      <p>feeling: <input name="feeling" value="{{feeling}}"/></p>
+      <p>happy_hr_suggestion: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/></p>
+
+      <button id="survey-submit-edit-btn">Submit Edit</button>
+    </div>
+  </template>
+
+
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

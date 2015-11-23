@@ -56,11 +56,99 @@ app.post('/login', function(req, res) {
 });
 
 // Show all forms (Peter)
+app.get('/surveys', function(req, res){
+  // add conditional checking res.cookies?
+  SurveyResponse.find().then(function(data){
+    res.send(data);
+  });
+});
 
-// Show form (Peter)
+// Create surveyResponse (Peter)
+app.post('/users/:id/surveys', function(req, res){
+  console.log(req.cookies.loggedInId)
+// find user using cookies
+  User.findById(req.cookies.loggedInId, function(err,user) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(user.survey_responses)
+
+      // setting survey object
+      var survey = new SurveyResponse({
+        date: req.body.date,
+        teaching_quality: req.body.teaching_quality,
+        comfort_level: req.body.comfort_level,
+        lesson_score: req.body.lesson_score,
+        comments: req.body.comments,
+        feeling: req.body.feeling,
+        happy_hr_suggestion: req.body.happy_hr_suggestion,
+        user: req.cookies.loggedInId,
+      });
+
+      // Not pushing to user for some reason...
+      // user.survey_responses.push({
+      //   survey
+      // });
+  
+      // saving survey
+      survey.save(function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          console.log(survey + 'created')
+          res.send(
+            "New Survey Created!"
+          );
+        };
+      });
+    };
+  });
+});
 
 // View form (Peter)
 
+app.get('/user/surveys', function(req,res){
+// grabbing user_id from cookies
+  user_id_pull = req.cookies.loggedInId
+  console.log(user_id_pull)
+// finding responses w/ user id
+  SurveyResponse.find({"user":user_id_pull}).then(function(surveys){
+    console.log("get surveys")
+    console.log(surveys)
+    res.send(surveys)
+  });
+});
+
+// Get individual survey
+
+app.get('/surveys/:id', function(req,res){
+  console.log(req.params.id)
+  SurveyResponse.findOne({"_id":req.params.id}).then(function(survey){
+    res.send(survey);
+  });
+});
+
 // Edit form (Peter)
 
+app.put('/surveys/:id', function(req,res){
+  console.log("hello")
+  console.log(req.params.id)
+
+  SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
+    if(err){
+      console.log(err)
+    }else{
+      res.send(survey);
+    }  
+  });
+
+})
+
 // Delete form (Peter)
+
+
+
+
+
+
+
