@@ -91,7 +91,7 @@ app.post('/surveys', function(req, res) {
 });
 
 // View form (Peter)
-app.get('/surveys/:id', function(req,res){
+app.get('/user/surveys', function(req,res){
 // grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);

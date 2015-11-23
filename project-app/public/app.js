@@ -157,7 +157,7 @@ $(function() {
   // Gets a user's individual surveys
   // 6a. getUserSurvey
   var getUserSurveys = function(data) {
-    $.get('/user/:id/surveys').done(function(data) {
+    $.get('/user/surveys').done(function(data) {
       renderUserSurveys(data);
     });
   };
