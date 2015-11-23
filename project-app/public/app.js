@@ -146,7 +146,7 @@ $(function() {
   // sending post request
   // document.cookie is irrelevant.  It grabs the user's _id from the cookie on the server side
     $.ajax({
-      url: "http://localhost:3000/users/"+document.cookie+"/surveys",
+      url: "http://localhost:3000/surveys",
       method: "POST",
       data: surveyResponseData
     }).done(viewDashboard);

@@ -63,7 +63,7 @@ app.get('/surveys', function(req, res) {
 });
 
 // Create surveyResponse (Peter)
-app.post('/users/:id/surveys', function(req, res) {
+app.post('/surveys', function(req, res) {
 // find user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
     if (err) {
@@ -91,7 +91,7 @@ app.post('/users/:id/surveys', function(req, res) {
 });
 
 // View form (Peter)
-app.get('/user/:id/surveys', function(req,res){
+app.get('/surveys/:id', function(req,res){
 // grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);
