@@ -20,6 +20,7 @@
   <div id="signup-btn"><a href="#">Sign up</a></div>
   <div id="logout-btn" style="display:none"><a href="#">Logout</a></div>
   <div id="user-profile-btn" style="display:none"><a href="#">My Profile</a></div>
+  <div id="home-btn" style="display:none"><a href="#">Home</a></div>
 
   <!-- User's dashboard -->
  <!--  Will include: 
@@ -37,7 +38,7 @@
     <div id="login-container">
       <h4>Login</h4>
       <p>Username: <input name="username"/></p>
-      <p>Password: <input name="password"/></p>
+      <p>Password: <input name="password" type="password"/></p>
       <button id="login-submit-btn">Submit</button>
     </div>
   </template>
@@ -48,7 +49,7 @@
       <h4>Sign Up</h4>
       <p>My name is <input name="name"/>.</p>
       <p>Username: <input name="username"/></p>
-      <p>Password: <input name="password"/></p>
+      <p>Password: <input name="password" type="password"/></p>
       <button id="signup-submit-btn">Submit</button>
     </div>
   </template>
@@ -139,9 +140,9 @@
   <template id="edit-user-profile-template">
     <div id="edit-user-profile-container">
       <h4>Edit User Account</h4>
-      <p>My name is <input name="name"/>.</p>
-      <p>Username: <input name="username"/></p>
-      <p>Password: <input name="password"/></p>
+      <p>My name is <input name="name" value="{{name}}"/>.</p>
+      <p>Username: <input name="username" value="{{username}}"/></p>
+      <p>Password: <input name="password" type="password" value="{{password}}"/></p>
       <button id="edit-user-submit-btn">Submit</button>
     </div>
   </template>

@@ -6,12 +6,17 @@ var user = null;
 $(function() {
 
   // MVP FUNCTIONS
+  var renderHomepage = function() {
+    window.location = '/';
+  };
+
   // 1. Login user
   // 1a. renderLoginForm
   var renderLoginForm = function() {
     $('#display-container').empty();
     $('#login-btn').hide();
     $('#signup-btn').hide();
+    $('#home-btn').show();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -39,6 +44,7 @@ $(function() {
     $('#display-container').empty();
     $('#login-btn').hide();
     $('#signup-btn').hide();
+    $('#home-btn').show();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -83,7 +89,8 @@ $(function() {
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
     $('#view-dashboard-btn').hide();
-    getSurveys();
+    $('#home-btn').hide();
+    // getSurveys();
     // Display new and view buttons. And then calls getSurveys function
   };
 
@@ -91,8 +98,8 @@ $(function() {
   // get ALL surveys
   var getSurveys = function() {
     $.get('/surveys').done(function(data) {
-      renderSurveys(data)
-      console.log(data)
+      renderSurveys(data);
+      console.log(data);
     });
   };
 
@@ -112,7 +119,8 @@ $(function() {
   var renderSurveyForm = function(){
     $('#display-container').empty();
     $('#new-survey-btn').hide();
-    $('#view-dashboard-btn').show()
+    $('#view-survey-btn').hide();
+    $('#view-dashboard-btn').show();
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -166,7 +174,7 @@ $(function() {
   var renderUserSurveys = function(data) {
     $('#display-container').empty();
     $('#view-survey-btn').hide();
-    $('#new-survey-btn').show();
+    $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
@@ -200,8 +208,8 @@ $(function() {
 // renders that specific survey
   var renderUserViewSurvey = function(data) {
     $('#display-container').empty();
-    $('#view-survey-btn').show();
-    $('#new-survey-btn').show();
+    $('#view-survey-btn').hide();
+    $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
@@ -228,8 +236,8 @@ $(function() {
 // 8b. render User Edit form
   var renderUserEditSurvey = function(data){
     $('#display-container').empty();
-    $('#view-survey-btn').show();
-    $('#new-survey-btn').show();
+    $('#view-survey-btn').hide();
+    $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($("#survey-edit-template").html());
@@ -273,8 +281,7 @@ $(function() {
   // 9. View user's account/profile
   // 9a. getUserProfile (Malina)
   var getUserProfile = function(id) {
-    var id = $(this).attr('data-id');
-    $.get('/users/' + id).done(function(data) {
+    $.get('/users/:id').done(function(data) {
       renderUserProfile(data);
     });
   };
@@ -282,6 +289,9 @@ $(function() {
   // 9b. renderUserProfile (Malina)
   var renderUserProfile = function(data) {
     $('#display-container').empty();
+    $('#user-profile-btn').hide();
+    $('#view-survey-btn').hide();
+    $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
@@ -291,13 +301,16 @@ $(function() {
   // 10a. editUserProfile
   var editUserProfile = function() {
     $('#display-container').empty();
-    var template = Handlebars.compile($('#edit-user-profile-template').html());
-    $('#display-container').append(template);
+    var userId = Cookies.get('loggedInId');
+    $.get('/users/:id').done(function(data) {
+      var template = Handlebars.compile($('#edit-user-profile-template').html());
+      $('#display-container').append(template(data));
+    });
   };
 
   // 10b. updateUserProfile
   var updateUserProfile = function() {
-    userId = Cookies.get('loggedInId');
+    var userId = Cookies.get('loggedInId');
     var nameInput = $("input[name='name']").val();
     var usernameInput = $("input[name='username']").val();
     var passwordInput = $("input[name='password']").val();
@@ -325,6 +338,7 @@ $(function() {
   };
 
   // CLICK FUNCTIONS
+  $('body').on('click', '#home-btn', renderHomepage);
   // 1a. Login button > renderLoginForm
   $('#login-btn').on('click', renderLoginForm);
   // 1b. Login submit button > submitLoginForm
