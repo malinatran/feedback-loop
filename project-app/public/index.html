@@ -58,9 +58,9 @@
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
-        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
-        <a href="#" id="analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
-        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
+        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">View My Surveys</a>
+        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">Complete New Survey</a>
+        <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">Survey Analytics</a>
       </div>
     </div>
 
@@ -297,9 +297,46 @@
       </div>
     </div>
 
-  </div>
+  <!-- Choose date for specific analytics template -->
+  <template id="analytics-by-date-template">
+    <div id="analytics-by-date-container" data-id="{{date}}">
+      <h4>{{ date }}</h4>
+      <button class="analytics-by-date-btn">Check Analytics</button>
+    </div>
+  </template>
+
+  <!-- Show analytics template -->
+  <template id="analytics-template">
+    <div id="analytics-container">
+      <h4>Analytics</h4>
+      <h5># of surveys completed: {{surveys_completed}}</h5>
+      <p>Average teaching quality: {{teaching_avg}}</p>
+      <p>Average comfort level: {{comfort_avg}}</p>
+      <p>Average lesson score: {{lesson_avg}}</p>
+
+      <h5>comments</h5>
+      <ul class="comments_list">
+        {{#each comments}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+      <h5>feelings</h5>
+      <ul class="feeling_list">
+        {{#each feeling}}
+          <li>{{this}}</li>
+        {{/each}} 
+      </ul>
+      <h5>Happy hour</h5>
+      <ul class="people_list">
+        {{#each happy_hr_suggestion}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </template>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>
 
 
