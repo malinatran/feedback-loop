@@ -88,22 +88,60 @@ $(function() {
   };
 
   // 4a.getSurveys
-  // get ALL surveys
-  var getSurveys = function() {
+  // get ALL surveys in an object, only with unique dates
+  var getSurveyDates = function() {
     $.get('/surveys').done(function(data) {
-      renderSurveys(data)
-      console.log(data)
+      renderSurveyAnalytics(data)
+      // console.log(data)
     });
   };
 
-  // 4b. renderSurveys
-  // render ALL surveys
-  var renderSurveys = function(data) {
-    var template = Handlebars.compile($('#display-survey-template').html());
+  // 4b. renderSurveyAnalytics
+  // renders the dates on the page with an analytics button
+  var renderSurveyAnalytics = function(data) {
+    $('#display-container').empty();
+
+    var template = Handlebars.compile($('#analytics-by-date-template').html());
+
     for(var i=0;i<data.length;i++) {
       $('#display-container').append(template(data[i]));
+    
+      var link = $('.analytics-by-date-btn').last();
+      link.click(function() {
+        // grab id from parent element
+        var date = $(this).parent().attr('data-id');
+        // console.log(date);
+        getAnalytics(date);
+        // button calls get Analytics, which will grab relevate data for the date
+        // Create new function that is called when "view analytics" is clicked
+      });
     };
   };
+  // 4c. get request with date, to grab all surveys with date object
+  var getAnalytics=function(input){
+
+    // var json = JSON.stringify(date_pull)
+
+    console.log(input)
+    $.ajax({
+      url: "http://localhost:3000/analytics/"+input,
+      method: "GET",
+    }).done(function(data){
+      renderDateAnalytics(data)
+      // console.log(data)
+      // receives analytics object and then calls render to put it on the page.
+    });
+
+  };
+// 4d. 
+  var renderDateAnalytics=function(input){
+    console.log(input)
+    $('#display-container').empty()
+
+    var template = Handlebars.compile($('#analytics-template').html());
+    $('#display-container').append(template(input));
+
+  }
 
   // 5. New Survey
   // User submits new survey
@@ -358,6 +396,9 @@ $(function() {
   $('body').on('click', '#edit-user-submit-btn', updateUserProfile);
   // 11. Delete user profile > deleteUserProfile
   $('body').on('click', '#delete-user-profile-btn', deleteUserProfile);
+// 12. Analytics button > getSurveys
+  $('body').on('click', '#analytics-btn', getSurveyDates);
+
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {

@@ -6,6 +6,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script href="node_modules/handlebars-intl/dist/handlebars-intl.min.js"></script>
   <script src="app.js"></script>
 </head>
   <body>
@@ -31,6 +32,7 @@
 
   <!-- Return home -->
   <div id="view-dashboard-btn" style="display:none"><a href="#">Back to Dashboard</a></div>
+  <div id="analytics-btn" style="display:none"><a href="#">Analytics</a></div>
   
   <!-- Login template -->
   <template id="login-template">
@@ -145,6 +147,45 @@
       <button id="edit-user-submit-btn">Submit</button>
     </div>
   </template>
+
+  <!-- Choose date for specific analytics template -->
+  <template id="analytics-by-date-template">
+    <div id="analytics-by-date-container" data-id="{{date}}">
+      <h4>{{ date }}</h4>
+      <button class="analytics-by-date-btn">Check Analytics</button>
+    </div>
+  </template>
+
+<!-- Show analytics template -->
+  <template id="analytics-template">
+    <div id="analytics-container">
+      <h4>Analytics</h4>
+      <h5># of surveys completed: {{surveys_completed}}</h5>
+      <p>Average teaching quality: {{teaching_avg}}</p>
+      <p>Average comfort level: {{comfort_avg}}</p>
+      <p>Average lesson score: {{lesson_avg}}</p>
+
+      <h5>comments</h5>
+      <ul class="comments_list">
+        {{#each comments}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+      <h5>feelings</h5>
+      <ul class="feeling_list">
+        {{#each feeling}}
+          <li>{{this}}</li>
+        {{/each}} 
+      </ul>
+      <h5>Happy hour</h5>
+      <ul class="people_list">
+        {{#each happy_hr_suggestion}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </template>
+
 
   </body>
 </html>
