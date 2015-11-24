@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost/feedbackloop');
 // Listener
 app.listen(port);
 
-// Sign up new user (Malina)
+// Sign up new user
 app.post('/users', function(req, res) {
   password_hash = md5(req.body.password);
   var user = new User({
@@ -43,7 +43,7 @@ app.post('/users', function(req, res) {
   });
 });
 
-// Login user (Malina)
+// Login user
 app.post('/login', function(req, res) {
   User.findOne({
     username: req.body.username,
@@ -54,42 +54,36 @@ app.post('/login', function(req, res) {
   });
 });
 
-// Show all forms (Peter)
+// Show all forms
 app.get('/surveys', function(req, res) {
-  dates_array = []
-
+  var dates_array = [];
   var check_dates_array = function(input){
     for (var i = 0; i < dates_array.length; i++) {
       if ( JSON.stringify(input) == JSON.stringify(dates_array[i].date)) {
-        return false
+        return false;
       }
     };
-    return true
-  }
-
+    return true;
+  };
   SurveyResponse.find().then(function(data) {
     for (var i = 0; i < data.length; i++) {
-      // console.log(typeof JSON.Stringify(data[i].date))
-      // console.log(check_dates_array(JSON.stringify(data[i].date)))
-      console.log(dates_array)
-      if(check_dates_array(data[i].date)){
+      if (check_dates_array(data[i].date)) { 
          dates_array.push(data[i])
       } 
     };
-    
-    res.send(dates_array)
+    res.send(dates_array);
   });
 });
 
-// Create surveyResponse (Peter)
+// Create survey response
 app.post('/surveys', function(req, res) {
-// find user using cookies
+// Finding user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
     if (err) {
       console.log(err);
     } else {
       console.log(user.survey_responses);
-      // setting survey object
+      // Setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
         teaching_quality: req.body.teaching_quality,
@@ -100,7 +94,7 @@ app.post('/surveys', function(req, res) {
         happy_hr_suggestion: req.body.happy_hr_suggestion,
         user: req.cookies.loggedInId
       });
-      // saving survey
+      // Saving survey
       survey.save(function(err) {
         console.log(survey + 'created');
         res.send(survey);
@@ -110,13 +104,11 @@ app.post('/surveys', function(req, res) {
 });
 
 // View form (Peter)
-
-app.get('/user/surveys', function(req,res){
-
-// grabbing user_id from cookies
+app.get('/user/surveys', function(req,res) {
+  // Grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);
-// finding responses w/ user id
+  // Finding responses w/ user id
   SurveyResponse.find({"user": user_id_pull}).then(function(surveys) {
     console.log("get surveys");
     console.log(surveys);
@@ -132,24 +124,25 @@ app.get('/surveys/:id', function(req,res){
   });
 });
 
-// Edit form (Peter)
+// Edit form
 app.put('/surveys/:id', function(req,res) {
   SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
-    if(err) {
+    if (err) {
       console.log(err)
     } else {
       res.send(survey);
-    }  
+    };  
   });
 });
 
-// View, edit/udpate, and delete user account (Malina)
+// View user account
 app.get('/users/:id', function(req, res) {
   User.findById(req.cookies.loggedInId, function(err, user) {
     res.send(user);
   });
 });
 
+// Edit user account
 app.put('/users/:id', function(req, res) {
   password_hash = md5(req.body.password);
   var user = {
@@ -157,13 +150,12 @@ app.put('/users/:id', function(req, res) {
     username: req.body.username, 
     password_hash: password_hash 
   };
-  // console.log(user);
   User.findOneAndUpdate(req.cookies.loggedInId, user, function(err, user) {
     res.send(user);
   });
 });
 
-// Only deletes original and does not redirect
+// Delete user account
 app.delete('/users/:id', function(req, res) {
   User.findByIdAndRemove(req.cookies.loggedInId, function(err, user) {
     console.log('User deleted');
@@ -192,7 +184,6 @@ app.get('/analytics/:date', function(req, res) {
   var teaching_quality_array = [];
   var comfort_level_array = [];
   var lesson_score_array = [];
-
   // Pushes all values to specific arrays
   for (var i=0; i<surveys_array.length; i++){
       comments_array.push(surveys_array[i].comments)
@@ -213,8 +204,7 @@ app.get('/analytics/:date', function(req, res) {
       lesson_score_array.push(surveys_array[i].lesson_score)
   };
 
-// Average function
-
+  // Average function
   var average = function(array){
     sum = 0
     for (var i = 0; i <array.length; i++) {
@@ -237,10 +227,8 @@ app.get('/analytics/:date', function(req, res) {
     comfort_level: comfort_level_array,
     lesson_score: lesson_score_array,
   }
-
-  res.send(object)
-
-  }) 
+  res.send(object);
+  }); 
 });
 
 
