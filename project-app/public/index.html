@@ -55,7 +55,7 @@
     </div>
   </template>
 
-  <!-- New Survey template -->
+  <!-- New survey template -->
   <template id="new-survey-template">
     <div id ="new-survey-container">
       <h4>Submit New Survey</h4>
@@ -70,7 +70,7 @@
     </div>
   </template>
 
-  <!-- All surveys display template -->
+  <!-- All surveys template -->
   <template id="display-survey-template">
     <div id ="display-survey-container">
       <h3>=================================</h3>
@@ -84,7 +84,7 @@
     </div>
   </template>
 
- <!--Template for User view specific survey page -->
+ <!-- User's view survey template -->
   <template id="view-user-survey-template">
     <div id ="display-survey-container" data-id="{{_id}}">
       <h3>=================================</h3>
@@ -99,7 +99,7 @@
     </div>
   </template>
 
-  <!-- Individual user's surveys -->
+  <!-- List of user's surveys template -->
   <template id="display-user-template">
     <div class ="display-user-survey-container" data-id="{{_id}}">
       <h3>=================================</h3>
@@ -109,7 +109,7 @@
     </div>
   </template>
 
-  <!-- Update template for Survey -->
+  <!-- Update survey template -->
   <template id="survey-edit-template">
     <div class="form">
       <h4>Edit Survey</h4>
@@ -121,12 +121,11 @@
       <p>Comments: <input name="comments" value="{{comments}}"/></p>
       <p>Feeling: <input name="feeling" value="{{feeling}}"/></p>
       <p>After class, we should have happy hour at: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>.</p>
-
-      <button id="survey-submit-edit-btn">Submit Edit</button>
+      <button id="survey-submit-edit-btn">Save</button>
     </div>
   </template>
 
-  <!-- View user profile -->
+  <!-- View user profile template -->
   <template id="user-profile-template">
     <div id="user-profile-container" data-id= "{{_id}}">
       <h4>View User Account</h4>
@@ -137,7 +136,7 @@
     <button id="delete-user-profile-btn">Delete Profile</button>
   </template>
 
-  <!-- Edit user profile -->
+  <!-- Edit user profile template -->
   <template id="edit-user-profile-template">
     <div id="edit-user-profile-container">
       <h4>Edit User Account</h4>
