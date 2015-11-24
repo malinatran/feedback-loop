@@ -119,7 +119,7 @@ Homepage button > renderHomepage
 
 9. 
   * View user profile button > getUserProfile
-
+ 
 10. 
   * Edit user profile button > editUserProfile,
   * Update user profile button > updateUserProfile
