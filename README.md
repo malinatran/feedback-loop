@@ -103,8 +103,9 @@ Homepage button > renderHomepage
   * New survey button > renderSurveys
   * Submit new survey button > submitNewSurvey
 
-5.
- 
+5. 
+  * No click functions
+
 6. 
   * View my surveys > getUserSurveys
   * Submit survey update > getUserSurveys
