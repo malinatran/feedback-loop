@@ -113,7 +113,6 @@ Homepage button > renderHomepage
 7. 
   * View individual survey event listener > getUserViewSurvey (in code block)
   * Back to view survey > getUserViewSurvey
-  *
 
 8. 
   * Edit individual survey > getUserEditSurvey (in code block)
