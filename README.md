@@ -113,15 +113,16 @@ Homepage button > renderHomepage
 7. 
   * View individual survey event listener > getUserViewSurvey (in code block)
   * Back to view survey > getUserViewSurvey
+  *
 
-8.
+8. 
   * Edit individual survey > getUserEditSurvey (in code block)
 
 9. 
   * View user profile button > getUserProfile
- 
+
 10. 
-  * Edit user profile button > editUserProfile,
+  * Edit user profile button > editUserProfile
   * Update user profile button > updateUserProfile
 
 11. 
