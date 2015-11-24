@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost/feedbackloop');
 // Listener
 app.listen(port);
 
-// Sign up new user (Malina)
+// Sign up new user
 app.post('/users', function(req, res) {
   password_hash = md5(req.body.password);
   var user = new User({
@@ -43,7 +43,7 @@ app.post('/users', function(req, res) {
   });
 });
 
-// Login user (Malina)
+// Login user
 app.post('/login', function(req, res) {
   User.findOne({
     username: req.body.username,
@@ -54,23 +54,23 @@ app.post('/login', function(req, res) {
   });
 });
 
-// Show all forms (Peter)
+// Show all forms
 app.get('/surveys', function(req, res) {
-  // add conditional checking res.cookies?
+  // Adding conditional checking res.cookies?
   SurveyResponse.find().then(function(data) {
     res.send(data);
   });
 });
 
-// Create surveyResponse (Peter)
+// Create survey response
 app.post('/surveys', function(req, res) {
-// find user using cookies
+// Finding user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
     if (err) {
       console.log(err);
     } else {
       console.log(user.survey_responses);
-      // setting survey object
+      // Setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
         teaching_quality: req.body.teaching_quality,
@@ -81,7 +81,7 @@ app.post('/surveys', function(req, res) {
         happy_hr_suggestion: req.body.happy_hr_suggestion,
         user: req.cookies.loggedInId
       });
-      // saving survey
+      // Saving survey
       survey.save(function(err) {
         console.log(survey + 'created');
         res.send(survey);
@@ -90,12 +90,12 @@ app.post('/surveys', function(req, res) {
   });
 });
 
-// View form (Peter)
+// View form
 app.get('/user/surveys', function(req,res){
-// grabbing user_id from cookies
+// Grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);
-// finding responses w/ user id
+// Finding responses w/ user id
   SurveyResponse.find({"user": user_id_pull}).then(function(surveys) {
     console.log("get surveys");
     console.log(surveys);
@@ -111,7 +111,7 @@ app.get('/surveys/:id', function(req,res){
   });
 });
 
-// Edit form (Peter)
+// Edit form
 app.put('/surveys/:id', function(req,res) {
   SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
     if(err) {
@@ -122,13 +122,14 @@ app.put('/surveys/:id', function(req,res) {
   });
 });
 
-// View, edit/udpate, and delete user account (Malina)
+// View user account
 app.get('/users/:id', function(req, res) {
   User.findById(req.cookies.loggedInId, function(err, user) {
     res.send(user);
   });
 });
 
+// Edit user account
 app.put('/users/:id', function(req, res) {
   password_hash = md5(req.body.password);
   var user = {
@@ -136,13 +137,12 @@ app.put('/users/:id', function(req, res) {
     username: req.body.username, 
     password_hash: password_hash 
   };
-  // console.log(user);
   User.findOneAndUpdate(req.cookies.loggedInId, user, function(err, user) {
     res.send(user);
   });
 });
 
-// Only deletes original and does not redirect
+// Delete user account
 app.delete('/users/:id', function(req, res) {
   User.findByIdAndRemove(req.cookies.loggedInId, function(err, user) {
     console.log('User deleted');
