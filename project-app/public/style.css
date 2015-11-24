@@ -26,6 +26,7 @@
 
 .dashboard-btns {
   border: 3px solid #30B271;
+  border-radius: 5px;
   color: black;
   display: inline-block;
   font-family: 'Raleway', sans-serif;
@@ -40,6 +41,7 @@
 
 .dashboard-btns a, .dashboard-btns a:visited {
   color: black;
+  text-decoration: none;
 }
 
 .dashboard-btns:hover {

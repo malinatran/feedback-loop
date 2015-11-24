@@ -92,7 +92,7 @@ $(function() {
   // get ALL surveys in an object, only with unique dates
   var getSurveyDates = function() {
     $.get('/surveys').done(function(data) {
-      renderSurveyAnalytics(data)
+      renderSurveyAnalytics(data);
       // console.log(data)
     });
   };
@@ -115,13 +115,14 @@ $(function() {
       });
     };
   };
+
   // 4c. get request with date, to grab all surveys with date object
-  var getAnalytics=function(input){
+  var getAnalytics = function(input){
     $.ajax({
       url: "http://localhost:3000/analytics/"+input,
       method: "GET",
     }).done(function(data) {
-      renderDateAnalytics(data)
+      renderDateAnalytics(data);
       // console.log(data)
       // receives analytics object and then calls render to put it on the page.
     });
@@ -140,7 +141,7 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -151,7 +152,7 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("input[name='comments']").val();
+    var comments = $("textarea[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
@@ -185,7 +186,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -196,6 +197,12 @@ $(function() {
         // Grabbing id from parent element
         var id = $(this).parent().attr('data-id');
         getUserViewSurvey(id);
+      });
+      var edit_link = $('.edit-survey');
+      // Add eventlistener to edit survey
+      edit_link.click(function() {
+        var id = $(this).parent().attr('data-id');
+        getUserEditSurvey(id);
       });
     };
   };
@@ -215,7 +222,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -241,12 +248,12 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
     // Event listener to subment edit
-    $('.edit-survey-submit').click(function() {
+    $('.edit-survey-submit').click(function() { 
       updateSurveyResponse();
     });
   };
@@ -258,7 +265,7 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("input[name='comments']").val();
+    var comments = $("textarea[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     // Setting data object for ajax
@@ -279,13 +286,13 @@ $(function() {
     }).done(getUserSurveys);
   };
 
-    // 9. View user's profile
-    // 9a. getUserProfile 
-    var getUserProfile = function(id) {
-      $.get('/users/:id').done(function(data) {
-        renderUserProfile(data);
-      });
-    };
+  // 9. View user's profile
+  // 9a. getUserProfile 
+  var getUserProfile = function(id) {
+    $.get('/users/:id').done(function(data) {
+      renderUserProfile(data);
+    });
+  };
 
   // 9b. renderUserProfile
   var renderUserProfile = function(data) {
@@ -294,7 +301,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };

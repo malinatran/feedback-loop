@@ -58,9 +58,9 @@
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
-        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">View My Surveys</a>
-        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">Complete New Survey</a>
-        <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">Survey Analytics</a>
+        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
+        <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
+        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
       </div>
     </div>
 
@@ -129,7 +129,7 @@
     <form class="form-horizontal">
       <template id="new-survey-template">
         <div class="form-group col-md-10">
-          <label class="col-md-5 control-label">Date</label>
+          <label class="col-md-5 control-label">Date:</label>
           <div class="col-md-5">
             <input name="date" type="date" class="form-control">
           </div>
@@ -192,60 +192,62 @@
       </div>
     </template> -->
 
-    <!-- List of user's surveys template -->
-    <table class="table col-md-6 col-md-offset-1">
-      <tbody>
-        <template id="display-user-template">
-          <div class="display-user-survey-container col-md-6" data-id="{{_id}}">
-            <div class="col-md-5 date-text">{{date}}</div>
-            <button class="view-survey btn btn-default">View</button>
-            <button class="edit-survey btn btn-default">Edit</button>
-          </div>
-        </template>
-      </tbody>
-    </table>
+    <!-- List of user's surveys template: DONE -->
+    <div class="row">
+      <table class="table">
+        <tbody>
+          <template id="display-user-template">
+            <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
+              <div class="col-md-7 date-text">{{date}}</div>
+              <button class="view-survey col-md-2 btn btn-default">View</button>
+              <button class="edit-survey col-md-2 btn btn-default">Edit</button>
+            </div>
+          </template>
+        </tbody>
+      </table>
+    </div>
 
     <!-- User's view survey template: DONE-->
     <form class="form-horizontal">
       <template id="view-user-survey-template">
         <div id="display-survey-container" data-id="{{_id}}" class="form-group col-md-10">
-          <label class="col-md-5 control-label">Date:</label>
+          <label class="col-md-5 col-md-offset-1 control-label">Date:</label>
           <div class="col-md-5">
             {{date}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">Teaching quality:</label>
+          <label class="col-md-5 col-md-offset-1 control-label">Teaching quality:</label>
           <div class="col-md-5">
             {{teaching_quality}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">Comfort level:</label>
+          <label class="col-md-5 col-md-offset-1 control-label">Comfort level:</label>
           <div class="col-md-5">
             {{comfort_level}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">Overall lesson:</label>
+          <label class="col-md-5 col-md-offset-1 control-label">Overall lesson:</label>
           <div class="col-md-5">
             {{lesson_score}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">Comments:</label>
+          <label class="col-md-5 col-md-offset-1 control-label">Comments:</label>
           <div class="col-md-5">
             {{comments}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">I am feeling: </label>
+          <label class="col-md-5 col-md-offset-1 control-label">I am feeling: </label>
           <div class="col-md-5">
             {{feeling}}
           </div>
         </div>
         <div class="form-group col-md-10" data-id="{{_id}}" >
-          <label class="col-md-5 control-label">Let's happy hour at: </label>
+          <label class="col-md-5 col-md-offset-1 control-label">Let's happy hour at: </label>
           <div class="col-md-5">
             {{happy_hr_suggestion}}
           </div>
@@ -253,21 +255,72 @@
       </template>
     </form>
 
-    <!-- Update survey template -->
-    <template id="survey-edit-template">
-      <div class="form">
-        <h4>Edit Survey</h4>
-        <p><input type="hidden" name="date" value="{{date}}"/></p>
-        <p><input type="hidden" name="_id" value="{{_id}}"/></p>
-        <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/></p>
-        <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/></p>
-        <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/></p>
-        <p>Comments: <input name="comments" value="{{comments}}"/></p>
-        <p>Feeling: <input name="feeling" value="{{feeling}}"/></p>
-        <p>After class, we should have happy hour at: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>.</p>
-        <button id="survey-submit-edit-btn">Save</button>
-      </div>
-    </template>
+    <!-- Edit survey template: IN PROGRESS -->
+    <!--   <template id="survey-edit-template">
+        <div class="form">
+          <h4>Edit Survey</h4>
+          <p><input type="hidden" name="date" value="{{date}}"/></p>
+          <p><input type="hidden" name="_id" value="{{_id}}"/></p>
+          <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/></p>
+          <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/></p>
+          <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/></p>
+          <p>Comments: <input name="comments" value="{{comments}}"/></p>
+          <p>Feeling: <input name="feeling" value="{{feeling}}"/></p>
+          <p>After class, we should have happy hour at: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>.</p>
+          <button id="survey-submit-edit-btn">Save</button>
+        </div>
+      </template> -->
+
+    <form class="form-horizontal">
+      <template id="survey-edit-template">
+        <div class="form-group col-md-10">
+          <label class="col-md-10 control-label">Date: {{date}}</label>
+          <input type="hidden" name="_id" value="{{_id}}"/>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Teaching quality (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Comfort level (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Overall lesson (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Comments:</label>
+          <div class="col-md-5">
+            <textarea name="comments" type="textarea" rows="3" cols="50" value="{{comments}}">
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">I am feeling: </label>
+          <div class="col-md-5">
+            <input name="feeling" value="{{feeling}}"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Let's happy hour at: </label>
+          <div class="col-md-5">
+            <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-10">
+            <button type="submit" id="survey-submit-edit-btn" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </template>
+    </form>
 
     <!-- View user profile template -->
     <template id="user-profile-template">

@@ -77,7 +77,7 @@ app.get('/surveys', function(req, res) {
 
 // Create survey response
 app.post('/surveys', function(req, res) {
-// Finding user using cookies
+  // Finding user using cookies
   User.findById(req.cookies.loggedInId, function(err,user) {
     if (err) {
       console.log(err);
