@@ -6,11 +6,14 @@ Team Tyrion
   * Mike Wiesenhart
   * Peter Winterhof
 
-**Technologies:**
-  * Node
-  * Express
-  * Mongo
+**Technologies (Languages & Frameworks):**
+  * JavaScript
+  * jQuery
+  * Node.js
+  * Express.js
+  * Mongo & Mongoose
   * AJAX
+  * Bootstrap
 
 **App Idea:**
 Web app that manages daily 'exit tickets' – survey forms for students to give feedback to instructors – and aggregates overall feedback for student viewing. The app will create a better feedback loop for students and instructors, one that is more transparent, social, and dynamic.
