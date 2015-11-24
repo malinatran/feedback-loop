@@ -82,6 +82,7 @@ $(function() {
     $('#user-profile-btn').show();
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
+    $('#analytics-btn').show();
     $('#view-dashboard-btn').hide();
     $('#home-btn').hide();
     // getSurveys();
@@ -112,6 +113,7 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-survey-btn').hide();
     $('#view-dashboard-btn').show();
+    $('#analytics-btn').hide();
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -156,6 +158,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
+    $('#analytics-btn').hide();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -185,6 +188,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
+    $('#analytics-btn').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -210,6 +214,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
+    $('#analytics-btn').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($("#survey-edit-template").html());
     $('#display-container').append(template(data));
@@ -262,6 +267,7 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
+    $('#analytics-btn').hide();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
