@@ -124,6 +124,11 @@ $(function() {
     var lesson_score = $("input[name='lesson_score']").val();
     var comments = $("input[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
+ //    function convert() {
+ //     var input = document.getElementById('inputText').value;
+ //     var output = emojione.toImage(input);
+ //     document.getElementById('outputText').innerHTML = output;
+ // }
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
