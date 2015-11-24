@@ -216,7 +216,7 @@ $(function() {
     $('#view-dashboard-btn').show();
     $('#analytics-btn').hide();
     // Handlebars compiling template for editing survey
-    var template = Handlebars.compile($("#survey-edit-template").html());
+    var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
     // Event listener to subment edit
     $('.edit-survey-submit').click(function() {

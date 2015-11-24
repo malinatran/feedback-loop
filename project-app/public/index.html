@@ -18,7 +18,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">&infin;</a>
+        <a class="navbar-brand" href="/">&infin;</a>
       </div>
 
       <div>
@@ -45,7 +45,7 @@
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
-        <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic</p>
+        <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
       </div>
     </div>
 
@@ -58,65 +58,129 @@
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
-        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">View My Surveys</a>
-        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">Complete New Survey</a>
-        <a href="#" id="analytics-btn" class="dashboard-btns" style="display:none">Survey Analytics</a>
+        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
+        <a href="#" id="analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
+        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
       </div>
     </div>
 
-    <!-- Login template -->
-    <form>
+    <!-- Login template: DONE -->
+    <form class="form-horizontal">
       <template id="login-template">
-        <div id="login-container">
-          <h4>Login</h4>
-          <div class="form-group">
-            <p>Username: <input name="username"/></p>
+        <div class="form-group col-md-8 col-md-offset-2">
+          <label for="inputUsername" class="col-sm-3 control-label">Username</label>
+          <div class="col-sm-8">
+            <input name="username" type="username" class="form-control" id="inputUsername">
           </div>
-          <div class="form-group">
-            <p>Password: <input name="password" type="password"/></p>
+        </div>
+        <div class="form-group col-md-8 col-md-offset-2">
+          <label for="inputPassword" class="col-sm-3 control-label">Password</label>
+          <div class="col-sm-8">
+            <input name="password" type="password" class="form-control" id="inputPassword">
           </div>
-          <div class type="checkbox">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-4 col-md-10">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
           </div>
-          <button type="submit" id="login-submit-btn" class="btn btn-info">Submit</button>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-10">
+            <button type="submit" id="login-submit-btn" class="btn btn-default">Sign in</button>
+          </div>
         </div>
       </template>
     </form>
 
-    <!-- Signup template -->
-    <form>
+    <!-- Signup template: DONE -->
+    <form class="form-horizontal">
       <template id="signup-template">
-        <div id="signup-container">
-          <h4>Sign Up</h4>
-          <div class="form-group">
-            <p>Hello, my name is <input name="name"/>.</p>
-            <p>Username: <input name="username"/></p>
-            <p>Password: <input name="password" type="password"/></p>
+        <div class="form-group col-md-8 col-md-offset-2">
+          <label for="inputName" class="col-sm-3 control-label">Name</label>
+          <div class="col-sm-8">
+            <input name="name" type="name" class="form-control" id="inputName">
           </div>
-          <button type="submit" id="signup-submit-btn" class="btn btn-info">Submit</button>
+        </div>
+        <div class="form-group col-md-8 col-md-offset-2">
+          <label for="inputUsername" class="col-sm-3 control-label">Username</label>
+          <div class="col-sm-8">
+            <input name="username" type="username" class="form-control" id="inputUsername">
+          </div>
+        </div>
+        <div class="form-group col-md-8 col-md-offset-2">
+          <label for="inputPassword" class="col-sm-3 control-label">Password</label>
+          <div class="col-sm-8">
+            <input name="password" type="password" class="form-control" id="inputPassword">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-10">
+            <button type="submit" id="signup-submit-btn" class="btn btn-default">Sign up</button>
+          </div>
         </div>
       </template>
     </form>
 
-    <!-- New survey template -->
-    <template id="new-survey-template">
-      <div id ="new-survey-container">
-        <h4>Submit New Survey</h4>
-        <p>Date:<input type="date" name="date"/></p>
-        <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality"/></p>
-        <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level"/></p>
-        <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score"/></p>
-        <p>Comments: <br> <textarea name="comments" type="textarea" rows='3' cols='50'></textarea></p>
-        <p>I am feeling: <input name="feeling"/>.</p>
-        <p>After class, we should have happy hour at: <input name="happy_hr_suggestion"/>.</p>
-        <button id="survey-submit-btn">Submit Survey</button>
-      </div>
-    </template>
+    <!-- New survey template: DONE -->
+    <form class="form-horizontal">
+      <template id="new-survey-template">
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Date</label>
+          <div class="col-md-5">
+            <input name="date" type="date" class="form-control">
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Teaching quality (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="teaching_quality">
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Comfort level (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="comfort_level"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Overall lesson (1-10):</label>
+          <div class="col-md-5">
+            <input type="number" min="1" max="10" step="1" name="lesson_score"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Comments:</label>
+          <div class="col-md-5">
+            <textarea name="comments" type="textarea" rows='3' cols='50'>Share with us something you've learned.
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">I am feeling: </label>
+          <div class="col-md-5">
+            <input name="feeling"/>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label class="col-md-5 control-label">Let's happy hour at: </label>
+          <div class="col-md-5">
+            <input name="happy_hr_suggestion"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-10">
+            <button type="submit" id="survey-submit-btn" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </template>
+    </form>
 
-    <!-- All surveys template -->
-    <template id="display-survey-template">
+    <!-- All surveys template: NOT USING -->
+<!--     <template id="display-survey-template">
       <div id ="display-survey-container">
         <h3>Date: {{date}}</h3>
         <h3>Teaching quality: {{teaching_quality}}</h3>
@@ -126,32 +190,68 @@
         <h3>Feeling: {{feeling}}</h3>
         <h3>Happy hour venue: {{happy_hr_suggestion}}</h3>
       </div>
-    </template>
-
-    <!-- User's view survey template -->
-    <template id="view-user-survey-template">
-      <div id ="display-survey-container" data-id="{{_id}}">
-        <h3>=================================</h3>
-        <h3>Date: {{date}}</h3>
-        <h3>Teaching quality: {{teaching_quality}}</h3>
-        <h3>Comfort level: {{comfort_level}}</h3>
-        <h3>Overall lesson: {{lesson_score}}</h3>
-        <h3>Comments: {{comments}}</h3>
-        <h3>Feeling: {{feeling}}</h3>
-        <h3>Happy hour venue: {{happy_hr_suggestion}}</h3>
-        <button class="edit-survey">Edit Survey</button>
-      </div>
-    </template>
+    </template> -->
 
     <!-- List of user's surveys template -->
-    <template id="display-user-template">
-      <div class ="display-user-survey-container" data-id="{{_id}}">
-        <h3>=================================</h3>
-        <h3>Date: {{date}}</h3>
-        <button class="view-survey">View Survey</button>
+    <table class="table col-md-6 col-md-offset-1">
+      <tbody>
+        <template id="display-user-template">
+          <div class="display-user-survey-container col-md-6" data-id="{{_id}}">
+            <div class="col-md-5 date-text">{{date}}</div>
+            <button class="view-survey btn btn-default">View</button>
+            <button class="edit-survey btn btn-default">Edit</button>
+          </div>
+        </template>
+      </tbody>
+    </table>
 
-      </div>
-    </template>
+    <!-- User's view survey template: DONE-->
+    <form class="form-horizontal">
+      <template id="view-user-survey-template">
+        <div id="display-survey-container" data-id="{{_id}}" class="form-group col-md-10">
+          <label class="col-md-5 control-label">Date:</label>
+          <div class="col-md-5">
+            {{date}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">Teaching quality:</label>
+          <div class="col-md-5">
+            {{teaching_quality}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">Comfort level:</label>
+          <div class="col-md-5">
+            {{comfort_level}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">Overall lesson:</label>
+          <div class="col-md-5">
+            {{lesson_score}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">Comments:</label>
+          <div class="col-md-5">
+            {{comments}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">I am feeling: </label>
+          <div class="col-md-5">
+            {{feeling}}
+          </div>
+        </div>
+        <div class="form-group col-md-10" data-id="{{_id}}" >
+          <label class="col-md-5 control-label">Let's happy hour at: </label>
+          <div class="col-md-5">
+            {{happy_hr_suggestion}}
+          </div>
+        </div>
+      </template>
+    </form>
 
     <!-- Update survey template -->
     <template id="survey-edit-template">
