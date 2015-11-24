@@ -88,27 +88,29 @@ Go to homepage
 Homepage button > renderHomepage
 
 1. 
-  * Login button > renderLoginForm, 
+  * Login button > renderLoginForm
   * Login submit button > submitLoginForm
 
 2. 
-  * Signup button > renderSignupForm, 
+  * Signup button > renderSignupForm 
   * Signup submit button > submitSignupForm
 
 3. 
   * Logout button > logoutUser
 
 4. 
-  * Back to dashboard button > viewDashboard, 
-  * New survey button > renderSurveys, 
+  * Back to dashboard button > viewDashboard 
+  * New survey button > renderSurveys
   * Submit new survey button > submitNewSurvey
 
+5.
+ 
 6. 
-  * View my surveys > getUserSurveys, 
+  * View my surveys > getUserSurveys
   * Submit survey update > getUserSurveys
 
 7. 
-  * View individual survey event listener > getUserViewSurvey (in code block),
+  * View individual survey event listener > getUserViewSurvey (in code block)
   * Back to view survey > getUserViewSurvey
 
 8.
