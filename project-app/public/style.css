@@ -64,6 +64,7 @@ html, body {
 }
 
 .dashboard-btns:hover {
+  color: #436060;
   background-color: #F1D911;
   text-decoration: none;
 }
@@ -71,7 +72,8 @@ html, body {
 footer {
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 300;
+  line-height: 1.5em;
   margin-bottom: 10px;
 }
 
@@ -90,7 +92,7 @@ footer {
 }
 
 .analytics-header {
-  border-bottom: 2px solid #30B271;
+  border-bottom: 1px solid #30B271;
   border-top: 2px solid #30B271;
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
@@ -112,8 +114,11 @@ footer {
 .subcontainer {
   float: left;
   margin: 10px;
-  width: 200px;
   text-align: center;
+}
+
+.view-user-survey-container {
+  line-height: 2em;
 }
 
 #back-to-surveys {
@@ -122,4 +127,31 @@ footer {
 
 #back-to-analytics {
   color: #30B271;
+}
+
+.my-profile {
+  color: #3E5ADE;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.profile-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 2em;
+}
+
+.profile-input {
+  border: none;
+  border-bottom: 3px solid #F1D911;
+  width: 200px;
+}
+
+.input-text {
+  background-color: #F1D911;
 }
