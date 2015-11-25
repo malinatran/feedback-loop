@@ -5,9 +5,11 @@ var user = null;
 
 $(function() {
 
-  // 0. Go to homepage
+  // 0. renderHomepage
   var renderHomepage = function() {
     window.location = '/';
+    $('#title').show();
+    $('.lead').show();
   };
 
   // 1. Login user
@@ -17,6 +19,7 @@ $(function() {
     $('#login-btn').hide();
     $('#signup-btn').hide();
     $('#home-btn').show();
+    $('#title').show();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -44,6 +47,7 @@ $(function() {
     $('#login-btn').hide();
     $('#signup-btn').hide();
     $('#home-btn').show();
+    $('#title').show();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -71,6 +75,8 @@ $(function() {
   var logoutUser = function() {
     Cookies.remove('loggedInId');
     window.location = '/';
+    $('#title').show();
+    $('.lead').show();
   };
 
   // 4. Display user's dashboard
@@ -85,22 +91,30 @@ $(function() {
     $('#view-analytics-btn').show();
     $('#view-dashboard-btn').hide();
     $('#home-btn').hide();
-    // Display new and view buttons. And then calls getSurveys function
+    $('#back-to-analytics').hide();
+    $('#back-to-surveys').hide();
+    $('#title').show();
+    $('.lead').show();
   };
 
-  // 4a.getSurveys
-  // get ALL surveys in an object, only with unique dates
+  // 4a. getSurveyDates
+  // Get ALL surveys in an object, only with unique dates
   var getSurveyDates = function() {
     $.get('/surveys').done(function(data) {
       renderSurveyAnalytics(data);
-      // console.log(data)
     });
   };
 
   // 4b. renderSurveyAnalytics
-  // renders the dates on the page with an analytics button
+  // Renders the dates on the page with an analytics button
   var renderSurveyAnalytics = function(data) {
     $('#display-container').empty();
+    $('#view-survey-btn').hide();
+    $('#new-survey-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#view-dashboard-btn').show();
+    $('#title').hide();
+    $('.lead').hide();
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
       $('#display-container').append(template(data[i]));
@@ -108,7 +122,6 @@ $(function() {
       link.click(function() {
         // grab id from parent element
         var date = $(this).parent().attr('data-id');
-        // console.log(date);
         getAnalytics(date);
         // button calls get Analytics, which will grab relevate data for the date
         // Create new function that is called when "view analytics" is clicked
@@ -116,20 +129,26 @@ $(function() {
     };
   };
 
-  // 4c. get request with date, to grab all surveys with date object
+  // 4c. getAnalytics
+  // Get request with date, to grab all surveys with date object
   var getAnalytics = function(input){
     $.ajax({
       url: "http://localhost:3000/analytics/"+input,
       method: "GET",
     }).done(function(data) {
       renderDateAnalytics(data);
-      // console.log(data)
       // receives analytics object and then calls render to put it on the page.
     });
   };
-  // 4d. 
-  var renderDateAnalytics=function(input) {
+
+  // 4d. renderDateAnalytics
+  var renderDateAnalytics = function(input) {
     $('#display-container').empty();
+    $('#view-dashboard-btn').show();
+    $('#back-to-surveys').hide();
+    $('#back-to-analytics').show();
+    $('#title').hide();
+    $('.lead').hide();
     var template = Handlebars.compile($('#analytics-template').html());
     $('#display-container').append(template(input));
   };
@@ -142,6 +161,8 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#view-dashboard-btn').show();
     $('#view-analytics-btn').hide();
+    $('#title').hide();
+    $('.lead').hide();
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -187,6 +208,10 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     $('#view-analytics-btn').hide();
+    $('#back-to-surveys').hide();
+    $('#back-to-analytics').hide();
+    $('#title').hide();
+    $('.lead').hide();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -209,12 +234,11 @@ $(function() {
 
   // 7. View user's survey
   // 7a. getUserViewSurvey
-    var getUserViewSurvey = function(id) {
-      $.get('/surveys/'+ id).done(function(data) {
-        renderUserViewSurvey(data);
-        console.log(data);
-      });
-    };
+  var getUserViewSurvey = function(id) {
+    $.get('/surveys/'+ id).done(function(data) {
+      renderUserViewSurvey(data);
+    });
+  };
 
   // 7b. renderUserViewSurvey
   var renderUserViewSurvey = function(data) {
@@ -223,6 +247,9 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     $('#view-analytics-btn').hide();
+    $('#back-to-surveys').show();
+    $('#title').hide();
+    $('.lead').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -243,12 +270,15 @@ $(function() {
   };
 
   // 8b. renderUserEditSurvey
-  var renderUserEditSurvey = function(data){
+  var renderUserEditSurvey = function(data) {
     $('#display-container').empty();
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     $('#view-analytics-btn').hide();
+    $('#back-to-surveys').show();
+    $('#title').hide();
+    $('.lead').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
@@ -302,6 +332,10 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
     $('#view-analytics-btn').hide();
+    $('#back-to-analytics').hide();
+    $('#back-to-surveys').hide();
+    $('#title').hide();
+    $('.lead').hide();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
@@ -350,6 +384,10 @@ $(function() {
   // 0. 
   // Homepage button > renderHomepage
   $('body').on('click', '#home-btn', renderHomepage);
+  // Back to analytics button > renderSurveyAnalytics
+  $('body').on('click', '#back-to-analytics', getSurveyDates);
+  // Back to analytics button > renderSurveyAnalytics
+  $('body').on('click', '#back-to-surveys', getUserSurveys);
 
   // 1. 
   // Login button > renderLoginForm
@@ -374,6 +412,8 @@ $(function() {
   $('body').on('click', '#new-survey-btn', renderSurveyForm);
   // Submit new survey > submitNewSurvey
   $('body').on('click', '#survey-submit-btn', createSurveyResponse);
+  // Analytics button > getSurveys
+  $('body').on('click', '#view-analytics-btn', getSurveyDates);
   
   // 6. 
   // View my surveys > getUserSurveys
@@ -399,12 +439,11 @@ $(function() {
   $('body').on('click', '#edit-user-profile-btn', editUserProfile);
   // Update user profile > updateUserProfile
   $('body').on('click', '#edit-user-submit-btn', updateUserProfile);
-  
+
   // 11. 
   // Delete user profile > deleteUserProfile
   $('body').on('click', '#delete-user-profile-btn', deleteUserProfile);
-// 12. Analytics button > getSurveys
-  $('body').on('click', '#view-analytics-btn', getSurveyDates);
+
 
 
   // If user is logged in, go directly to dashboard

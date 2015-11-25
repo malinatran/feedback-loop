@@ -56,22 +56,22 @@ app.post('/login', function(req, res) {
 
 // Show all forms
 app.get('/surveys', function(req, res) {
-  var dates_array = [];
-  var check_dates_array = function(input){
-    for (var i = 0; i < dates_array.length; i++) {
-      if ( JSON.stringify(input) == JSON.stringify(dates_array[i].date)) {
+  var survey_responses = [];
+  var check_survey_responses = function(input){
+    for (var i = 0; i < survey_responses.length; i++) {
+      if ( JSON.stringify(input) == JSON.stringify(survey_responses[i].date)) {
         return false;
       }
     };
     return true;
   };
-  SurveyResponse.find().then(function(data) {
+  SurveyResponse.find().sort('-date').exec(function(err,data) {
     for (var i = 0; i < data.length; i++) {
-      if (check_dates_array(data[i].date)) { 
-         dates_array.push(data[i])
+      if (check_survey_responses(data[i].date)) { 
+        survey_responses.push(data[i]);
       } 
     };
-    res.send(dates_array);
+    res.send(survey_responses);
   });
 });
 
@@ -103,15 +103,13 @@ app.post('/surveys', function(req, res) {
   });
 });
 
-// View form (Peter)
+// View form
 app.get('/user/surveys', function(req,res) {
   // Grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
   console.log(user_id_pull);
   // Finding responses w/ user id
-  SurveyResponse.find({"user": user_id_pull}).then(function(surveys) {
-    console.log("get surveys");
-    console.log(surveys);
+  SurveyResponse.find({"user": user_id_pull}).sort('-date').exec(function(err, surveys) {
     res.send(surveys);
   });
 });
@@ -162,7 +160,6 @@ app.delete('/users/:id', function(req, res) {
   });
 });
 
-
 // Get surveys for specific date, manipulate data, return object with manipulated data
 app.get('/analytics/:date', function(req, res) {
   surveys_array = []
@@ -171,12 +168,10 @@ app.get('/analytics/:date', function(req, res) {
   // Find all surveys. Compares stringified date to pull_date. Pushes correct object to array
   SurveyResponse.find().then(function(data) {
     for (var i = 0; i < data.length; i++) {
-      console.log(JSON.stringify(data[i].date))
-      if(JSON.stringify(data[i].date)==pull_date){
+      if (JSON.stringify(data[i].date)==pull_date){
         surveys_array.push(data[i])
       }
     };
-  console.log(surveys_array)
   // empty arrays for making new object
   var comments_array = [];
   var feeling_array = [];
@@ -185,35 +180,33 @@ app.get('/analytics/:date', function(req, res) {
   var comfort_level_array = [];
   var lesson_score_array = [];
   // Pushes all values to specific arrays
-  for (var i=0; i<surveys_array.length; i++){
-      comments_array.push(surveys_array[i].comments)
+  for (var i=0; i < surveys_array.length; i++) {
+    comments_array.push(surveys_array[i].comments);
   };
-  for (var i=0; i<surveys_array.length; i++){
-      feeling_array.push(surveys_array[i].feeling)
+  for (var i=0; i < surveys_array.length; i++) {
+    feeling_array.push(surveys_array[i].feeling);
   };
-  for (var i=0; i<surveys_array.length; i++){
-      happy_hr_suggestion_array.push(surveys_array[i].happy_hr_suggestion)
+  for (var i=0; i < surveys_array.length; i++) {
+    happy_hr_suggestion_array.push(surveys_array[i].happy_hr_suggestion);
   };
-  for (var i=0; i<surveys_array.length; i++){
-    teaching_quality_array.push(surveys_array[i].teaching_quality)
+  for (var i=0; i < surveys_array.length; i++) {
+    teaching_quality_array.push(surveys_array[i].teaching_quality);
   };
-  for (var i=0; i<surveys_array.length; i++){
-      comfort_level_array.push(surveys_array[i].comfort_level)
+  for (var i=0; i < surveys_array.length; i++) {
+    comfort_level_array.push(surveys_array[i].comfort_level);
   };
-  for (var i=0; i<surveys_array.length; i++){
-      lesson_score_array.push(surveys_array[i].lesson_score)
+  for (var i=0; i < surveys_array.length; i++) {
+    lesson_score_array.push(surveys_array[i].lesson_score);
   };
-
   // Average function
-  var average = function(array){
-    sum = 0
-    for (var i = 0; i <array.length; i++) {
-      sum += array[i]
+  var average = function(array) {
+    sum=0;
+    for (var i=0; i <array.length; i++) {
+      sum += array[i];
     };
-    mean = sum/array.length
-    return mean
-  }
-
+    mean=sum/array.length;
+    return mean;
+  };
   // Create object with averages and individual arrays
   var object = {
     surveys_completed: surveys_array.length,

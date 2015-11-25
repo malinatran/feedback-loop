@@ -13,8 +13,9 @@
   <script src="app.js"></script>
 </head>
 <body>
-
+  <div id="wrapper"> <!-- Opens content -->
   <!-- Navbar -->
+  <div id="header"> <!-- Opens header -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -25,18 +26,24 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" id="login-btn">Login</a></li>
           <li><a href="#" id="signup-btn">Signup</a></li>
-          <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
+          <li><a href="#" id="back-to-surveys" style="display: none">Surveys</a></li>
+          <li><a href="#" id="back-to-analytics" style="display: none">Analytics</a></li>
           <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
+          <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
+          <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
+  </div> <!-- Closes header -->
 
   <div class="container">
+    
+    <div id="content"> <!-- Opens content -->
     <!-- Title -->
     <div class="row text-center">
       <div class="col-md-12">
-        <div id="title">
+        <div id="title" style="display:none">
           <div id="feedback">FEEDBACK</div>
           <img src="img/loop.jpg" id="loop"/>
         </div>
@@ -45,7 +52,7 @@
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
-        <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
+        <p class="lead" style="display:none">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
       </div>
     </div>
 
@@ -256,21 +263,6 @@
     </form>
 
     <!-- Edit survey template: IN PROGRESS -->
-    <!--   <template id="survey-edit-template">
-        <div class="form">
-          <h4>Edit Survey</h4>
-          <p><input type="hidden" name="date" value="{{date}}"/></p>
-          <p><input type="hidden" name="_id" value="{{_id}}"/></p>
-          <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/></p>
-          <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/></p>
-          <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/></p>
-          <p>Comments: <input name="comments" value="{{comments}}"/></p>
-          <p>Feeling: <input name="feeling" value="{{feeling}}"/></p>
-          <p>After class, we should have happy hour at: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>.</p>
-          <button id="survey-submit-edit-btn">Save</button>
-        </div>
-      </template> -->
-
     <form class="form-horizontal">
       <template id="survey-edit-template">
         <div class="form-group col-md-10">
@@ -298,8 +290,7 @@
         <div class="form-group col-md-10">
           <label class="col-md-5 control-label">Comments:</label>
           <div class="col-md-5">
-            <textarea name="comments" type="textarea" rows="3" cols="50" value="{{comments}}">
-            </textarea>
+            <textarea name="comments" type="textarea" rows="3" cols="50">{{comments}}</textarea>
           </div>
         </div>
         <div class="form-group col-md-10">
@@ -344,53 +335,79 @@
       </div>
     </template>
 
+    <!-- Choose date for specific analytics template -->
     <div class="row">
-      <div class="col-md-12 text-center">
-        <footer>&copy; Copyright 2015 | Team Tyrion</footer>
+      <table class="table">
+        <tbody>
+          <template id="analytics-by-date-template">
+            <div class="analytics-by-date-container col-md-10 col-md-offset-2" data-id="{{date}}">
+              <div class="col-md-7 date-text">{{date}}</div>
+              <button class="analytics-by-date-btn col-md-2 btn btn-default">View</button>
+            </div>
+          </template>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Show analytics template -->
+    <template id="analytics-template">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="subcontainer">
+            <span class="analytics-header">SURVEYS COMPLETED</span>
+            <div class="analytics-number">{{surveys_completed}}</div>
+          </div>
+          <div class="subcontainer">
+            <span class="analytics-header">AVG TEACHING QUALITY</span>
+            <div class="analytics-number">{{teaching_avg}}</div>
+          </div>
+          <div class="subcontainer">
+            <span class="analytics-header">AVG COMFORT LEVEL</span>
+            <div class="analytics-number">{{comfort_avg}}</div>
+          </div>
+          <div class="subcontainer">
+            <span class="analytics-header">AVG LESSON SCORE</span>
+            <div class="analytics-number">{{comfort_avg}}</div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="analytics-header2"><strong>Date:</strong> {{date}}</p>
+          <p class="analytics-header2"><strong>Comments:</strong></p>
+            <ul class="comments_list">
+              {{#each comments}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          <p class="analytics-header2"><strong>Feelings:</strong></p>
+            <ul class="feeling_list">
+              {{#each feeling}}
+              <li>{{this}}</li>
+              {{/each}} 
+            </ul>
+          <p class="analytics-header2"><strong>Happy Hour Suggestions:</strong></p>
+            <ul class="people_list">
+              {{#each happy_hr_suggestion}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+        </div>
+      </div>
+    </template>
+    </div> <!-- Closes content -->
+
+    <div id="footer">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <footer>&copy; Copyright 2015 FEEDBACK LOOP // Team Tyrion</footer>
+        </div>
       </div>
     </div>
 
-  <!-- Choose date for specific analytics template -->
-  <template id="analytics-by-date-template">
-    <div id="analytics-by-date-container" data-id="{{date}}">
-      <h4>{{ date }}</h4>
-      <button class="analytics-by-date-btn">Check Analytics</button>
-    </div>
-  </template>
-
-  <!-- Show analytics template -->
-  <template id="analytics-template">
-    <div id="analytics-container">
-      <h4>Analytics</h4>
-      <h5># of surveys completed: {{surveys_completed}}</h5>
-      <p>Average teaching quality: {{teaching_avg}}</p>
-      <p>Average comfort level: {{comfort_avg}}</p>
-      <p>Average lesson score: {{lesson_avg}}</p>
-
-      <h5>comments</h5>
-      <ul class="comments_list">
-        {{#each comments}}
-          <li>{{this}}</li>
-        {{/each}}
-      </ul>
-      <h5>feelings</h5>
-      <ul class="feeling_list">
-        {{#each feeling}}
-          <li>{{this}}</li>
-        {{/each}} 
-      </ul>
-      <h5>Happy hour</h5>
-      <ul class="people_list">
-        {{#each happy_hr_suggestion}}
-          <li>{{this}}</li>
-        {{/each}}
-      </ul>
-    </div>
-  </template>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    </div> <!-- Closes wrapper -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   </body>
-</html>
+  </html>
 
 
 
