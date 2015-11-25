@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var port = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
-var emoji = require('node-emoji');
 
 // Models
 var User = require('./models/user.js');
