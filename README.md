@@ -56,7 +56,12 @@ Go to homepage
 3. Logout user (logging out on the client side)
   * logoutUser
 
-4. Display user's dashboard
+4. Display user's dashboard, surveys, and analytics
+  * 4. viewDashboard
+  * 4a. getSurveyDates
+  * 4b. renderSurveyAnalytics
+  * 4c. getAnalytics
+  * 4d. renderDateAnalytics
 
 5. Fill out survey
   * 5a. renderSurveyForm (hide buttons, compile Handlebars template)
@@ -84,11 +89,14 @@ Go to homepage
   * 10b. updateUserProfile
 
 11. Delete user's profile & account
-  * deleteUserProfile
+  * 11a. confirmDelete
+  * 11b. deleteUserProfile
 
 **Click functions (corresponds with above functions):**
 
 Homepage button > renderHomepage
+Back to analytics button > getSurveyDates
+Back to surveys button > getUserSurveys
 
 1. 
   * Login button > renderLoginForm
@@ -128,4 +136,4 @@ Homepage button > renderHomepage
   * Update user profile button > updateUserProfile
 
 11. 
-  * Delete user profile button > deleteUserProfile
+  * Delete user profile button > confirmDelete
