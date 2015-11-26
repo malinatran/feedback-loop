@@ -173,7 +173,9 @@ app.get('/analytics/:date', function(req, res) {
     };
   // empty arrays for making new object
   var comments_array = [];
+  var randomized_comments= [];
   var feeling_array = [];
+  var randomized_feeling = [];
   var happy_hr_suggestion_array = [];
   var teaching_quality_array = [];
   var comfort_level_array = [];
@@ -204,16 +206,28 @@ app.get('/analytics/:date', function(req, res) {
       sum += array[i];
     };
     mean=sum/array.length;
-    return mean;
+    return mean.toFixed(2);
   };
+  // shuffle comments
+  comments_length = comments_array.length
+  for (var i = 0; i < comments_length; i++){    
+    randomized_comments[i] = comments_array.splice(Math.floor(Math.random() * comments_array.length), 1)[0];
+  }
+
+  // shuffle feelings
+  feeling_length = feeling_array.length
+  for (var i = 0; i < feeling_length; i++){    
+    randomized_feeling[i] = feeling_array.splice(Math.floor(Math.random() * feeling_array.length), 1)[0];
+  }
+
   // Create object with averages and individual arrays
   var object = {
     surveys_completed: surveys_array.length,
     teaching_avg: average(teaching_quality_array),
     comfort_avg: average(comfort_level_array),
     lesson_avg: average(lesson_score_array),
-    comments: comments_array,
-    feeling: feeling_array,
+    comments: randomized_comments,
+    feeling: randomized_feeling,
     happy_hr_suggestion: happy_hr_suggestion_array,
     teaching_quality: teaching_quality_array,
     comfort_level: comfort_level_array,
