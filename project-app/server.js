@@ -81,7 +81,7 @@ app.post('/surveys', function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(user.survey_responses);
+      console.log(user.survey_responses)
       // Setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
@@ -95,7 +95,6 @@ app.post('/surveys', function(req, res) {
       });
       // Saving survey
       survey.save(function(err) {
-        console.log(survey + 'created');
         res.send(survey);
       });
     };
@@ -161,9 +160,9 @@ app.delete('/users/:id', function(req, res) {
 
 // Get surveys for specific date, manipulate data, return object with manipulated data
 app.get('/analytics/:date', function(req, res) {
-  surveys_array = []
+  var surveys_array = [];
   // Convert date to string
-  pull_date = JSON.stringify(req.params.date)
+  var pull_date = JSON.stringify(req.params.date);
   // Find all surveys. Compares stringified date to pull_date. Pushes correct object to array
   SurveyResponse.find().then(function(data) {
     for (var i = 0; i < data.length; i++) {
@@ -212,16 +211,15 @@ app.get('/analytics/:date', function(req, res) {
   comments_length = comments_array.length
   for (var i = 0; i < comments_length; i++){    
     randomized_comments[i] = comments_array.splice(Math.floor(Math.random() * comments_array.length), 1)[0];
-  }
-
+  };
   // shuffle feelings
   feeling_length = feeling_array.length
   for (var i = 0; i < feeling_length; i++){    
     randomized_feeling[i] = feeling_array.splice(Math.floor(Math.random() * feeling_array.length), 1)[0];
-  }
-
+  };
   // Create object with averages and individual arrays
   var object = {
+    date: JSON.parse(pull_date),
     surveys_completed: surveys_array.length,
     teaching_avg: average(teaching_quality_array),
     comfort_avg: average(comfort_level_array),

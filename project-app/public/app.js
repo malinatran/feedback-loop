@@ -131,8 +131,10 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').show();
     $('#new-survey-headline').hide();
+    $('#back-to-analytics').hide();
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
+      data[i].formattedDate = new Date(data[i].date).toDateString();
       $('#display-container').append(template(data[i]));
       var link = $('.analytics-by-date-btn').last();
       link.click(function() {
@@ -152,6 +154,7 @@ $(function() {
       url: "http://localhost:3000/analytics/"+input,
       method: "GET",
     }).done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
       renderDateAnalytics(data);
       // receives analytics object and then calls render to put it on the page.
     });
@@ -221,6 +224,7 @@ $(function() {
   // 6a. getUserSurvey
   var getUserSurveys = function(data) {
     $.get('/user/surveys').done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
       renderUserSurveys(data);
     });
   };
@@ -243,6 +247,7 @@ $(function() {
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
+      data[i].formattedDate = new Date(data[i].date).toDateString();
       $('#display-container').append(template(data[i]));
       // Adding event listener to view survey button
       var link = $('.view-survey').last();
@@ -264,6 +269,7 @@ $(function() {
   // 7a. getUserViewSurvey
   var getUserViewSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
+      data.formattedDate = new Date(data.date).toDateString();
       renderUserViewSurvey(data);
     });
   };
@@ -297,6 +303,9 @@ $(function() {
   // 8a. getUserEditSurvey
   var getUserEditSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
+      data['formattedDate'] = new Date (data.date).toDateString();
+      console.log(data.formattedDate);
+      console.log(data);
       renderUserEditSurvey(data);
     });
   };
@@ -410,6 +419,7 @@ $(function() {
   };
 
   // 11. Delete user's profile & account
+  // 11a. confirmDelete
   var confirmDelete = function() {
     if (confirm("Do you really want to say goodbye?")) {
         deleteUserProfile();
@@ -418,6 +428,7 @@ $(function() {
     }       
   };
 
+  // 11b. deleteUserProfile
   var deleteUserProfile = function() {
     user = Cookies.get('loggedInId');
     $.ajax({
@@ -432,9 +443,9 @@ $(function() {
   // 0. 
   // Homepage button > renderHomepage
   $('body').on('click', '#home-btn', renderHomepage);
-  // Back to analytics button > renderSurveyAnalytics
+  // Back to analytics button > getSurveyDates
   $('body').on('click', '#back-to-analytics', getSurveyDates);
-  // Back to analytics button > renderSurveyAnalytics
+  // Back to surveys button > getUserSurveys
   $('body').on('click', '#back-to-surveys', getUserSurveys);
 
   // 1. 
