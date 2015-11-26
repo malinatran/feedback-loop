@@ -26,8 +26,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#" id="login-btn">Login</a></li>
           <li><a href="#" id="signup-btn">Signup</a></li>
-          <li><a href="#" id="back-to-surveys" style="display: none">Surveys</a></li>
-          <li><a href="#" id="back-to-analytics" style="display: none">Analytics</a></li>
+          <li><a href="#" id="back-to-surveys" style="display: none">All Surveys</a></li>
+          <li><a href="#" id="back-to-analytics" style="display: none">All Analytics</a></li>
           <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
           <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
           <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
@@ -228,7 +228,7 @@
         <tbody>
           <template id="display-user-template">
             <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
-              <div class="col-md-5 col-md-offset-1 date-text">{{date}}</div>
+              <div class="col-md-5 col-md-offset-1 date-text">{{formattedDate}}</div>
               <button class="view-survey col-md-2 btn btn-default">View</button>
               <button class="edit-survey col-md-2 btn btn-default">Edit</button>
             </div>
@@ -242,7 +242,7 @@
       <div class="view-user-survey-container">
         <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
           <label class="col-md-3 control-label">Date:</label>
-          <div class="col-md-6">{{date}}</div>
+          <div class="col-md-6">{{formattedDate}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
@@ -289,7 +289,7 @@
     <form class="form-horizontal">
       <template id="survey-edit-template">
         <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-10 control-label">Date: {{date}}</label>
+          <label class="col-md-10 control-label">Date: {{formattedDate}}</label>
           <input type="hidden" name="_id" value="{{_id}}"/>
         </div>
         <div class="form-group col-md-10 col-md-offset-2">
@@ -383,7 +383,7 @@
           <template id="analytics-by-date-template">
 <!-- This is strange. Only by giving it a class of 'display-user-survey-container' can I format it how I want to. -->
             <div class="display-user-survey-container col-md-10 col-md-offset-2" data-id="{{date}}">
-              <div class="col-md-5 col-md-offset-1 date-text">{{date}}</div>
+              <div class="col-md-5 col-md-offset-1 date-text">{{formattedDate}}</div>
               <button class="analytics-by-date-btn col-md-2 btn btn-default">View</button>
             </div>
           </template>
@@ -416,6 +416,11 @@
             <span class="analytics-header">AVG LESSON SCORE</span>
             <div class="analytics-number">{{comfort_avg}}</div>
           </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
