@@ -125,7 +125,15 @@ $(function() {
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
     var comments = $("input[name='comments']").val();
-    var feeling = $("input[name='feeling']").val();
+    var feeling = $("input[name='feeling']")
+    var emoji = $(function() {
+          window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: 'vendor/emoji-picker/lib/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        window.emojiPicker.discover();
+    }).val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
