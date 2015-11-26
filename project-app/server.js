@@ -55,6 +55,7 @@ app.post('/login', function(req, res) {
 
 // Show all forms
 app.get('/surveys', function(req, res) {
+  var user_id_pull = req.cookies.loggedInId
   var survey_responses = [];
   var check_survey_responses = function(input){
     for (var i = 0; i < survey_responses.length; i++) {
@@ -64,9 +65,10 @@ app.get('/surveys', function(req, res) {
     };
     return true;
   };
-  SurveyResponse.find().sort('-date').exec(function(err,data) {
+  SurveyResponse.find({"user": user_id_pull}).sort('-date').exec(function(data) {
     for (var i = 0; i < data.length; i++) {
-      if (check_survey_responses(data[i].date)) { 
+      if (check_survey_responses(data[i].date)) {
+        console.log(check_survey_responses(data[i].date)) 
         survey_responses.push(data[i]);
       } 
     };
@@ -76,31 +78,60 @@ app.get('/surveys', function(req, res) {
 
 // Create survey response
 app.post('/surveys', function(req, res) {
-  // Finding user using cookies
-  User.findById(req.cookies.loggedInId, function(err,user) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(user.survey_responses);
-      // Setting survey object
-      var survey = new SurveyResponse({
-        date: req.body.date,
-        teaching_quality: req.body.teaching_quality,
-        comfort_level: req.body.comfort_level,
-        lesson_score: req.body.lesson_score,
-        comments: req.body.comments,
-        feeling: req.body.feeling,
-        happy_hr_suggestion: req.body.happy_hr_suggestion,
-        user: req.cookies.loggedInId
+  var user_id_pull = req.cookies.loggedInId
+  var input_date = req.body.date
+  // Date is formated YYYY-MM-DD. Have to convert to a date object before stringifying (stringified date object from surveyresponses won't compare to YYYY-MM-DD)
+  console.log(input_date)
+  var year = input_date.split('-')[0]
+  // January is month 0
+  var month = (parseInt(input_date.split('-')[1]))-1
+  var day = input_date.split('-')[2]
+  var make_date = new Date(year, month, day)
+  console.log(make_date)
+  var make_date_string = make_date.toDateString()
+  console.log(make_date_string)
+
+      SurveyResponse.find({"user": user_id_pull}).then(function(data){
+        console.log(data)
+        // var checkDate = function(input){          
+        //   for (var i = 0; i < data.length; i++) {
+        //     var loop_date = data[i].date.setHours(24).toDateString()
+        //     console.log(loop_date)
+        //     if (data[i].date.getTime()==input){
+        //       return false
+        //     };          
+        //   };
+        //   return true
+        // }
+        // console.log(data)
+
+
+        // if(checkDate(req.body.date)){
+          
+        //   // Setting survey object
+        //   var survey = new SurveyResponse({
+        //     date: req.body.date,
+        //     teaching_quality: req.body.teaching_quality,
+        //     comfort_level: req.body.comfort_level,
+        //     lesson_score: req.body.lesson_score,
+        //     comments: req.body.comments,
+        //     feeling: req.body.feeling,
+        //     happy_hr_suggestion: req.body.happy_hr_suggestion,
+        //     user: req.cookies.loggedInId
+        //   });
+        //   // Saving survey
+        //   survey.save(function(err) {
+        //     console.log(survey + 'created');
+        //     res.send(survey);
+        //   });
+        // }else{
+        //   res.send("You cannot do that")
+        // };      
       });
-      // Saving survey
-      survey.save(function(err) {
-        console.log(survey + 'created');
-        res.send(survey);
-      });
-    };
-  });
+
+  // });
 });
+
 
 // View form
 app.get('/user/surveys', function(req,res) {

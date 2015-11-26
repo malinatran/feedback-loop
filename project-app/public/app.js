@@ -214,7 +214,10 @@ $(function() {
       url: "http://localhost:3000/surveys",
       method: "POST",
       data: surveyResponseData
-    }).done(viewDashboard);
+    }).done(function(data){
+      console.log(data)
+      viewDashboard()
+    });
   };
 
   // 6. View user's surveys
