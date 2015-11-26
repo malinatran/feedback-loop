@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Tyrion ftw</title>
+  <title>FeedbackLoop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -56,12 +56,49 @@
       </div>
     </div>
 
+    <!-- Splash page -->
+    <div id="splash-container">
+      <br><br>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div id="title-splash">
+            <div id="feedback-splash">FEEDBACK</div>
+            <img src="img/loop.jpg" id="loop-splash"/>
+          </div>
+        </div>
+      </div>
+      <br><br><br>
+      <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2">
+          <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2">
+          <a href="#" class="dashboard-btns">LOGIN</a>
+          <a href="#" class="dashboard-btns">SIGNUP</a>
+        </div>
+      </div>
+      <br><br><br>
+      <div class="row text-center">
+        <div class="col-md-12 text-center">
+          <p id="learn-more-splash">LEARN MORE</p>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-12 text-center">
+          <p id="arrow-splash">&#751;</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Headlines -->
+    <div id="my-surveys-headline">MY SURVEYS</div>
+    <div id="analytics-headline">ANALYTICS</div>
+    <div id="new-survey-headline">NEW SURVEY</div>
+
     <!-- Display container; append results here -->
-<!--     <div class="row">
-      <div class="col-md-8 col-md-offset-2"> -->
-        <div id="display-container"></div>
- <!--      </div>
-    </div> -->
+    <div id="display-container"></div>
 
     <div class="row text-center">
       <div class="col-md-8 col-md-offset-2">
@@ -107,19 +144,19 @@
     <form class="form-horizontal">
       <template id="signup-template">
         <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputName" class="col-md-3 control-label">Name</label>
+          <label for="inputName" class="col-md-2 control-label">Name</label>
           <div class="col-md-5">
             <input name="name" type="name" class="form-control" id="inputName">
           </div>
         </div>
         <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputUsername" class="col-sm-3 control-label">Username</label>
+          <label for="inputUsername" class="col-md-2 control-label">Username</label>
           <div class="col-md-5">
             <input name="username" type="username" class="form-control" id="inputUsername">
           </div>
         </div>
         <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputPassword" class="col-md-3 control-label">Password</label>
+          <label for="inputPassword" class="col-md-2 control-label">Password</label>
           <div class="col-md-5">
             <input name="password" type="password" class="form-control" id="inputPassword">
           </div>
@@ -302,20 +339,20 @@
     <!-- View user profile template -->
     <template id="user-profile-template">
       <div class="row">
-        <div class="col-md-8 col-md-offset-4">
+        <div class="col-md-12 text-center">
           <div id="user-profile-container" data-id="{{_id}}">
           <div class="my-profile">MY USER ACCOUNT</div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
             <p class="profile-text">Dear <span class="input-text">{{name}}</span> (famously known as <span class="input-text">{{username}}</span> on the Internet),<br>You may click <button type="submit" id="edit-user-profile-btn" class="btn btn-default">edit</button> to change your info or password.<br> Or, click <button type="submit" id="delete-user-profile-btn" class="btn btn-default">delete</button> to eliminate your account, forever.</p></p>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
           <p class="profile-text">Please click wisely.</p>
         </div>
@@ -323,27 +360,17 @@
     </template>
 
     <!-- Edit user profile template -->
-<!--     <template id="edit-user-profile-template">
-      <div id="edit-user-profile-container">
-        <h4>Edit User Account</h4>
-        <p>My name is <input name="name" value="{{name}}"/>.</p>
-        <p>Username: <input name="username" value="{{username}}"/></p>
-        <p>Password: <input name="password" type="password" value="{{password}}"/></p>
-        <button id="edit-user-submit-btn">Submit</button>
-      </div>
-    </template> -->
-
     <template id="edit-user-profile-template">
       <div class="row">
-        <div class="col-md-8 col-md-offset-3">
+        <div class="col-md-12 text-center">
           <div id="edit-user-profile-container" data-id="{{_id}}">
           <div class="my-profile">MY USER IDENTITY CRISIS</div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
-            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/>and<br> my stage name to <input name="username" class="profile-input" value="{{username}}"/>. I'm paranoid so I'd like to change my super secret password to be <input name="password" class="profile-input" type="password" value="{{password}}"/>. Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
+            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/><br>and my stage name to <input name="username" class="profile-input" value="{{username}}"/>.<br> I'd like to change my super secret password to <input name="password" class="profile-input" type="password" value="{{password}}"/>.<br> Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
           </div>
         </div>
       </div>
@@ -367,8 +394,8 @@
     <!-- Show analytics template -->
     <template id="analytics-template">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <strong>Date:</strong> {{date}}
+        <div class="col-md-12 text-center">
+          <p id="daily-analytics-headline">DAILY ANALYTICS</p>
         </div>
       </div>
       <div class="row">

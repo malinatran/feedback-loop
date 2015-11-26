@@ -35,7 +35,6 @@ app.post('/users', function(req, res) {
       console.log(err);
       res.statusCode = 503;
     } else {
-      console.log('User created');
       // User is logged in until user explicitly clicks logout, even if page is refreshed or window is closed
       // maxAge is set to one year
       res.cookie('loggedInId', user.id, { maxAge:31556952000 }).send(user);
