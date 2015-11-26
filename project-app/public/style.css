@@ -3,6 +3,7 @@ html, body {
   padding:0;
   height:100%;
 }
+
 #wrapper {
   min-height:100%;
   position:relative;
@@ -46,10 +47,6 @@ footer {
 
 /* Splash Page */
 
-#title-splash {
-
-}
-
 #loop-splash {
   width: 200px;
 }
@@ -76,15 +73,24 @@ footer {
   font-weight: 300;
 }
 
+#arrow-splash:active, #arrow-splash:hover, #arrow-splash:focus {
+  text-decoration: none;
+}
+
 #about-us {
-  background-color: #B33232;
+  width: 1280px;
+}
+
+#stockimg1 {
+  width: 1280px;
+  margin-top: 100px;
 }
 
 /* Dashboard */
 
 .dashboard-btns {
   border: 3px solid #F1D911;
-  border-radius: 5px;
+  border-radius: 7px;
   color: black;
   display: inline-block;
   font-family: 'Raleway', sans-serif;
@@ -97,15 +103,23 @@ footer {
   width: 150px;
 }
 
-.dashboard-btns a, .dashboard-btns a:visited {
+a.dashboard-btns:link, a.dashboard-btns:visited {
   color: black;
   text-decoration: none;
 }
 
-.dashboard-btns:hover {
+a.dashboard-btns:hover {
   /*color: #436060;*/
+  box-shadow: 0 5px #D0C800;
   color: white;
   background-color: #F1D911;
+  text-decoration: none;
+}
+
+a.dashboard-btns:active {
+  position: relative;
+  top: 5px;
+  box-shadow: none;
   text-decoration: none;
 }
 
@@ -165,10 +179,6 @@ footer {
 }
 
 /* Misc Buttons & Texts */
-
-#login-submit-btn, #signup-submit-btn {
-  margin-top: 30px;
-}
 
 .date-text {
   font-family: 'Raleway', sans-serif;
@@ -244,6 +254,7 @@ footer {
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
   font-weight: 300;
+  margin: 10px;
   padding: 5px 0;
   text-align: center;
 }
@@ -254,4 +265,6 @@ footer {
   font-weight: 400;
   text-align: center;
 }
+
+
 

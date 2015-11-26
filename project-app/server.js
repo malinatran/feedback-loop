@@ -81,7 +81,6 @@ app.post('/surveys', function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(user.survey_responses)
       // Setting survey object
       var survey = new SurveyResponse({
         date: req.body.date,
@@ -105,7 +104,6 @@ app.post('/surveys', function(req, res) {
 app.get('/user/surveys', function(req,res) {
   // Grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
-  console.log(user_id_pull);
   // Finding responses w/ user id
   SurveyResponse.find({"user": user_id_pull}).sort('-date').exec(function(err, surveys) {
     res.send(surveys);
@@ -114,7 +112,6 @@ app.get('/user/surveys', function(req,res) {
 
 // Get individual survey
 app.get('/surveys/:id', function(req,res){
-  console.log(req.params.id);
   SurveyResponse.findOne({"_id": req.params.id}).then(function(survey) {
     res.send(survey);
   });
