@@ -20,6 +20,10 @@ $(function() {
     $('#signup-btn').hide();
     $('#home-btn').show();
     $('#title').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -48,6 +52,10 @@ $(function() {
     $('#signup-btn').hide();
     $('#home-btn').show();
     $('#title').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -95,6 +103,10 @@ $(function() {
     $('#back-to-surveys').hide();
     $('#title').show();
     $('.lead').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
   };
 
   // 4a. getSurveyDates
@@ -115,6 +127,10 @@ $(function() {
     $('#view-dashboard-btn').show();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').show();
+    $('#new-survey-headline').hide();
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
       $('#display-container').append(template(data[i]));
@@ -149,6 +165,10 @@ $(function() {
     $('#back-to-analytics').show();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').show();
+    $('#new-survey-headline').hide();
     var template = Handlebars.compile($('#analytics-template').html());
     $('#display-container').append(template(input));
   };
@@ -163,6 +183,10 @@ $(function() {
     $('#view-analytics-btn').hide();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').show();
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -212,6 +236,10 @@ $(function() {
     $('#back-to-analytics').hide();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -250,6 +278,10 @@ $(function() {
     $('#back-to-surveys').show();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -279,6 +311,10 @@ $(function() {
     $('#back-to-surveys').show();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
@@ -336,6 +372,10 @@ $(function() {
     $('#back-to-surveys').hide();
     $('#title').hide();
     $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
@@ -370,6 +410,14 @@ $(function() {
   };
 
   // 11. Delete user's profile & account
+  var confirmDelete = function() {
+    if (confirm("Do you really want to say goodbye?")) {
+        deleteUserProfile();
+    } else {
+        false;
+    }       
+  };
+
   var deleteUserProfile = function() {
     user = Cookies.get('loggedInId');
     $.ajax({
@@ -442,9 +490,7 @@ $(function() {
 
   // 11. 
   // Delete user profile > deleteUserProfile
-  $('body').on('click', '#delete-user-profile-btn', deleteUserProfile);
-
-
+  $('body').on('click', '#delete-user-profile-btn', confirmDelete);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
