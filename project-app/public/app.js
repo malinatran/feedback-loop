@@ -16,8 +16,8 @@ $(function() {
   // 1a. renderLoginForm
   var renderLoginForm = function() {
     $('#display-container').empty();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').hide();
+    $('.signup-btn').show();
     $('#home-btn').show();
     $('#title').show();
     $('#splash-container').hide();
@@ -48,8 +48,8 @@ $(function() {
   // 2a. renderSignupForm
   var renderSignupForm = function() {
     $('#display-container').empty();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').show();
+    $('.signup-btn').hide();
     $('#home-btn').show();
     $('#title').show();
     $('#splash-container').hide();
@@ -91,8 +91,8 @@ $(function() {
   var viewDashboard = function() {
     $('#display-container').empty();
     $('#logout-btn').show();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').hide();
+    $('.signup-btn').hide();
     $('#user-profile-btn').show();
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
@@ -303,9 +303,7 @@ $(function() {
   // 8a. getUserEditSurvey
   var getUserEditSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
-      data['formattedDate'] = new Date (data.date).toDateString();
-      console.log(data.formattedDate);
-      console.log(data);
+      data.formattedDate = new Date (data.date).toDateString();
       renderUserEditSurvey(data);
     });
   };
@@ -450,13 +448,13 @@ $(function() {
 
   // 1. 
   // Login button > renderLoginForm
-  $('#login-btn').on('click', renderLoginForm);
+  $('.login-btn').on('click', renderLoginForm);
   // Login submit button > submitLoginForm
   $('body').on('click', '#login-submit-btn', submitLoginForm);
 
   // 2. 
   // Signup button > renderSignupForm
-  $('#signup-btn').on('click', renderSignupForm);
+  $('.signup-btn').on('click', renderSignupForm);
   // Signup submit button > submitSignupForm
   $('body').on('click', '#signup-submit-btn', submitSignupForm);
   
