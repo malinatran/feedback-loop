@@ -88,22 +88,22 @@ app.post('/surveys', function(req, res) {
   var day = input_date.split('-')[2]
   var make_date = new Date(year, month, day)
   console.log(make_date)
-  var make_date_string = make_date.toDateString()
-  console.log(make_date_string)
+  var milli_date = make_date.getTime()
+  console.log(milli_date)
 
       SurveyResponse.find({"user": user_id_pull}).then(function(data){
-        console.log(data)
-        // var checkDate = function(input){          
-        //   for (var i = 0; i < data.length; i++) {
-        //     var loop_date = data[i].date.setHours(24).toDateString()
-        //     console.log(loop_date)
-        //     if (data[i].date.getTime()==input){
-        //       return false
-        //     };          
-        //   };
-        //   return true
-        // }
         // console.log(data)
+        var checkDate = function(input){          
+          for (var i = 0; i < data.length; i++) {
+            loop_date = data[i].date.getTime()
+            console.log(loop_date)
+            // if (data[i].date.getTime()==input){
+            //   return false
+            // };          
+          };
+          return true
+        }
+        checkDate()
 
 
         // if(checkDate(req.body.date)){
