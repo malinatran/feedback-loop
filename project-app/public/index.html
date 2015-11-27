@@ -40,19 +40,23 @@
   <div class="container">
     
     <div id="content"> <!-- Opens content -->
-    <!-- Title -->
-    <div class="row text-center">
-      <div class="col-md-12">
-        <div id="title" style="display:none">
-          <div id="feedback">FEEDBACK</div>
-          <img src="img/loop.jpg" id="loop"/>
+
+    <!-- Dashboard -->
+    <div id="dashboard-container" class="col-md-12">
+      <br><br>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div class="title">
+            <div id="dashboard">DASHBOARD</div>
+            <img src="img/loop.jpg" id="loop-dashboard"/>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="row text-center">
-      <div class="col-md-8 col-md-offset-2">
-        <p class="lead" style="display:none">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
+      <br><br><br>
+      <div class="row text-center">
+        <div class="col-md-8 col-md-offset-2">
+          <p class="lead">Help us tighten the feedback loop by contributing your thoughts and ideas.</p>
+        </div>
       </div>
     </div>
 
@@ -61,7 +65,7 @@
       <br><br>
       <div class="row text-center">
         <div class="col-md-12">
-          <div id="title-splash">
+          <div class="title">
             <div id="feedback-splash">FEEDBACK</div>
             <img src="img/loop.jpg" id="loop-splash"/>
           </div>
@@ -70,7 +74,7 @@
       <br><br><br>
       <div class="row text-center">
         <div class="col-md-8 col-md-offset-2">
-          <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic.</p>
+          <p class="lead">Fostering better communication in the classroom &mdash; one that is more transparent, social, and dynamic.</p>
         </div>
       </div>
       <div class="row text-center">
@@ -88,6 +92,31 @@
       <div class="row text-center">
         <div class="col-md-12 text-center">
           <a href="#" id="arrow-splash">&#751;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login and Signup Pages -->
+    <div id="login-container" class="col-md-12">
+      <br><br>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div class="title">
+            <div id="login">LOGIN</div>
+            <img src="img/loop.jpg" class="small-loop"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="signup-container" class="col-md-12">
+      <br><br>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <div class="title">
+            <div id="signup">SIGNUP</div>
+            <img src="img/loop.jpg" class="small-loop"/>
+          </div>
         </div>
       </div>
     </div>
@@ -111,15 +140,15 @@
     <!-- Login template: DONE -->
     <form class="form-horizontal">
       <template id="login-template">
-        <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputUsername" class="col-md-2 control-label">Username</label>
-          <div class="col-md-5">
+        <div class="form-group col-md-12 col-md-offset-3">
+          <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+          <div class="col-md-3">
             <input name="username" type="username" class="form-control" id="inputUsername">
           </div>
         </div>
-        <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputPassword" class="col-md-2 control-label">Password</label>
-          <div class="col-md-5">
+        <div class="form-group col-md-12 col-md-offset-3">
+          <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+          <div class="col-md-3">
             <input name="password" type="password" class="form-control" id="inputPassword">
           </div>
         </div>
@@ -133,7 +162,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-10 col-md-offset-5">
+          <div class="col-md-1 col-md-offset-6">
             <button type="submit" id="login-submit-btn" class="btn btn-default">Sign in</button>
           </div>
         </div>
@@ -143,26 +172,26 @@
     <!-- Signup template: DONE -->
     <form class="form-horizontal">
       <template id="signup-template">
-        <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputName" class="col-md-2 control-label">Name</label>
-          <div class="col-md-5">
+        <div class="form-group col-md-12 col-md-offset-3">
+          <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
+          <div class="col-md-3">
             <input name="name" type="name" class="form-control" id="inputName">
           </div>
         </div>
-        <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputUsername" class="col-md-2 control-label">Username</label>
-          <div class="col-md-5">
+        <div class="form-group col-md-12 col-md-offset-3">
+          <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+          <div class="col-md-3">
             <input name="username" type="username" class="form-control" id="inputUsername">
           </div>
         </div>
-        <div class="form-group col-md-8 col-md-offset-3">
-          <label for="inputPassword" class="col-md-2 control-label">Password</label>
-          <div class="col-md-5">
+        <div class="form-group col-md-12 col-md-offset-3">
+          <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+          <div class="col-md-3">
             <input name="password" type="password" class="form-control" id="inputPassword">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-10 col-md-offset-5">
+          <div class="col-md-1 col-md-offset-6">
             <button type="submit" id="signup-submit-btn" class="btn btn-default">Sign up</button>
           </div>
         </div>
@@ -240,47 +269,44 @@
     <!-- User's view survey template: DONE-->
     <template id="view-user-survey-template">
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-          <label class="col-md-3 control-label">Date:</label>
-          <div class="col-md-6">{{formattedDate}}</div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Date:</label>
+          <div class="col-md-2">{{formattedDate}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-          <label class="col-md-3 control-label">Teaching quality:</label>
-          <div class="col-md-6">{{teaching_quality}}</div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Teaching quality:</label>
+          <div class="col-md-2">{{teaching_quality}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-          <label class="col-md-3 control-label">Comfort level:</label>
-          <div class="col-md-6">{{comfort_level}}</div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Comfort level:</label>
+          <div class="col-md-2">{{comfort_level}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-          <label class="col-md-3 control-label">Overall lesson:</label>
-          <div class="col-md-6">{{lesson_score}}</div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Overall lesson:</label>
+          <div class="col-md-2">{{lesson_score}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-          <label class="col-md-3 control-label">Comments:</label>
-          <div class="col-md-6">{{comments}}</div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Comments:</label>
+          <div class="col-md-5">{{comments}}</div>
         </div>
       </div>
       <div class="view-user-survey-container">
-        <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-        <label class="col-md-3 control-label">I am feeling: </label>
-        <div class="col-md-6">
-          {{feeling}}
-        </div>
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <label class="col-md-2 control-label">Feelings:</label>
+          <div class="col-md-5">{{feeling}}</div>
       </div>
       <div class="view-user-survey-container">
-      <div class="col-md-10 col-md-offset-2" data-id="{{_id}}">
-        <label class="col-md-3 control-label">Let's happy hour at: </label>
-        <div class="col-md-6">
-          {{happy_hr_suggestion}}
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <div class="col-md-8"><strong>Happy hour suggestion:</strong> &nbsp; &nbsp; &nbsp; {{happy_hr_suggestion}}</div>
+          <!-- <div class="col-md-5"></div> -->
         </div>
       </div>
     </template>
@@ -394,11 +420,6 @@
     <!-- Show analytics template -->
     <template id="analytics-template">
       <div class="row">
-        <div class="col-md-12 text-center">
-          <p id="daily-analytics-headline">DAILY ANALYTICS</p>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-md-10 col-md-offset-2">
           <div class="subcontainer">
             <span class="analytics-header">SURVEYS COMPLETED</span>
@@ -418,31 +439,33 @@
           </div>
       </div>
       <div class="row">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-2">
           <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-2">
           <p class="analytics-header2"><strong>Comments:</strong></p>
-            <ul class="comments_list">
+            <ul class="col-md-7 comments_list">
               {{#each comments}}
               <li>{{this}}</li>
               {{/each}}
             </ul>
-        </div>
+        </div> 
       </div>
       <div class="row">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-2">
           <p class="analytics-header2"><strong>Feelings:</strong></p>
             <ul class="feeling_list">
               {{#each feeling}}
               <li>{{this}}</li>
               {{/each}} 
             </ul>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-md-10">
-          <p class="analytics-header2"><strong>Happy Hour Suggestions:</strong></p>
+        <div class="col-md-12 col-md-offset-2">
+          <p class="analytics-header2"><strong>Happy hour suggestions:</strong></p>
             <ul class="people_list">
               {{#each happy_hr_suggestion}}
               <li>{{this}}</li>

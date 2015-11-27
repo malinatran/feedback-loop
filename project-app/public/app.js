@@ -10,6 +10,8 @@ $(function() {
     window.location = '/';
     $('#title').show();
     $('.lead').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
   };
 
   // 1. Login user
@@ -24,6 +26,8 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').show();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -56,6 +60,8 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').show();
+    $('#login-container').hide();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -107,6 +113,10 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#dashboard-container').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('body').css("background-image", "url(img/backgroundcolors.jpg)");
   };
 
   // 4a. getSurveyDates
@@ -132,6 +142,10 @@ $(function() {
     $('#analytics-headline').show();
     $('#new-survey-headline').hide();
     $('#back-to-analytics').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
       data[i].formattedDate = new Date(data[i].date).toDateString();
@@ -172,6 +186,10 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').show();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($('#analytics-template').html());
     $('#display-container').append(template(input));
   };
@@ -190,6 +208,10 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').hide();
     $('#new-survey-headline').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
@@ -244,6 +266,10 @@ $(function() {
     $('#my-surveys-headline').show();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -288,6 +314,9 @@ $(function() {
     $('#my-surveys-headline').show();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -322,6 +351,9 @@ $(function() {
     $('#my-surveys-headline').show();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
@@ -383,6 +415,10 @@ $(function() {
     $('#my-surveys-headline').hide();
     $('#analytics-headline').hide();
     $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
