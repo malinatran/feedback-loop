@@ -20,6 +20,12 @@ html, body {
   left:0;
 }
 
+#logo {
+  border-radius: 7px;
+  height: 30px;
+  vertical-align: middle;
+}
+
 footer {
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
@@ -107,9 +113,11 @@ footer {
 }
 
 .dashboard-btns {
-  border: 3px solid #F1D911;
+  /*border: 3px solid #F1D911;*/
+  background-color: #F1D911;
   border-radius: 7px;
-  color: black;
+  box-shadow: 0 5px #D0C800;
+  color: #696969;
   display: inline-block;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
@@ -122,7 +130,7 @@ footer {
 }
 
 a.dashboard-btns:link, a.dashboard-btns:visited {
-  color: black;
+  color: #696969;
   text-decoration: none;
 }
 

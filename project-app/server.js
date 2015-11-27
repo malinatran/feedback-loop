@@ -90,6 +90,7 @@ app.post('/surveys', function(req, res) {
         comments: req.body.comments,
         feeling: req.body.feeling,
         happy_hr_suggestion: req.body.happy_hr_suggestion,
+        happy_hr_suggestion_likes: 0,
         user: req.cookies.loggedInId
       });
       // Saving survey
@@ -167,74 +168,76 @@ app.get('/analytics/:date', function(req, res) {
         surveys_array.push(data[i])
       }
     };
-  // empty arrays for making new object
-  var comments_array = [];
-  var randomized_comments= [];
-  var feeling_array = [];
-  var randomized_feeling = [];
-  var happy_hr_suggestion_array = [];
-  var teaching_quality_array = [];
-  var comfort_level_array = [];
-  var lesson_score_array = [];
-  // Pushes all values to specific arrays
-  for (var i=0; i < surveys_array.length; i++) {
-    comments_array.push(surveys_array[i].comments);
-  };
-  for (var i=0; i < surveys_array.length; i++) {
-    feeling_array.push(surveys_array[i].feeling);
-  };
-  for (var i=0; i < surveys_array.length; i++) {
-    happy_hr_suggestion_array.push(surveys_array[i].happy_hr_suggestion);
-  };
-  for (var i=0; i < surveys_array.length; i++) {
-    teaching_quality_array.push(surveys_array[i].teaching_quality);
-  };
-  for (var i=0; i < surveys_array.length; i++) {
-    comfort_level_array.push(surveys_array[i].comfort_level);
-  };
-  for (var i=0; i < surveys_array.length; i++) {
-    lesson_score_array.push(surveys_array[i].lesson_score);
-  };
-  // Average function
-  var average = function(array) {
-    sum=0;
-    for (var i=0; i <array.length; i++) {
-      sum += array[i];
+    // empty arrays for making new object
+    var comments_array = [];
+    var randomized_comments= [];
+    var feeling_array = [];
+    var randomized_feeling = [];
+    var happy_hr_suggestion_array = [];
+    var teaching_quality_array = [];
+    var comfort_level_array = [];
+    var lesson_score_array = [];
+    // Pushes all values to specific arrays
+    for (var i=0; i < surveys_array.length; i++) {
+      comments_array.push(surveys_array[i].comments);
     };
-    mean=sum/array.length;
-    return mean.toFixed(2);
-  };
-  // shuffle comments
-  comments_length = comments_array.length
-  for (var i = 0; i < comments_length; i++){    
-    randomized_comments[i] = comments_array.splice(Math.floor(Math.random() * comments_array.length), 1)[0];
-  };
-  // shuffle feelings
-  feeling_length = feeling_array.length
-  for (var i = 0; i < feeling_length; i++){    
-    randomized_feeling[i] = feeling_array.splice(Math.floor(Math.random() * feeling_array.length), 1)[0];
-  };
-  // Create object with averages and individual arrays
-  var object = {
-    date: JSON.parse(pull_date),
-    surveys_completed: surveys_array.length,
-    teaching_avg: average(teaching_quality_array),
-    comfort_avg: average(comfort_level_array),
-    lesson_avg: average(lesson_score_array),
-    comments: randomized_comments,
-    feeling: randomized_feeling,
-    happy_hr_suggestion: happy_hr_suggestion_array,
-    teaching_quality: teaching_quality_array,
-    comfort_level: comfort_level_array,
-    lesson_score: lesson_score_array,
-  }
-  res.send(object);
+    for (var i=0; i < surveys_array.length; i++) {
+      feeling_array.push(surveys_array[i].feeling);
+    };
+    for (var i=0; i < surveys_array.length; i++) {
+      happy_hr_suggestion_array.push(surveys_array[i].happy_hr_suggestion);
+    };
+    for (var i=0; i < surveys_array.length; i++) {
+      teaching_quality_array.push(surveys_array[i].teaching_quality);
+    };
+    for (var i=0; i < surveys_array.length; i++) {
+      comfort_level_array.push(surveys_array[i].comfort_level);
+    };
+    for (var i=0; i < surveys_array.length; i++) {
+      lesson_score_array.push(surveys_array[i].lesson_score);
+    };
+    // Average function
+    var average = function(array) {
+      sum=0;
+      for (var i=0; i <array.length; i++) {
+        sum += array[i];
+      };
+      mean=sum/array.length;
+      return mean.toFixed(2);
+    };
+    // shuffle comments
+    comments_length = comments_array.length
+    for (var i = 0; i < comments_length; i++){    
+      randomized_comments[i] = comments_array.splice(Math.floor(Math.random() * comments_array.length), 1)[0];
+    };
+    // shuffle feelings
+    feeling_length = feeling_array.length
+    for (var i = 0; i < feeling_length; i++){    
+      randomized_feeling[i] = feeling_array.splice(Math.floor(Math.random() * feeling_array.length), 1)[0];
+    };
+    // Create object with averages and individual arrays
+    var object = {
+      date: JSON.parse(pull_date),
+      surveys_completed: surveys_array.length,
+      teaching_avg: average(teaching_quality_array),
+      comfort_avg: average(comfort_level_array),
+      lesson_avg: average(lesson_score_array),
+      comments: randomized_comments,
+      feeling: randomized_feeling,
+      teaching_quality: teaching_quality_array,
+      comfort_level: comfort_level_array,
+      lesson_score: lesson_score_array,
+      surveys: surveys_array
+    }
+    res.send(object);
   }); 
 });
 
-
-
-
+app.post('/surveys/:id/like', function(req, res) {
+  SurveyResponse.findByIdAndUpdate({ _id: req.params.id }, {$inc: {happy_hr_suggestion_likes: 1}}, function (err, data) {
+    res.send(true);
+  });
+});
 
 
 
