@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,300,600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
-  <script src="app.js"></script>
+  <link href="/vendor/emoji-picker/lib/css/nanoscroller.css" rel="stylesheet">
+  <link href="/vendor/emoji-picker/lib/css/emoji.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 </head>
 <body>
   <div id="wrapper"> <!-- Opens content -->
@@ -231,9 +231,9 @@
       </div>
     </div>
     <div class="form-group col-md-10 col-md-offset-2">
-      <label class="col-md-3 control-label" data-emojiable="true">I am feeling: </label>
+      <label class="col-md-3 control-label">I am feeling: </label>
       <div class="col-md-6">
-        <input name="feeling" class="form-control"/>
+        <input name="feeling" class="form-control" data-emojiable="true"/>
       </div>
     </div>
     <div class="form-group col-md-10 col-md-offset-2">
@@ -401,9 +401,9 @@
       </div>
     </div>
     <div class="form-group col-md-10 col-md-offset-2">
-      <label class="col-md-3 control-label" data-emojiable="true">I am feeling: </label>
+      <label class="col-md-3 control-label">I am feeling: </label>
       <div class="col-md-6">
-        <input name="feeling" class="form-control" value="{{feeling}}"/>
+        <input name="feeling" class="form-control" value="{{feeling}}" data-emojiable="true"/>
       </div>
     </div>
     <div class="form-group col-md-10 col-md-offset-2">
@@ -464,8 +464,18 @@
       </div>
     </div>
   </template>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <script src="/moment.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/nanoscroller.min.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/tether.min.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/config.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/util.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/jquery.emojiarea.js"></script>
+  <script src="/vendor/emoji-picker/lib/js/emoji-picker.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
