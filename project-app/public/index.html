@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Tyrion ftw</title>
+  <title>FeedbackLoop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -11,290 +11,461 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
   <script src="app.js"></script>
-  <link href="vendor/emoji-picker/lib/css/nanoscroller.css" rel="stylesheet">
-  <link href="vendor/emoji-picker/lib/css/emoji.css" rel="stylesheet">
 </head>
-  <body>
-  <!-- Title -->
-  <h2>Exit ticket, but better.</h2>
-
-  <!-- Display container; append results here -->
-  <div id="display-container"></div>
-
-  <!-- Splash page -->
-  <div id="login-btn"><a href="#">Login</a></div>
-  <div id="signup-btn"><a href="#">Sign up</a></div>
-  <div id="logout-btn" style="display:none"><a href="#">Logout</a></div>
-  <div id="user-profile-btn" style="display:none"><a href="#">My Profile</a></div>
-  <div id="home-btn" style="display:none"><a href="#">Home</a></div>
-
-  <!-- User's dashboard -->
- <!--  Will include: 
-  1. Fill out new survey with editing & deleting options
-  2. View aggregate of survey results
-  3. View my surveys -->
-  <div id="view-survey-btn" style="display:none"><a href="#">View My Surveys</a></div>
-  <div id="new-survey-btn" style="display:none"><a href="#">Complete New Survey</a></div>
-
-  <!-- Return home -->
-  <div id="view-dashboard-btn" style="display:none"><a href="#">Back to Dashboard</a></div>
-  
-  <!-- Login template -->
-  <template id="login-template">
-    <div id="login-container">
-      <h4>Login</h4>
-      <p>Username: <input name="username"/></p>
-      <p>Password: <input name="password" type="password"/></p>
-      <button id="login-submit-btn">Submit</button>
-    </div>
-  </template>
-
-  <!-- Signup template -->
-  <template id="signup-template">
-    <div id="signup-container">
-      <h4>Sign Up</h4>
-      <p>My name is <input name="name"/>.</p>
-      <p>Username: <input name="username"/></p>
-      <p>Password: <input name="password" type="password"/></p>
-      <button id="signup-submit-btn">Submit</button>
-    </div>
-  </template>
-
-  <!-- New survey template -->
-  <template id="new-survey-template">
-    <div id ="new-survey-container">
-      <h4>Submit New Survey</h4>
-      <p>Date:<input type="date" name="date"/></p>
-      <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality"/></p>
-      <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level"/></p>
-      <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score"/></p>
-      <p>Comments: <textarea name="comments" type="textarea" rows='3' cols='50'></textarea></p>
-      <p>I am feeling: <input name="feeling" data-emojiable="true"/><p>
-      <p>After class, we should have happy hour at: <input name="happy_hr_suggestion"/>.</p>
-      <button id="survey-submit-btn">Submit Survey</button>
-    </div>
-  </template>
-
-  <!-- All surveys template -->
-  <template id="display-survey-template">
-    <div id ="display-survey-container">
-      <h3>=================================</h3>
-      <h3>Date: {{date}}</h3>
-      <h3>Teaching quality: {{teaching_quality}}</h3>
-      <h3>Comfort level: {{comfort_level}}</h3>
-      <h3>Overall lesson: {{lesson_score}}</h3>
-      <h3>Comments: {{comments}}</h3>
-      <h3>Feeling: {{feeling}}</h3>
-      <h3>Happy hour venue: {{happy_hr_suggestion}}</h3>
-=======
 <body>
+  <div id="wrapper"> <!-- Opens content -->
+    <!-- Navbar -->
+    <div id="header"> <!-- Opens header -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img alt="Brand" id="logo" src="img/logo.png"/></a>
+          </div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">&infin;</a>
+          <div>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" class="login-btn">Login</a></li>
+              <li><a href="#" class="signup-btn">Signup</a></li>
+              <li><a href="#" id="back-to-surveys" style="display: none">All Surveys</a></li>
+              <li><a href="#" id="back-to-analytics" style="display: none">All Analytics</a></li>
+              <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
+              <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
+              <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div> <!-- Closes header -->
+
+    <div class="container">
+
+      <div id="content"> <!-- Opens content -->
+
+        <!-- Dashboard -->
+        <div id="dashboard-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="dashboard">DASHBOARD</div>
+                <img src="img/loop.jpg" id="loop-dashboard"/>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <p class="lead">Help us tighten the feedback loop by contributing your thoughts and ideas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Splash page -->
+        <div id="splash-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="feedback-splash">FEEDBACK</div>
+                <img src="img/loop.jpg" id="loop-splash"/>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <p class="lead">Fostering better communication in the classroom &mdash; one that is more transparent, social, and dynamic.</p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="#" class="login-btn dashboard-btns">LOGIN</a>
+              <a href="#" class="signup-btn dashboard-btns">SIGNUP</a>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-12 text-center">
+              <p id="learn-more-splash">LEARN MORE</p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-12 text-center">
+              <a href="#" id="arrow-splash">&#751;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login and Signup Pages -->
+        <div id="login-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="login">LOGIN</div>
+                <img src="img/loop.jpg" class="small-loop"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="signup-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="signup">SIGNUP</div>
+                <img src="img/loop.jpg" class="small-loop"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headlines -->
+        <div id="my-surveys-headline">MY SURVEYS</div>
+        <div id="analytics-headline">ANALYTICS</div>
+        <div id="new-survey-headline">NEW SURVEY</div>
+
+        <!-- Display container; append results here -->
+        <div id="display-container"></div>
+
+        <div class="row text-center">
+          <div class="col-md-8 col-md-offset-2">
+            <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
+            <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
+            <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
+          </div>
+        </div>
+
+      </div> <!-- Closes content -->
+
+    </div> <!-- Closes container -->
+  </div> <!-- Closes wrapper -->
+
+
+  <template id="login-template">
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+      <div class="col-md-3">
+        <input name="username" type="username" class="form-control" id="inputUsername">
       </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+      <div class="col-md-3">
+        <input name="password" type="password" class="form-control" id="inputPassword">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-8 col-md-offset-5">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-6">
+        <button type="submit" id="login-submit-btn" class="btn btn-default">Sign in</button>
+      </div>
+    </div>
+  </template>
 
-      <div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="login-btn">Login</a></li>
-          <li><a href="#" id="signup-btn">Signup</a></li>
-          <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
-          <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
+
+  <template id="signup-template">
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
+      <div class="col-md-3">
+        <input name="name" type="name" class="form-control" id="inputName">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+      <div class="col-md-3">
+        <input name="username" type="username" class="form-control" id="inputUsername">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+      <div class="col-md-3">
+        <input name="password" type="password" class="form-control" id="inputPassword">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-6">
+        <button type="submit" id="signup-submit-btn" class="btn btn-default">Sign up</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="new-survey-template">
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Date:</label>
+      <div class="col-md-3">
+        <input name="date" type="date" class="form-control">
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Teaching quality (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comfort level (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Overall lesson (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comments:</label>
+      <div class="col-md-6">
+        <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">Share with us something you've learned today.</textarea>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label" data-emojiable="true">I am feeling: </label>
+      <div class="col-md-6">
+        <input name="feeling" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Let's happy hour at: </label>
+      <div class="col-md-6">
+        <input name="happy_hr_suggestion" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-5 col-md-10">
+        <button type="submit" id="survey-submit-btn" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="display-user-template">
+    <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
+      <div class="col-md-3 col-md-offset-2 date-text">{{formattedDate}}</div>
+      <button class="view-survey col-md-2 btn btn-default">View</button>
+      <button class="edit-survey col-md-2 btn btn-default">Edit</button>
+    </div>
+  </template>
+
+  <!-- Show analytics template -->
+  <template id="analytics-template">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">
+        <div class="subcontainer">
+          <span class="analytics-header">SURVEYS COMPLETED</span>
+          <div class="analytics-number">{{surveys_completed}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG TEACHING QUALITY</span>
+          <div class="analytics-number">{{teaching_avg}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG COMFORT LEVEL</span>
+          <div class="analytics-number">{{comfort_avg}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG LESSON SCORE</span>
+          <div class="analytics-number">{{comfort_avg}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Comments:</strong></p>
+        <ul class="col-md-7 comments_list">
+          {{#each comments}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Feelings:</strong></p>
+        <ul class="feeling_list">
+          {{#each feeling}}
+          <li>{{this}}</li>
+          {{/each}} 
         </ul>
       </div>
->>>>>>> master
     </div>
-  </nav>
-
-  <div class="container">
-    <!-- Title -->
-    <div class="row text-center">
-      <div class="col-md-12">
-        <div id="title">
-          <div id="feedback">FEEDBACK</div>
-          <img src="img/loop.jpg" id="loop"/>
-        </div>
-      </div>
-    </div>
-
-    <div class="row text-center">
-      <div class="col-md-8 col-md-offset-2">
-        <p class="lead">Fostering better interactions between students and instructors &mdash; one that is more transparent, social, and dynamic</p>
-      </div>
-    </div>
-
-    <!-- Display container; append results here -->
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div id="display-container"></div>
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Happy hour suggestions:</strong></p>
+        <ul class="people_list">
+          {{#each surveys}}
+          <li>{{happy_hr_suggestion}}
+            <button type="button" class="btn btn-default thumbs-up" aria-label="Thumbs Up" data-survey_id="{{_id}}">
+              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">{{happy_hr_suggestion_likes}}</span>
+            </button>
+          </li>
+          {{/each}}
+        </ul>
       </div>
     </div>
+  </template>
 
-    <div class="row text-center">
-      <div class="col-md-8 col-md-offset-2">
-        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">View My Surveys</a>
-        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">Complete New Survey</a>
-        <a href="#" id="analytics-btn" class="dashboard-btns" style="display:none">Survey Analytics</a>
-      </div>
+  <template id="analytics-by-date-template">
+    <!-- This is strange. Only by giving it a class of 'display-user-survey-container' can I format it how I want to. -->
+    <div class="display-user-survey-container col-md-10 col-md-offset-3" data-id="{{date}}">
+      <div class="col-md-3 col-md-offset-1 date-text">{{formattedDate}}</div>
+      <button class="analytics-by-date-btn col-md-2 btn btn-default">View</button>
     </div>
+  </template>
 
-    <!-- Login template -->
-    <form>
-      <template id="login-template">
-        <div id="login-container">
-          <h4>Login</h4>
-          <div class="form-group">
-            <p>Username: <input name="username"/></p>
-          </div>
-          <div class="form-group">
-            <p>Password: <input name="password" type="password"/></p>
-          </div>
-          <div class type="checkbox">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-          <button type="submit" id="login-submit-btn" class="btn btn-info">Submit</button>
-        </div>
-      </template>
-    </form>
-
-    <!-- Signup template -->
-    <form>
-      <template id="signup-template">
-        <div id="signup-container">
-          <h4>Sign Up</h4>
-          <div class="form-group">
-            <p>Hello, my name is <input name="name"/>.</p>
-            <p>Username: <input name="username"/></p>
-            <p>Password: <input name="password" type="password"/></p>
-          </div>
-          <button type="submit" id="signup-submit-btn" class="btn btn-info">Submit</button>
-        </div>
-      </template>
-    </form>
-
-    <!-- New survey template -->
-    <template id="new-survey-template">
-      <div id ="new-survey-container">
-        <h4>Submit New Survey</h4>
-        <p>Date:<input type="date" name="date"/></p>
-        <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality"/></p>
-        <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level"/></p>
-        <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score"/></p>
-        <p>Comments: <br> <textarea name="comments" type="textarea" rows='3' cols='50'></textarea></p>
-        <p>I am feeling: <input name="feeling" data-emojiable="true"/><p>
-          <!-- <p> -->
-            <!-- <a href="https://github.com/one-signal/emoji-picker"> -->
-              <button class="btn btn-lg btn-primary btn-secondary"></button>
-        <p>After class, we should have happy hour at: <input name="happy_hr_suggestion"/>.</p>
-        <button id="survey-submit-btn">Submit Survey</button>
-      </div>
-    </template>
-
-    <!-- All surveys template -->
-    <template id="display-survey-template">
-      <div id ="display-survey-container">
-        <h3>Date: {{date}}</h3>
-        <h3>Teaching quality: {{teaching_quality}}</h3>
-        <h3>Comfort level: {{comfort_level}}</h3>
-        <h3>Overall lesson: {{lesson_score}}</h3>
-        <h3>Comments: {{comments}}</h3>
-        <h3>Feeling: {{feeling}}</h3>
-        <h3>Happy hour venue: {{happy_hr_suggestion}}</h3>
-      </div>
-    </template>
-
-    <!-- User's view survey template -->
-    <template id="view-user-survey-template">
-      <div id ="display-survey-container" data-id="{{_id}}">
-        <h3>=================================</h3>
-        <h3>Date: {{date}}</h3>
-        <h3>Teaching quality: {{teaching_quality}}</h3>
-        <h3>Comfort level: {{comfort_level}}</h3>
-        <h3>Overall lesson: {{lesson_score}}</h3>
-        <h3>Comments: {{comments}}</h3>
-        <h3>Feeling: {{feeling}}</h3>
-        <h3>Happy hour venue: {{happy_hr_suggestion}}</h3>
-        <button class="edit-survey">Edit Survey</button>
-      </div>
-    </template>
-
-    <!-- List of user's surveys template -->
-    <template id="display-user-template">
-      <div class ="display-user-survey-container" data-id="{{_id}}">
-        <h3>=================================</h3>
-        <h3>Date: {{date}}</h3>
-        <button class="view-survey">View Survey</button>
-
-      </div>
-    </template>
-
-    <!-- Update survey template -->
-    <template id="survey-edit-template">
-      <div class="form">
-        <h4>Edit Survey</h4>
-        <p><input type="hidden" name="date" value="{{date}}"/></p>
-        <p><input type="hidden" name="_id" value="{{_id}}"/></p>
-        <p>Teaching quality (1-10): <input type = "number" min="1" max="10" step="1" name="teaching_quality" value="{{teaching_quality}}"/></p>
-        <p>Comfort level (1-10): <input type = "number" min="1" max="10" step="1" name="comfort_level" value="{{comfort_level}}"/></p>
-        <p>Overall lesson (1-10): <input type = "number" min="1" max="10" step="1" name="lesson_score" value="{{lesson_score}}"/></p>
-        <p>Comments: <input name="comments" value="{{comments}}"/></p>
-        <p>Feeling: <input name="feeling" value="{{feeling}}"/></p>
-        <p>After class, we should have happy hour at: <input name="happy_hr_suggestion" value="{{happy_hr_suggestion}}"/>.</p>
-        <button id="survey-submit-edit-btn">Save</button>
-      </div>
-    </template>
-
-    <!-- View user profile template -->
-    <template id="user-profile-template">
-      <div id="user-profile-container" data-id= "{{_id}}">
-        <h4>View User Account</h4>
-        <p>Username: {{username}}</p>
-        <p>Name: {{name}}</p>
-      </div>
-      <button id="edit-user-profile-btn">Edit Profile</button>
-      <button id="delete-user-profile-btn">Delete Profile</button>
-    </template>
-
-    <!-- Edit user profile template -->
-    <template id="edit-user-profile-template">
-      <div id="edit-user-profile-container">
-        <h4>Edit User Account</h4>
-        <p>My name is <input name="name" value="{{name}}"/>.</p>
-        <p>Username: <input name="username" value="{{username}}"/></p>
-        <p>Password: <input name="password" type="password" value="{{password}}"/></p>
-        <button id="edit-user-submit-btn">Submit</button>
-      </div>
-    </template>
-
+  <!-- View user profile template -->
+  <template id="user-profile-template">
     <div class="row">
       <div class="col-md-12 text-center">
-        <footer>&copy; Copyright 2015 | Team Tyrion</footer>
+        <div id="user-profile-container" data-id="{{_id}}">
+          <div class="my-profile">MY USER ACCOUNT</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="user-profile-container" data-id="{{_id}}">
+            <p class="profile-text">Dear <span class="input-text">{{name}}</span> (famously known as <span class="input-text">{{username}}</span> on the Internet),<br>You may click <button type="submit" id="edit-user-profile-btn" class="btn btn-default">edit</button> to change your info or password.<br> Or, click <button type="submit" id="delete-user-profile-btn" class="btn btn-default">delete</button> to eliminate your account, forever.</p></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="user-profile-container" data-id="{{_id}}">
+            <p class="profile-text">Please click wisely.</p>
+          </div>
+        </div>
       </div>
     </div>
+  </template>
 
-  </div>
+  <!-- Edit user profile template -->
+  <template id="edit-user-profile-template">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div id="edit-user-profile-container" data-id="{{_id}}">
+          <div class="my-profile">MY USER IDENTITY CRISIS</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="user-profile-container" data-id="{{_id}}">
+            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/><br>and my stage name to <input name="username" class="profile-input" value="{{username}}"/>.<br> I'd like to change my super secret password to <input name="password" class="profile-input" type="password" value="{{password}}"/>.<br> Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="survey-edit-template">
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-10 control-label">Date: {{formattedDate}}</label>
+      <input type="hidden" name="_id" value="{{_id}}"/>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Teaching quality (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control" value="{{teaching_quality}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comfort level (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control" value="{{comfort_level}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Overall lesson (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control" value="{{lesson_score}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comments:</label>
+      <div class="col-md-6">
+        <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">{{comments}}</textarea>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label" data-emojiable="true">I am feeling: </label>
+      <div class="col-md-6">
+        <input name="feeling" class="form-control" value="{{feeling}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Let's happy hour at: </label>
+      <div class="col-md-6">
+        <input name="happy_hr_suggestion" class="form-control" value="{{happy_hr_suggestion}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-5 col-md-10">
+        <button type="submit" id="survey-submit-edit-btn" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- User's view survey template: DONE-->
+  <template id="view-user-survey-template">
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Date:</label>
+        <div class="col-md-2">{{formattedDate}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Teaching quality:</label>
+        <div class="col-md-2">{{teaching_quality}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Comfort level:</label>
+        <div class="col-md-2">{{comfort_level}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Overall lesson:</label>
+        <div class="col-md-2">{{lesson_score}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Comments:</label>
+        <div class="col-md-5">{{comments}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Feelings:</label>
+        <div class="col-md-5">{{feeling}}</div>
+      </div>
+      <div class="view-user-survey-container">
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <div class="col-md-8"><strong>Happy hour suggestion:</strong> &nbsp; &nbsp; &nbsp; {{happy_hr_suggestion}}</div>
+          <!-- <div class="col-md-5"></div> -->
+        </div>
+      </div>
+    </div>
+  </template>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="vendor/emoji-picker/lib/js/nanoscroller.min.js"></script>
-  <script src="vendor/emoji-picker/lib/js/tether.min.js"></script>
-  <script src="vendor/emoji-picker/lib/js/config.js"></script>
-  <script src="vendor/emoji-picker/lib/js/util.js"></script>
-  <script src="vendor/emoji-picker/lib/js/jquery.emojiarea.js"></script>
-  <script src="vendor/emoji-picker/lib/js/emoji-picker.js"></script>
+  <script src="/moment.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

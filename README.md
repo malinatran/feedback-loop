@@ -6,11 +6,14 @@ Team Tyrion
   * Mike Wiesenhart
   * Peter Winterhof
 
-**Technologies:**
-  * Node
-  * Express
-  * Mongo
+**Technologies (Languages & Frameworks):**
+  * JavaScript
+  * jQuery
+  * Node.js
+  * Express.js
+  * Mongo & Mongoose
   * AJAX
+  * Bootstrap
 
 **App Idea:**
 Web app that manages daily 'exit tickets' – survey forms for students to give feedback to instructors – and aggregates overall feedback for student viewing. The app will create a better feedback loop for students and instructors, one that is more transparent, social, and dynamic.
@@ -53,7 +56,12 @@ Go to homepage
 3. Logout user (logging out on the client side)
   * logoutUser
 
-4. Display user's dashboard
+4. Display user's dashboard, surveys, and analytics
+  * 4. viewDashboard
+  * 4a. getSurveyDates
+  * 4b. renderSurveyAnalytics
+  * 4c. getAnalytics
+  * 4d. renderDateAnalytics
 
 5. Fill out survey
   * 5a. renderSurveyForm (hide buttons, compile Handlebars template)
@@ -81,11 +89,14 @@ Go to homepage
   * 10b. updateUserProfile
 
 11. Delete user's profile & account
-  * deleteUserProfile
+  * 11a. confirmDelete
+  * 11b. deleteUserProfile
 
 **Click functions (corresponds with above functions):**
 
 Homepage button > renderHomepage
+Back to analytics button > getSurveyDates
+Back to surveys button > getUserSurveys
 
 1. 
   * Login button > renderLoginForm
@@ -114,15 +125,15 @@ Homepage button > renderHomepage
   * View individual survey event listener > getUserViewSurvey (in code block)
   * Back to view survey > getUserViewSurvey
 
-8.
+8. 
   * Edit individual survey > getUserEditSurvey (in code block)
 
 9. 
   * View user profile button > getUserProfile
 
 10. 
-  * Edit user profile button > editUserProfile,
+  * Edit user profile button > editUserProfile
   * Update user profile button > updateUserProfile
 
 11. 
-  * Delete user profile button > deleteUserProfile
+  * Delete user profile button > confirmDelete

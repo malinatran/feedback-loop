@@ -2,21 +2,33 @@ console.log('test');
 
 // Setting global user variable to later assign cookies to
 var user = null;
+var counter = $("#hiddenVal").val();
 
 $(function() {
 
-  // 0. Go to homepage
+  // 0. renderHomepage
   var renderHomepage = function() {
     window.location = '/';
+    $('#title').show();
+    $('.lead').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
   };
 
   // 1. Login user
   // 1a. renderLoginForm
   var renderLoginForm = function() {
     $('#display-container').empty();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').hide();
+    $('.signup-btn').show();
     $('#home-btn').show();
+    $('#title').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').show();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -41,9 +53,16 @@ $(function() {
   // 2a. renderSignupForm
   var renderSignupForm = function() {
     $('#display-container').empty();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').show();
+    $('.signup-btn').hide();
     $('#home-btn').show();
+    $('#title').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').show();
+    $('#login-container').hide();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -71,40 +90,110 @@ $(function() {
   var logoutUser = function() {
     Cookies.remove('loggedInId');
     window.location = '/';
+    $('#title').show();
+    $('.lead').show();
   };
 
   // 4. Display user's dashboard
   var viewDashboard = function() {
     $('#display-container').empty();
     $('#logout-btn').show();
-    $('#login-btn').hide();
-    $('#signup-btn').hide();
+    $('.login-btn').hide();
+    $('.signup-btn').hide();
     $('#user-profile-btn').show();
     $('#view-survey-btn').show();
     $('#new-survey-btn').show();
-    $('#analytics-btn').show();
+    $('#view-analytics-btn').show();
     $('#view-dashboard-btn').hide();
     $('#home-btn').hide();
-    // getSurveys();
+    $('#back-to-analytics').hide();
+    $('#back-to-surveys').hide();
+    $('#title').show();
+    $('.lead').show();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#dashboard-container').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('body').css("background-image", "url(img/backgroundcolors.jpg)");
   };
 
-  // 4a.getSurveys
-  // get ALL surveys
-  // var getSurveys = function() {
-  //   $.get('/surveys').done(function(data) {
-  //     renderSurveys(data);
-  //     console.log(data);
-  //   });
-  // };
+  // 4a. getSurveyDates
+  // Get ALL surveys in an object, only with unique dates
+  var getSurveyDates = function() {
+    $.get('/surveys').done(function(data) {
+      renderSurveyAnalytics(data);
+    });
+  };
 
-  // 4b. renderSurveys
-  // render ALL surveys
-  // var renderSurveys = function(data) {
-  //   var template = Handlebars.compile($('#display-survey-template').html());
-  //   for(var i=0;i<data.length;i++) {
-  //     $('#display-container').append(template(data[i]));
-  //   };
-  // };
+  // 4b. renderSurveyAnalytics
+  // Renders the dates on the page with an analytics button
+  var renderSurveyAnalytics = function(data) {
+    $('#display-container').empty();
+    $('#view-survey-btn').hide();
+    $('#new-survey-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#view-dashboard-btn').show();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').show();
+    $('#new-survey-headline').hide();
+    $('#back-to-analytics').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    var template = Handlebars.compile($('#analytics-by-date-template').html());
+    for (var i=0; i < data.length; i++) {
+      data[i].formattedDate = new Date(data[i].date).toDateString();
+      $('#display-container').append(template(data[i]));
+      var link = $('.analytics-by-date-btn').last();
+      link.click(function() {
+        // grab id from parent element
+        var date = $(this).parent().attr('data-id');
+        getAnalytics(date);
+        // button calls get Analytics, which will grab relevate data for the date
+        // Create new function that is called when "view analytics" is clicked
+      });
+    };
+  };
+
+  // 4c. getAnalytics
+  // Get request with date, to grab all surveys with date object
+  var getAnalytics = function(input){
+    $.ajax({
+      url: "/analytics/"+input,
+      method: "GET",
+    }).done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
+      renderDateAnalytics(data);
+      // receives analytics object and then calls render to put it on the page.
+    });
+  };
+
+  // 4d. renderDateAnalytics
+  var renderDateAnalytics = function(input) {
+    $('#display-container').empty();
+    $('#view-dashboard-btn').show();
+    $('#back-to-surveys').hide();
+    $('#back-to-analytics').show();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').show();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    var template = Handlebars.compile($('#analytics-template').html());
+    $('#display-container').append(template(input));
+  };
 
   // 5. Fill out survey
   // 5a. renderSurveyForm
@@ -113,17 +202,28 @@ $(function() {
     $('#new-survey-btn').hide();
     $('#view-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').show();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
   };
 
   // 5b. createSurveyResponse
   var createSurveyResponse = function() {
-    var date = $("input[name='date']").val();
+    var date = moment($("input[name='date']").val()).toDate();
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
+
     var comments = $("input[name='comments']").val();
     var feeling = $("input[name='feeling']")
     var emoji = $(function() {
@@ -134,6 +234,7 @@ $(function() {
         });
         window.emojiPicker.discover();
     }).val();
+
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
@@ -146,7 +247,7 @@ $(function() {
     };
   // document.cookie is irrelevant. It grabs the user's _id from the cookie on the server side
     $.ajax({
-      url: "http://localhost:3000/surveys",
+      url: "/surveys",
       method: "POST",
       data: surveyResponseData
     }).done(viewDashboard);
@@ -156,6 +257,7 @@ $(function() {
   // 6a. getUserSurvey
   var getUserSurveys = function(data) {
     $.get('/user/surveys').done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
       renderUserSurveys(data);
     });
   };
@@ -166,10 +268,23 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#back-to-surveys').hide();
+    $('#back-to-analytics').hide();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
+      data[i].formattedDate = new Date(data[i].date).toDateString();
       $('#display-container').append(template(data[i]));
       // Adding event listener to view survey button
       var link = $('.view-survey').last();
@@ -178,17 +293,23 @@ $(function() {
         var id = $(this).parent().attr('data-id');
         getUserViewSurvey(id);
       });
+      var edit_link = $('.edit-survey');
+      // Add eventlistener to edit survey
+      edit_link.click(function() {
+        var id = $(this).parent().attr('data-id');
+        getUserEditSurvey(id);
+      });
     };
   };
 
   // 7. View user's survey
   // 7a. getUserViewSurvey
-    var getUserViewSurvey = function(id) {
-      $.get('/surveys/'+ id).done(function(data) {
-        renderUserViewSurvey(data);
-        console.log(data);
-      });
-    };
+  var getUserViewSurvey = function(id) {
+    $.get('/surveys/'+ id).done(function(data) {
+      data.formattedDate = new Date(data.date).toDateString();
+      renderUserViewSurvey(data);
+    });
+  };
 
   // 7b. renderUserViewSurvey
   var renderUserViewSurvey = function(data) {
@@ -196,7 +317,17 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#back-to-surveys').show();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -212,22 +343,33 @@ $(function() {
   // 8a. getUserEditSurvey
   var getUserEditSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
       renderUserEditSurvey(data);
     });
   };
 
   // 8b. renderUserEditSurvey
-  var renderUserEditSurvey = function(data){
+  var renderUserEditSurvey = function(data) {
     $('#display-container').empty();
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#back-to-surveys').show();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').show();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
     // Handlebars compiling template for editing survey
-    var template = Handlebars.compile($("#survey-edit-template").html());
+    var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
     // Event listener to subment edit
-    $('.edit-survey-submit').click(function() {
+    $('.edit-survey-submit').click(function() { 
       updateSurveyResponse();
     });
   };
@@ -239,7 +381,7 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("input[name='comments']").val();
+    var comments = $("textarea[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     // Setting data object for ajax
@@ -254,19 +396,19 @@ $(function() {
     };
     // Sending put request with object data
     $.ajax({
-      url: "http://localhost:3000/surveys/"+id,
+      url: "/surveys/"+id,
       method: "PUT",
       data: surveyUpdateData
     }).done(getUserSurveys);
   };
 
-    // 9. View user's profile
-    // 9a. getUserProfile 
-    var getUserProfile = function(id) {
-      $.get('/users/:id').done(function(data) {
-        renderUserProfile(data);
-      });
-    };
+  // 9. View user's profile
+  // 9a. getUserProfile 
+  var getUserProfile = function(id) {
+    $.get('/users/:id').done(function(data) {
+      renderUserProfile(data);
+    });
+  };
 
   // 9b. renderUserProfile
   var renderUserProfile = function(data) {
@@ -275,7 +417,19 @@ $(function() {
     $('#view-survey-btn').hide();
     $('#new-survey-btn').hide();
     $('#view-dashboard-btn').show();
-    $('#analytics-btn').hide();
+    $('#view-analytics-btn').hide();
+    $('#back-to-analytics').hide();
+    $('#back-to-surveys').hide();
+    $('#title').hide();
+    $('.lead').hide();
+    $('#splash-container').hide();
+    $('#my-surveys-headline').hide();
+    $('#analytics-headline').hide();
+    $('#new-survey-headline').hide();
+    $('#signup-container').hide();
+    $('#login-container').hide();
+    $('#dashboard-container').hide();
+    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
@@ -303,37 +457,63 @@ $(function() {
       password: passwordInput
     }
     $.ajax({
-      url: "http://localhost:3000/users/" + userId,
+      url: "/users/" + userId,
       method: "PUT",
       data: user
     }).done(renderUserProfile(user));
   };
 
   // 11. Delete user's profile & account
+  // 11a. confirmDelete
+  var confirmDelete = function() {
+    if (confirm("Do you really want to say goodbye?")) {
+        deleteUserProfile();
+    } else {
+        false;
+    }       
+  };
+
+  // 11b. deleteUserProfile
   var deleteUserProfile = function() {
     user = Cookies.get('loggedInId');
     $.ajax({
-      url: "http://localhost:3000/users/" + user,
+      url: "/users/" + user,
       method: "DELETE",
       data: 'json'
     }).done(Cookies.remove('loggedInId'));
     window.location = '/';
   };
 
+  // 12. likeSuggestion
+  var likeSuggestion = function() {
+    var $this = $(this);
+    var $likes = $this.children('.glyphicon');
+    var num = parseInt($likes.text());
+    num++;
+    $likes.text(num);
+    $.post('surveys/' + $this.data('survey_id') + '/like').done(function(data) {
+      console.log(data);
+    });
+  };
+
   // CLICK FUNCTIONS
   // 0. 
   // Homepage button > renderHomepage
   $('body').on('click', '#home-btn', renderHomepage);
+  // Back to analytics button > getSurveyDates
+  $('body').on('click', '#back-to-analytics', getSurveyDates);
+  // Back to surveys button > getUserSurveys
+  $('body').on('click', '#back-to-surveys', getUserSurveys);
 
   // 1. 
   // Login button > renderLoginForm
-  $('#login-btn').on('click', renderLoginForm);
+  $('.login-btn').on('click', renderLoginForm);
   // Login submit button > submitLoginForm
   $('body').on('click', '#login-submit-btn', submitLoginForm);
 
   // 2. 
   // Signup button > renderSignupForm
-  $('#signup-btn').on('click', renderSignupForm);
+  $('.signup-btn').on('click', renderSignupForm);
   // Signup submit button > submitSignupForm
   $('body').on('click', '#signup-submit-btn', submitSignupForm);
   
@@ -348,6 +528,8 @@ $(function() {
   $('body').on('click', '#new-survey-btn', renderSurveyForm);
   // Submit new survey > submitNewSurvey
   $('body').on('click', '#survey-submit-btn', createSurveyResponse);
+  // Analytics button > getSurveys
+  $('body').on('click', '#view-analytics-btn', getSurveyDates);
   
   // 6. 
   // View my surveys > getUserSurveys
@@ -373,10 +555,13 @@ $(function() {
   $('body').on('click', '#edit-user-profile-btn', editUserProfile);
   // Update user profile > updateUserProfile
   $('body').on('click', '#edit-user-submit-btn', updateUserProfile);
-  
+
   // 11. 
   // Delete user profile > deleteUserProfile
-  $('body').on('click', '#delete-user-profile-btn', deleteUserProfile);
+  $('body').on('click', '#delete-user-profile-btn', confirmDelete);
+
+  // 12.
+  $('body').on('click', '.thumbs-up', likeSuggestion);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
