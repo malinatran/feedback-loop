@@ -1,4 +1,5 @@
 html, body {
+  background: url(img/backgroundcolors.jpg) no-repeat center center fixed;
   margin:0;
   padding:0;
   height:100%;
@@ -27,34 +28,16 @@ footer {
   margin-bottom: 10px;
 }
 
-/* Title */
-#title-container {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#feedback {
-  color: #3E5ADE;
-  font-family: 'Raleway', sans-serif;
-  font-size: 30px;
-  font-weight: 400;
-  letter-spacing: 6px;
-}
-
-#loop {
-  width: 200px;
-}
-
 /* Splash Page */
 
 #loop-splash {
-  width: 200px;
+  width: 275px;
 }
 
 #feedback-splash {
-  color: #3E5ADE;
+  color: black;
   font-family: 'Raleway', sans-serif;
-  font-size: 30px;
+  font-size: 42px;
   font-weight: 400;
   letter-spacing: 6px;
 }
@@ -86,7 +69,42 @@ footer {
   margin-top: 100px;
 }
 
+/* Login + Signup */
+
+#login-container, #signup-container {
+  display: none;
+  margin-bottom: 50px;
+}
+
+#login, #signup {
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+.small-loop {
+  width: 125px;
+}
+
 /* Dashboard */
+
+#dashboard-container {
+  display: none;
+}
+
+#dashboard {
+  color: #00bccd;
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
+#loop-dashboard {
+  width: 200px;
+}
 
 .dashboard-btns {
   border: 3px solid #F1D911;
@@ -109,9 +127,8 @@ a.dashboard-btns:link, a.dashboard-btns:visited {
 }
 
 a.dashboard-btns:hover {
-  /*color: #436060;*/
   box-shadow: 0 5px #D0C800;
-  color: white;
+  color: black;
   background-color: #F1D911;
   text-decoration: none;
 }
@@ -124,11 +141,12 @@ a.dashboard-btns:active {
 }
 
 /* Headlines */
+
 #my-surveys-headline {
-  background-color: #B33232;
+  background-color: #3E5ADE;
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
-  box-shadow: -5px 0 #A22121;
+  box-shadow: -5px 0 #2D4ACD;
   color: #FFF;
   display: none;
   font-family: 'Raleway', sans-serif;
@@ -143,10 +161,10 @@ a.dashboard-btns:active {
 }
 
 #analytics-headline {
-  background-color: #30B271;
+  background-color: #A13A78;
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
-  box-shadow: -5px 0 #20A160;
+  box-shadow: -5px 0 #8b0a58;
   color: #FFF;
   display: none;
   font-family: 'Raleway', sans-serif;
@@ -201,17 +219,17 @@ a.dashboard-btns:active {
 }
 
 #back-to-surveys {
-  color: #B33232;
+  color: #323299;
 }
 
 #back-to-analytics {
-  color: #30B271;
+  color: #8b0a58;
 }
 
 /* Profile */
 
 .my-profile {
-  color: #3E5ADE;
+  color: #00bccd;
   font-family: 'Raleway', sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -240,20 +258,12 @@ a.dashboard-btns:active {
 
 /* Analytics */
 
-#daily-analytics-headline {
-  color: #30B271;
-  font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 6px;
-}
-
 .analytics-header {
-  border-bottom: 1px solid #30B271;
-  border-top: 2px solid #30B271;
+  border-bottom: 2px solid #A13A78;
+  border-top: 2px solid #A13A78;
   font-family: 'Raleway', sans-serif;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 500;
   margin: 10px;
   padding: 5px 0;
   text-align: center;
