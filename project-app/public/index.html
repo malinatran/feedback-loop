@@ -14,359 +14,325 @@
 </head>
 <body>
   <div id="wrapper"> <!-- Opens content -->
-  <!-- Navbar -->
-  <div id="header"> <!-- Opens header -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">&infin;</a>
-      </div>
+    <!-- Navbar -->
+    <div id="header"> <!-- Opens header -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img alt="Brand" id="logo" src="img/logo.png"/></a>
+          </div>
 
-      <div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" class="login-btn">Login</a></li>
-          <li><a href="#" class="signup-btn">Signup</a></li>
-          <li><a href="#" id="back-to-surveys" style="display: none">All Surveys</a></li>
-          <li><a href="#" id="back-to-analytics" style="display: none">All Analytics</a></li>
-          <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
-          <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
-          <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
+          <div>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" class="login-btn">Login</a></li>
+              <li><a href="#" class="signup-btn">Signup</a></li>
+              <li><a href="#" id="back-to-surveys" style="display: none">All Surveys</a></li>
+              <li><a href="#" id="back-to-analytics" style="display: none">All Analytics</a></li>
+              <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
+              <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
+              <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div> <!-- Closes header -->
+
+    <div class="container">
+
+      <div id="content"> <!-- Opens content -->
+
+        <!-- Dashboard -->
+        <div id="dashboard-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="dashboard">DASHBOARD</div>
+                <img src="img/loop.jpg" id="loop-dashboard"/>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <p class="lead">Help us tighten the feedback loop by contributing your thoughts and ideas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Splash page -->
+        <div id="splash-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="feedback-splash">FEEDBACK</div>
+                <img src="img/loop.jpg" id="loop-splash"/>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <p class="lead">Fostering better communication in the classroom &mdash; one that is more transparent, social, and dynamic.</p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="#" class="login-btn dashboard-btns">LOGIN</a>
+              <a href="#" class="signup-btn dashboard-btns">SIGNUP</a>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="row text-center">
+            <div class="col-md-12 text-center">
+              <p id="learn-more-splash">LEARN MORE</p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-12 text-center">
+              <a href="#" id="arrow-splash">&#751;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login and Signup Pages -->
+        <div id="login-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="login">LOGIN</div>
+                <img src="img/loop.jpg" class="small-loop"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="signup-container" class="col-md-12">
+          <br><br>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <div class="title">
+                <div id="signup">SIGNUP</div>
+                <img src="img/loop.jpg" class="small-loop"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headlines -->
+        <div id="my-surveys-headline">MY SURVEYS</div>
+        <div id="analytics-headline">ANALYTICS</div>
+        <div id="new-survey-headline">NEW SURVEY</div>
+
+        <!-- Display container; append results here -->
+        <div id="display-container"></div>
+
+        <div class="row text-center">
+          <div class="col-md-8 col-md-offset-2">
+            <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
+            <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
+            <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
+          </div>
+        </div>
+
+      </div> <!-- Closes content -->
+
+    </div> <!-- Closes container -->
+  </div> <!-- Closes wrapper -->
+
+
+  <template id="login-template">
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+      <div class="col-md-3">
+        <input name="username" type="username" class="form-control" id="inputUsername">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+      <div class="col-md-3">
+        <input name="password" type="password" class="form-control" id="inputPassword">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-8 col-md-offset-5">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-6">
+        <button type="submit" id="login-submit-btn" class="btn btn-default">Sign in</button>
+      </div>
+    </div>
+  </template>
+
+
+  <template id="signup-template">
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
+      <div class="col-md-3">
+        <input name="name" type="name" class="form-control" id="inputName">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
+      <div class="col-md-3">
+        <input name="username" type="username" class="form-control" id="inputUsername">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
+      <div class="col-md-3">
+        <input name="password" type="password" class="form-control" id="inputPassword">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-1 col-md-offset-6">
+        <button type="submit" id="signup-submit-btn" class="btn btn-default">Sign up</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="new-survey-template">
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Date:</label>
+      <div class="col-md-3">
+        <input name="date" type="date" class="form-control">
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Teaching quality (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comfort level (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Overall lesson (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comments:</label>
+      <div class="col-md-6">
+        <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">Share with us something you've learned today.</textarea>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">I am feeling: </label>
+      <div class="col-md-6">
+        <input name="feeling" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Let's happy hour at: </label>
+      <div class="col-md-6">
+        <input name="happy_hr_suggestion" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-5 col-md-10">
+        <button type="submit" id="survey-submit-btn" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="display-user-template">
+    <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
+      <div class="col-md-3 col-md-offset-2 date-text">{{formattedDate}}</div>
+      <button class="view-survey col-md-2 btn btn-default">View</button>
+      <button class="edit-survey col-md-2 btn btn-default">Edit</button>
+    </div>
+  </template>
+
+  <!-- Show analytics template -->
+  <template id="analytics-template">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">
+        <div class="subcontainer">
+          <span class="analytics-header">SURVEYS COMPLETED</span>
+          <div class="analytics-number">{{surveys_completed}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG TEACHING QUALITY</span>
+          <div class="analytics-number">{{teaching_avg}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG COMFORT LEVEL</span>
+          <div class="analytics-number">{{comfort_avg}}</div>
+        </div>
+        <div class="subcontainer">
+          <span class="analytics-header">AVG LESSON SCORE</span>
+          <div class="analytics-number">{{comfort_avg}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Comments:</strong></p>
+        <ul class="col-md-7 comments_list">
+          {{#each comments}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Feelings:</strong></p>
+        <ul class="feeling_list">
+          {{#each feeling}}
+          <li>{{this}}</li>
+          {{/each}} 
         </ul>
       </div>
     </div>
-  </nav>
-  </div> <!-- Closes header -->
-
-  <div class="container">
-    
-    <div id="content"> <!-- Opens content -->
-
-    <!-- Dashboard -->
-    <div id="dashboard-container" class="col-md-12">
-      <br><br>
-      <div class="row text-center">
-        <div class="col-md-12">
-          <div class="title">
-            <div id="dashboard">DASHBOARD</div>
-            <img src="img/loop.jpg" id="loop-dashboard"/>
-          </div>
-        </div>
-      </div>
-      <br><br><br>
-      <div class="row text-center">
-        <div class="col-md-8 col-md-offset-2">
-          <p class="lead">Help us tighten the feedback loop by contributing your thoughts and ideas.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Splash page -->
-    <div id="splash-container" class="col-md-12">
-      <br><br>
-      <div class="row text-center">
-        <div class="col-md-12">
-          <div class="title">
-            <div id="feedback-splash">FEEDBACK</div>
-            <img src="img/loop.jpg" id="loop-splash"/>
-          </div>
-        </div>
-      </div>
-      <br><br><br>
-      <div class="row text-center">
-        <div class="col-md-8 col-md-offset-2">
-          <p class="lead">Fostering better communication in the classroom &mdash; one that is more transparent, social, and dynamic.</p>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-8 col-md-offset-2">
-          <a href="#" class="login-btn dashboard-btns">LOGIN</a>
-          <a href="#" class="signup-btn dashboard-btns">SIGNUP</a>
-        </div>
-      </div>
-      <br><br><br>
-      <div class="row text-center">
-        <div class="col-md-12 text-center">
-          <p id="learn-more-splash">LEARN MORE</p>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-12 text-center">
-          <a href="#" id="arrow-splash">&#751;</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Login and Signup Pages -->
-    <div id="login-container" class="col-md-12">
-      <br><br>
-      <div class="row text-center">
-        <div class="col-md-12">
-          <div class="title">
-            <div id="login">LOGIN</div>
-            <img src="img/loop.jpg" class="small-loop"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="signup-container" class="col-md-12">
-      <br><br>
-      <div class="row text-center">
-        <div class="col-md-12">
-          <div class="title">
-            <div id="signup">SIGNUP</div>
-            <img src="img/loop.jpg" class="small-loop"/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Headlines -->
-    <div id="my-surveys-headline">MY SURVEYS</div>
-    <div id="analytics-headline">ANALYTICS</div>
-    <div id="new-survey-headline">NEW SURVEY</div>
-
-    <!-- Display container; append results here -->
-    <div id="display-container"></div>
-
-    <div class="row text-center">
-      <div class="col-md-8 col-md-offset-2">
-        <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
-        <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
-        <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
-      </div>
-    </div>
-
-    <!-- Login template: DONE -->
-    <form class="form-horizontal">
-      <template id="login-template">
-        <div class="form-group col-md-12 col-md-offset-3">
-          <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
-          <div class="col-md-3">
-            <input name="username" type="username" class="form-control" id="inputUsername">
-          </div>
-        </div>
-        <div class="form-group col-md-12 col-md-offset-3">
-          <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
-          <div class="col-md-3">
-            <input name="password" type="password" class="form-control" id="inputPassword">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-8 col-md-offset-5">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Remember me
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-1 col-md-offset-6">
-            <button type="submit" id="login-submit-btn" class="btn btn-default">Sign in</button>
-          </div>
-        </div>
-      </template>
-    </form>
-
-    <!-- Signup template: DONE -->
-    <form class="form-horizontal">
-      <template id="signup-template">
-        <div class="form-group col-md-12 col-md-offset-3">
-          <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
-          <div class="col-md-3">
-            <input name="name" type="name" class="form-control" id="inputName">
-          </div>
-        </div>
-        <div class="form-group col-md-12 col-md-offset-3">
-          <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
-          <div class="col-md-3">
-            <input name="username" type="username" class="form-control" id="inputUsername">
-          </div>
-        </div>
-        <div class="form-group col-md-12 col-md-offset-3">
-          <label for="inputPassword" class="col-md-1 col-md-offset-1 control-label">Password</label>
-          <div class="col-md-3">
-            <input name="password" type="password" class="form-control" id="inputPassword">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-1 col-md-offset-6">
-            <button type="submit" id="signup-submit-btn" class="btn btn-default">Sign up</button>
-          </div>
-        </div>
-      </template>
-    </form>
-
-    <!-- New survey template: DONE -->
-    <form class="form-horizontal">
-      <template id="new-survey-template">
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Date:</label>
-          <div class="col-md-3">
-            <input name="date" type="date" class="form-control">
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Teaching quality (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Comfort level (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Overall lesson (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Comments:</label>
-          <div class="col-md-6">
-            <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">Share with us something you've learned today.</textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">I am feeling: </label>
-          <div class="col-md-6">
-            <input name="feeling" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Let's happy hour at: </label>
-          <div class="col-md-6">
-            <input name="happy_hr_suggestion" class="form-control"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-5 col-md-10">
-            <button type="submit" id="survey-submit-btn" class="btn btn-default">Submit</button>
-          </div>
-        </div>
-      </template>
-    </form>
-
-    <!-- List of user's surveys template: DONE -->
     <div class="row">
-      <table class="table">
-        <tbody>
-          <template id="display-user-template">
-            <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
-              <div class="col-md-3 col-md-offset-2 date-text">{{formattedDate}}</div>
-              <button class="view-survey col-md-2 btn btn-default">View</button>
-              <button class="edit-survey col-md-2 btn btn-default">Edit</button>
-            </div>
-          </template>
-        </tbody>
-      </table>
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Happy hour suggestions:</strong></p>
+        <ul class="people_list">
+          {{#each surveys}}
+          <li>{{happy_hr_suggestion}}
+            <button type="button" class="btn btn-default thumbs-up" aria-label="Thumbs Up" data-survey_id="{{_id}}">
+              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">{{happy_hr_suggestion_likes}}</span>
+            </button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
+  </template>
 
-    <!-- User's view survey template: DONE-->
-    <template id="view-user-survey-template">
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Date:</label>
-          <div class="col-md-2">{{formattedDate}}</div>
-        </div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Teaching quality:</label>
-          <div class="col-md-2">{{teaching_quality}}</div>
-        </div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Comfort level:</label>
-          <div class="col-md-2">{{comfort_level}}</div>
-        </div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Overall lesson:</label>
-          <div class="col-md-2">{{lesson_score}}</div>
-        </div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Comments:</label>
-          <div class="col-md-5">{{comments}}</div>
-        </div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <label class="col-md-2 control-label">Feelings:</label>
-          <div class="col-md-5">{{feeling}}</div>
-      </div>
-      <div class="view-user-survey-container">
-        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
-          <div class="col-md-8"><strong>Happy hour suggestion:</strong> &nbsp; &nbsp; &nbsp; {{happy_hr_suggestion}}</div>
-          <!-- <div class="col-md-5"></div> -->
-        </div>
-      </div>
-    </template>
+  <template id="analytics-by-date-template">
+    <!-- This is strange. Only by giving it a class of 'display-user-survey-container' can I format it how I want to. -->
+    <div class="display-user-survey-container col-md-10 col-md-offset-3" data-id="{{date}}">
+      <div class="col-md-3 col-md-offset-1 date-text">{{formattedDate}}</div>
+      <button class="analytics-by-date-btn col-md-2 btn btn-default">View</button>
+    </div>
+  </template>
 
-    <!-- Edit survey template: DONE -->
-    <form class="form-horizontal">
-      <template id="survey-edit-template">
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-10 control-label">Date: {{formattedDate}}</label>
-          <input type="hidden" name="_id" value="{{_id}}"/>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Teaching quality (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control" value="{{teaching_quality}}"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Comfort level (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control" value="{{comfort_level}}"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Overall lesson (1-10):</label>
-          <div class="col-md-2">
-            <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control" value="{{lesson_score}}"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Comments:</label>
-          <div class="col-md-6">
-            <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">{{comments}}</textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">I am feeling: </label>
-          <div class="col-md-6">
-            <input name="feeling" class="form-control" value="{{feeling}}"/>
-          </div>
-        </div>
-        <div class="form-group col-md-10 col-md-offset-2">
-          <label class="col-md-3 control-label">Let's happy hour at: </label>
-          <div class="col-md-6">
-            <input name="happy_hr_suggestion" class="form-control" value="{{happy_hr_suggestion}}"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-5 col-md-10">
-            <button type="submit" id="survey-submit-edit-btn" class="btn btn-default">Submit</button>
-          </div>
-        </div>
-      </template>
-    </form>
-
-    <!-- View user profile template -->
-    <template id="user-profile-template">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div id="user-profile-container" data-id="{{_id}}">
+  <!-- View user profile template -->
+  <template id="user-profile-template">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div id="user-profile-container" data-id="{{_id}}">
           <div class="my-profile">MY USER ACCOUNT</div>
         </div>
       </div>
@@ -380,16 +346,18 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
-          <p class="profile-text">Please click wisely.</p>
+            <p class="profile-text">Please click wisely.</p>
+          </div>
         </div>
-      </div>  
-    </template>
+      </div>
+    </div>
+  </template>
 
-    <!-- Edit user profile template -->
-    <template id="edit-user-profile-template">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div id="edit-user-profile-container" data-id="{{_id}}">
+  <!-- Edit user profile template -->
+  <template id="edit-user-profile-template">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div id="edit-user-profile-container" data-id="{{_id}}">
           <div class="my-profile">MY USER IDENTITY CRISIS</div>
         </div>
       </div>
@@ -400,102 +368,104 @@
           </div>
         </div>
       </div>
-    </template>
-
-    <!-- Choose date for specific analytics template -->
-    <div class="row">
-      <table class="table">
-        <tbody>
-          <template id="analytics-by-date-template">
-<!-- This is strange. Only by giving it a class of 'display-user-survey-container' can I format it how I want to. -->
-            <div class="display-user-survey-container col-md-10 col-md-offset-3" data-id="{{date}}">
-              <div class="col-md-3 col-md-offset-1 date-text">{{formattedDate}}</div>
-              <button class="analytics-by-date-btn col-md-2 btn btn-default">View</button>
-            </div>
-          </template>
-        </tbody>
-      </table>
     </div>
+  </template>
 
-    <!-- Show analytics template -->
-    <template id="analytics-template">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-2">
-          <div class="subcontainer">
-            <span class="analytics-header">SURVEYS COMPLETED</span>
-            <div class="analytics-number">{{surveys_completed}}</div>
-          </div>
-          <div class="subcontainer">
-            <span class="analytics-header">AVG TEACHING QUALITY</span>
-            <div class="analytics-number">{{teaching_avg}}</div>
-          </div>
-          <div class="subcontainer">
-            <span class="analytics-header">AVG COMFORT LEVEL</span>
-            <div class="analytics-number">{{comfort_avg}}</div>
-          </div>
-          <div class="subcontainer">
-            <span class="analytics-header">AVG LESSON SCORE</span>
-            <div class="analytics-number">{{comfort_avg}}</div>
-          </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-md-offset-2">
-          <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-md-offset-2">
-          <p class="analytics-header2"><strong>Comments:</strong></p>
-            <ul class="col-md-7 comments_list">
-              {{#each comments}}
-              <li>{{this}}</li>
-              {{/each}}
-            </ul>
-        </div> 
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-md-offset-2">
-          <p class="analytics-header2"><strong>Feelings:</strong></p>
-            <ul class="feeling_list">
-              {{#each feeling}}
-              <li>{{this}}</li>
-              {{/each}} 
-            </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-md-offset-2">
-          <p class="analytics-header2"><strong>Happy hour suggestions:</strong></p>
-            <ul class="people_list">
-              {{#each happy_hr_suggestion}}
-              <li>{{this}}</li>
-              {{/each}}
-            </ul>
-        </div>
-      </div>
-    </template>
-    </div> <!-- Closes content -->
-
-    <div id="footer">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <footer>&copy; Copyright 2015 Feedback Loop &infin; Created by Team Tyrion</footer>
-        </div>
+  <template id="survey-edit-template">
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-10 control-label">Date: {{formattedDate}}</label>
+      <input type="hidden" name="_id" value="{{_id}}"/>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Teaching quality (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="teaching_quality" class="form-control" value="{{teaching_quality}}"/>
       </div>
     </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comfort level (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="comfort_level" class="form-control" value="{{comfort_level}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Overall lesson (1-10):</label>
+      <div class="col-md-2">
+        <input type="number" min="1" max="10" step="1" name="lesson_score" class="form-control" value="{{lesson_score}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Comments:</label>
+      <div class="col-md-6">
+        <textarea name="comments" type="textarea" rows="3" cols="50" class="form-control">{{comments}}</textarea>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">I am feeling: </label>
+      <div class="col-md-6">
+        <input name="feeling" class="form-control" value="{{feeling}}"/>
+      </div>
+    </div>
+    <div class="form-group col-md-10 col-md-offset-2">
+      <label class="col-md-3 control-label">Let's happy hour at: </label>
+      <div class="col-md-6">
+        <input name="happy_hr_suggestion" class="form-control" value="{{happy_hr_suggestion}}"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-5 col-md-10">
+        <button type="submit" id="survey-submit-edit-btn" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </template>
 
-    </div> <!-- Closes wrapper -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-  </body>
-  </html>
+  <!-- User's view survey template: DONE-->
+  <template id="view-user-survey-template">
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Date:</label>
+        <div class="col-md-2">{{formattedDate}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Teaching quality:</label>
+        <div class="col-md-2">{{teaching_quality}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Comfort level:</label>
+        <div class="col-md-2">{{comfort_level}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Overall lesson:</label>
+        <div class="col-md-2">{{lesson_score}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Comments:</label>
+        <div class="col-md-5">{{comments}}</div>
+      </div>
+    </div>
+    <div class="view-user-survey-container">
+      <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+        <label class="col-md-2 control-label">Feelings:</label>
+        <div class="col-md-5">{{feeling}}</div>
+      </div>
+      <div class="view-user-survey-container">
+        <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
+          <div class="col-md-8"><strong>Happy hour suggestion:</strong> &nbsp; &nbsp; &nbsp; {{happy_hr_suggestion}}</div>
+          <!-- <div class="col-md-5"></div> -->
+        </div>
+      </div>
+    </div>
+  </template>
 
-
-
-
-
-
-
-
-
-
-
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <script src="/moment.js"></script>
+</body>
+</html>

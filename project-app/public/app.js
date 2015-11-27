@@ -2,6 +2,7 @@ console.log('test');
 
 // Setting global user variable to later assign cookies to
 var user = null;
+var counter = $("#hiddenVal").val();
 
 $(function() {
 
@@ -165,7 +166,7 @@ $(function() {
   // Get request with date, to grab all surveys with date object
   var getAnalytics = function(input){
     $.ajax({
-      url: "http://localhost:3000/analytics/"+input,
+      url: "/analytics/"+input,
       method: "GET",
     }).done(function(data) {
       data.formattedDate = new Date (data.date).toDateString();
@@ -218,7 +219,7 @@ $(function() {
 
   // 5b. createSurveyResponse
   var createSurveyResponse = function() {
-    var date = $("input[name='date']").val();
+    var date = moment($("input[name='date']").val()).toDate();
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
@@ -236,7 +237,7 @@ $(function() {
     };
   // document.cookie is irrelevant. It grabs the user's _id from the cookie on the server side
     $.ajax({
-      url: "http://localhost:3000/surveys",
+      url: "/surveys",
       method: "POST",
       data: surveyResponseData
     }).done(viewDashboard);
@@ -385,7 +386,7 @@ $(function() {
     };
     // Sending put request with object data
     $.ajax({
-      url: "http://localhost:3000/surveys/"+id,
+      url: "/surveys/"+id,
       method: "PUT",
       data: surveyUpdateData
     }).done(getUserSurveys);
@@ -446,7 +447,7 @@ $(function() {
       password: passwordInput
     }
     $.ajax({
-      url: "http://localhost:3000/users/" + userId,
+      url: "/users/" + userId,
       method: "PUT",
       data: user
     }).done(renderUserProfile(user));
@@ -466,11 +467,23 @@ $(function() {
   var deleteUserProfile = function() {
     user = Cookies.get('loggedInId');
     $.ajax({
-      url: "http://localhost:3000/users/" + user,
+      url: "/users/" + user,
       method: "DELETE",
       data: 'json'
     }).done(Cookies.remove('loggedInId'));
     window.location = '/';
+  };
+
+  // 12. likeSuggestion
+  var likeSuggestion = function() {
+    var $this = $(this);
+    var $likes = $this.children('.glyphicon');
+    var num = parseInt($likes.text());
+    num++;
+    $likes.text(num);
+    $.post('surveys/' + $this.data('survey_id') + '/like').done(function(data) {
+      console.log(data);
+    });
   };
 
   // CLICK FUNCTIONS
@@ -536,6 +549,9 @@ $(function() {
   // 11. 
   // Delete user profile > deleteUserProfile
   $('body').on('click', '#delete-user-profile-btn', confirmDelete);
+
+  // 12.
+  $('body').on('click', '.thumbs-up', likeSuggestion);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
