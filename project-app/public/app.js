@@ -117,6 +117,22 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('body').css("background-image", "url(img/backgroundcolors.jpg)");
+
+  var date_object = new Date
+
+  if (date_object.getDay()==0) {
+    date_object.setDate(date_object.getDate()-2)
+  }else if(date_object.getDay()==6){
+    date_object.setDate(date_object.getDate()-1)
+  }else if (date_object.getDay()==1){
+    date_object.setDate(date_object.getDate()-3)
+  }
+  date_object.setHours(5);
+  date_object.setMinutes(0);
+  date_object.setSeconds(0);
+  getDashboardAnalytics(date_object)
+  
+
   };
 
   // 4a. getSurveyDates
@@ -472,6 +488,20 @@ $(function() {
     }).done(Cookies.remove('loggedInId'));
     window.location = '/';
   };
+
+  // 12. getDashboardAnalytics
+
+  var getDashboardAnalytics = function(input){
+    $.ajax({
+      url: "http://localhost:3000/analytics/"+input,
+      method: "GET",
+    }).done(function(data) {
+      data.formattedDate = new Date (data.date).toDateString();
+      console.log(data)
+      // receives analytics object and then calls render to put it on the page.
+    });
+
+  }
 
   // CLICK FUNCTIONS
   // 0. 
