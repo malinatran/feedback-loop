@@ -6,6 +6,12 @@ var counter = $("#hiddenVal").val();
 
 $(function() {
 
+  emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '/vendor/emoji-picker/lib/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+
   // 0. renderHomepage
   var renderHomepage = function() {
     window.location = '/';
@@ -215,6 +221,7 @@ $(function() {
     $('body').css("background-image", "url(img/backgroundyellow.jpg)");
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
+    emojiPicker.discover();
   };
 
   // 5b. createSurveyResponse
@@ -223,8 +230,12 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("textarea[name='comments']").val();
-    var feeling = $("input[name='feeling']").val();
+
+    var comments = $("input[name='comments']").val();
+    var feeling = $("input[name='feeling']")
+    
+          
+
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
@@ -362,6 +373,7 @@ $(function() {
     $('.edit-survey-submit').click(function() { 
       updateSurveyResponse();
     });
+    emojiPicker.discover();
   };
 
   // 8c. updateSurveyResponse
