@@ -6,13 +6,14 @@ Team Tyrion
   * Mike Wiesenhart
   * Peter Winterhof
 
-**Technologies (Languages & Frameworks):**
+**Technologies (Languages, Frameworks, and Libraries):**
   * JavaScript
   * jQuery
   * Node.js
   * Express.js
   * Mongo & Mongoose
   * AJAX
+  * Moment.js
   * Bootstrap
 
 **App Idea:**
