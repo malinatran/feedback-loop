@@ -5,6 +5,13 @@ var cookieParser = require('cookie-parser');
 var port = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
+var Yelp = require('yelp');
+var yelp = new Yelp({
+  consumer_key: process.env.YELP_CONSUMER_KEY,
+  consumer_secret: process.env.YELP_CONSUMER_SECRET,
+  token: process.env.YELP_TOKEN,
+  token_secret: process.env.YELP_TOKEN_SECRET
+});
 
 // Models
 var User = require('./models/user.js');
@@ -28,6 +35,7 @@ app.post('/users', function(req, res) {
   var user = new User({
     name: req.body.name,
     username: req.body.username,
+    email: req.body.email,
     password_hash: password_hash,
   });
   user.save(function(err) {
@@ -142,6 +150,7 @@ app.put('/users/:id', function(req, res) {
   var user = {
     name: req.body.name,
     username: req.body.username, 
+    email: req.body.email,
     password_hash: password_hash 
   };
   User.findOneAndUpdate(req.cookies.loggedInId, user, function(err, user) {
@@ -238,6 +247,7 @@ app.post('/surveys/:id/like', function(req, res) {
     res.send(true);
   });
 });
+
 
 
 

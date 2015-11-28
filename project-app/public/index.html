@@ -142,7 +142,6 @@
     </div> <!-- Closes container -->
   </div> <!-- Closes wrapper -->
 
-
   <template id="login-template">
     <div class="form-group col-md-12 col-md-offset-3">
       <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
@@ -172,7 +171,6 @@
     </div>
   </template>
 
-
   <template id="signup-template">
     <div class="form-group col-md-12 col-md-offset-3">
       <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
@@ -184,6 +182,12 @@
       <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
       <div class="col-md-3">
         <input name="username" type="username" class="form-control" id="inputUsername">
+      </div>
+    </div>
+    <div class="form-group col-md-12 col-md-offset-3">
+      <label for="inputEmail" class="col-md-1 col-md-offset-1 control-label">Email</label>
+      <div class="col-md-3">
+        <input name="email" type="email" class="form-control" id="inputEmail">
       </div>
     </div>
     <div class="form-group col-md-12 col-md-offset-3">
@@ -260,21 +264,17 @@
   <!-- Show analytics template -->
   <template id="analytics-template">
     <div class="row">
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-12 col-md-offset-2" id="averages-header">
         <div class="subcontainer">
-          <span class="analytics-header">SURVEYS COMPLETED</span>
-          <div class="analytics-number">{{surveys_completed}}</div>
-        </div>
-        <div class="subcontainer">
-          <span class="analytics-header">AVG TEACHING QUALITY</span>
+          <span class="analytics-header">TEACHING QUALITY AVG</span>
           <div class="analytics-number">{{teaching_avg}}</div>
         </div>
         <div class="subcontainer">
-          <span class="analytics-header">AVG COMFORT LEVEL</span>
+          <span class="analytics-header">COMFORT LEVEL AVG</span>
           <div class="analytics-number">{{comfort_avg}}</div>
         </div>
         <div class="subcontainer">
-          <span class="analytics-header">AVG LESSON SCORE</span>
+          <span class="analytics-header">LESSON SCORE AVG</span>
           <div class="analytics-number">{{comfort_avg}}</div>
         </div>
       </div>
@@ -282,6 +282,11 @@
     <div class="row">
       <div class="col-md-12 col-md-offset-2">
         <p class="analytics-header2"><strong>Date:</strong> {{formattedDate}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-md-offset-2">
+        <p class="analytics-header2"><strong>Surveys Completed:</strong> {{surveys_completed}}</p>
       </div>
     </div>
     <div class="row">
@@ -311,7 +316,7 @@
           {{#each surveys}}
           <li>{{happy_hr_suggestion}}
             <button type="button" class="btn btn-default thumbs-up" aria-label="Thumbs Up" data-survey_id="{{_id}}">
-              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">{{happy_hr_suggestion_likes}}</span>
+              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;<strong>{{happy_hr_suggestion_likes}}</strong></span>
             </button>
           </li>
           {{/each}}
@@ -364,7 +369,7 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
-            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/><br>and my stage name to <input name="username" class="profile-input" value="{{username}}"/>.<br> I'd like to change my super secret password to <input name="password" class="profile-input" type="password" value="{{password}}"/>.<br> Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
+            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/><br>and my stage name to <input name="username" class="profile-input" value="{{username}}"/>.<br> Holler at me at <input name="email" class="profile-input" value="{{email}}"/>, and you will never guess<br> my super secret password (enter here: <input name="password" class="profile-input" type="password" value="{{password}}"/>).<br> Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
           </div>
         </div>
       </div>

@@ -4,7 +4,8 @@ var SurveyResponseSchema = require('./surveyresponse').schema;
 var UserSchema = new mongoose.Schema({
   name: String,
   username: String,
-  password_hash: { type: String, select: false },
+  email: String,
+  password_hash: { type: String, select: false }
 });
 
 var User = mongoose.model('User', UserSchema);

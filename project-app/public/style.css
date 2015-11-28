@@ -117,7 +117,7 @@ footer {
   background-color: #F1D911;
   border-radius: 7px;
   box-shadow: 0 5px #D0C800;
-  color: #696969;
+  color: #fff;
   display: inline-block;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
@@ -130,7 +130,7 @@ footer {
 }
 
 a.dashboard-btns:link, a.dashboard-btns:visited {
-  color: #696969;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -216,9 +216,14 @@ a.dashboard-btns:active {
   margin: 10px 0;
 }
 
+#averages-header {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
 .subcontainer {
   float: left;
-  margin: 10px;
+  margin: 0 20px;
   text-align: center;
 }
 
@@ -232,6 +237,12 @@ a.dashboard-btns:active {
 
 #back-to-analytics {
   color: #8b0a58;
+}
+
+.glyphicon-thumbs-up {
+  color: #8b0a58;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
 }
 
 /* Profile */
@@ -270,9 +281,9 @@ a.dashboard-btns:active {
   border-bottom: 2px solid #A13A78;
   border-top: 2px solid #A13A78;
   font-family: 'Raleway', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  margin: 10px;
+  margin: 14px;
   padding: 5px 0;
   text-align: center;
 }

@@ -492,7 +492,7 @@ $(function() {
     var $likes = $this.children('.glyphicon');
     var num = parseInt($likes.text());
     num++;
-    $likes.text(num);
+    $likes.html('&nbsp;<strong>' + num + '</strong>');
     $.post('surveys/' + $this.data('survey_id') + '/like').done(function(data) {
       console.log(data);
     });
