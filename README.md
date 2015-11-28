@@ -14,6 +14,7 @@ Team Tyrion
   * Mongo & Mongoose
   * AJAX
   * Moment.js
+  * Emoji-Picker.js
   * Bootstrap
 
 **App Idea:**
