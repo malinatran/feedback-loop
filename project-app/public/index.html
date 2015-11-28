@@ -13,8 +13,7 @@
 
 </head>
 <body>
-  <div id="wrapper"> <!-- Opens content -->
-    <!-- Navbar -->
+  <div id="wrapper"> <!-- Opens wrapper -->
     <div id="header"> <!-- Opens header -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -26,8 +25,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#" class="login-btn">Login</a></li>
               <li><a href="#" class="signup-btn">Signup</a></li>
-              <li><a href="#" id="back-to-surveys" style="display: none">All Surveys</a></li>
-              <li><a href="#" id="back-to-analytics" style="display: none">All Analytics</a></li>
+              <li><a href="#" id="back-to-surveys" style="display: none">Back to All Surveys</a></li>
+              <li><a href="#" id="back-to-analytics" style="display: none">Back to All Analytics</a></li>
               <li><a href="#" id="view-dashboard-btn" style="display:none">Dashboard</a></li>
               <li><a href="#" id="user-profile-btn" style="display:none">My Profile</a></li>
               <li><a href="#" id="logout-btn" style="display:none">Logout</a></li>
@@ -55,7 +54,7 @@
           <br><br><br>
           <div class="row text-center">
             <div class="col-md-8 col-md-offset-2">
-              <p class="lead">Help us tighten the feedback loop by contributing your thoughts and ideas.</p>
+              <p class="lead">Tighten the feedback loop by sharing your experience and contributing your ideas.</p>
             </div>
           </div>
         </div>
@@ -142,6 +141,7 @@
     </div> <!-- Closes container -->
   </div> <!-- Closes wrapper -->
 
+  <!-- TEMPLATE 01: Login -->
   <template id="login-template">
     <div class="form-group col-md-12 col-md-offset-3">
       <label for="inputUsername" class="col-md-1 col-md-offset-1 control-label">Username</label>
@@ -171,6 +171,7 @@
     </div>
   </template>
 
+  <!-- TEMPLATE 02: Signup -->
   <template id="signup-template">
     <div class="form-group col-md-12 col-md-offset-3">
       <label for="inputName" class="col-md-1 col-md-offset-1 control-label">Name</label>
@@ -203,6 +204,7 @@
     </div>
   </template>
 
+  <!-- TEMPLATE 03: Create new survey -->
   <template id="new-survey-template">
     <div class="form-group col-md-10 col-md-offset-2">
       <label class="col-md-3 control-label">Date:</label>
@@ -243,7 +245,7 @@
     <div class="form-group col-md-10 col-md-offset-2">
       <label class="col-md-3 control-label">Let's happy hour at: </label>
       <div class="col-md-6">
-        <input name="happy_hr_suggestion" class="form-control"/>
+        <input name="happy_hr_suggestion" class="form-control"/><div id="search-btn">Search</div>
       </div>
     </div>
     <div class="form-group">
@@ -253,6 +255,7 @@
     </div>
   </template>
 
+  <!-- TEMPLATE 04: Show list of user's surveys by date -->
   <template id="display-user-template">
     <div class="display-user-survey-container col-md-10 col-md-offset-1" data-id="{{_id}}">
       <div class="col-md-3 col-md-offset-2 date-text">{{formattedDate}}</div>
@@ -261,7 +264,7 @@
     </div>
   </template>
 
-  <!-- Show analytics template -->
+  <!-- TEMPLATE 05: View analytics -->
   <template id="analytics-template">
     <div class="row">
       <div class="col-md-12 col-md-offset-2" id="averages-header">
@@ -325,6 +328,7 @@
     </div>
   </template>
 
+  <!-- TEMPLATE 06: Display list of analytics by date -->
   <template id="analytics-by-date-template">
     <!-- This is strange. Only by giving it a class of 'display-user-survey-container' can I format it how I want to. -->
     <div class="display-user-survey-container col-md-10 col-md-offset-3" data-id="{{date}}">
@@ -333,7 +337,7 @@
     </div>
   </template>
 
-  <!-- View user profile template -->
+  <!-- TEMPLATE 07: View user's profile -->
   <template id="user-profile-template">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -358,7 +362,7 @@
     </div>
   </template>
 
-  <!-- Edit user profile template -->
+  <!-- TEMPLATE 08: Edit user's profile -->
   <template id="edit-user-profile-template">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -369,13 +373,14 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="user-profile-container" data-id="{{_id}}">
-            <p class="profile-text">I would like to change my name to <input name="name" class="profile-input"  value="{{name}}"/><br>and my stage name to <input name="username" class="profile-input" value="{{username}}"/>.<br> Holler at me at <input name="email" class="profile-input" value="{{email}}"/>, and you will never guess<br> my super secret password (enter here: <input name="password" class="profile-input" type="password" value="{{password}}"/>).<br> Let's <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, before we forget.</p>
+            <p class="profile-text">Name IRL: <input name="name" class="profile-input"  value="{{name}}"/><br>Stage name: <input name="username" class="profile-input" value="{{username}}"/><br> Holler at: <input name="email" class="profile-input" value="{{email}}"/><br> Super secret password: <input name="password" class="profile-input" type="password" value="{{password}}"/><br> Let's not forget to <button id="edit-user-submit-btn" class="btn btn-default">save</button> all of these changes, shall we?</p>
           </div>
         </div>
       </div>
     </div>
   </template>
 
+  <!-- TEMPLATE 09: Edit user's survey -->
   <template id="survey-edit-template">
     <div class="form-group col-md-10 col-md-offset-2">
       <label class="col-md-10 control-label">Date: {{formattedDate}}</label>
@@ -424,7 +429,7 @@
     </div>
   </template>
 
-  <!-- User's view survey template: DONE-->
+  <!-- TEMPLATE 10: View user's survey -->
   <template id="view-user-survey-template">
     <div class="view-user-survey-container">
       <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
@@ -464,11 +469,11 @@
       <div class="view-user-survey-container">
         <div class="col-md-12 col-md-offset-3" data-id="{{_id}}">
           <div class="col-md-8"><strong>Happy hour suggestion:</strong> &nbsp; &nbsp; &nbsp; {{happy_hr_suggestion}}</div>
-          <!-- <div class="col-md-5"></div> -->
         </div>
       </div>
     </div>
   </template>
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
   <script src="/moment.js"></script>

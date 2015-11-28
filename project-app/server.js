@@ -113,6 +113,7 @@ app.post('/surveys', function(req, res) {
 app.get('/user/surveys', function(req,res) {
   // Grabbing user_id from cookies
   user_id_pull = req.cookies.loggedInId;
+  console.log(user_id_pull);
   // Finding responses w/ user id
   SurveyResponse.find({"user": user_id_pull}).sort('-date').exec(function(err, surveys) {
     res.send(surveys);
@@ -248,7 +249,13 @@ app.post('/surveys/:id/like', function(req, res) {
   });
 });
 
-
+// yelp.search({ term: 'food', location: 'Brooklyn' })
+//   .then(function (data) {
+//     res.send(data);
+//   })
+//   .catch(function (err) {
+//     console.error(err);
+// });
 
 
 

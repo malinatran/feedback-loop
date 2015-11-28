@@ -6,11 +6,11 @@ var counter = $("#hiddenVal").val();
 
 $(function() {
 
-  emojiPicker = new EmojiPicker({
-          emojiable_selector: '[data-emojiable=true]',
-          assetsPath: '/vendor/emoji-picker/lib/img/',
-          popupButtonClasses: 'fa fa-smile-o'
-        });
+  var emojiPicker = new EmojiPicker({
+    emojiable_selector: '[data-emojiable=true]',
+    assetsPath: '/vendor/emoji-picker/lib/img/',
+    popupButtonClasses: 'fa fa-smile-o'
+  });
 
   // 0. renderHomepage
   var renderHomepage = function() {
@@ -77,10 +77,12 @@ $(function() {
   var submitSignupForm = function() {
     var nameInput = $("input[name='name']").val();
     var usernameInput = $("input[name='username']").val();
+    var emailInput = $("input[name='email']").val();
     var passwordInput = $("input[name='password']").val();
     var user = {
       name: nameInput,
       username: usernameInput,
+      email: emailInput,
       password: passwordInput
     }
     $.post('/users', user).done(createUser);
@@ -123,7 +125,7 @@ $(function() {
     $('#dashboard-container').show();
     $('#signup-container').hide();
     $('#login-container').hide();
-    $('body').css("background-image", "url(img/backgroundcolors.jpg)");
+    $('body').css("background", "url(img/backgroundcolors.jpg) no-repeat center center fixed");
   };
 
   // 4a. getSurveyDates
@@ -152,7 +154,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
       data[i].formattedDate = new Date(data[i].date).toDateString();
@@ -196,7 +198,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#analytics-template').html());
     $('#display-container').append(template(input));
   };
@@ -218,7 +220,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
     emojiPicker.discover();
@@ -230,12 +232,8 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-
     var comments = $("input[name='comments']").val();
-    var feeling = $("input[name='feeling']")
-    
-          
-
+    var feeling = $("input[name='feeling']");
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
@@ -281,7 +279,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
     for (var i=0; i < data.length; i++) {
@@ -431,7 +429,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    $('body').css("background-image", "url(img/backgroundyellow.jpg)");
+    $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
   };
@@ -452,10 +450,12 @@ $(function() {
     var userId = Cookies.get('loggedInId');
     var nameInput = $("input[name='name']").val();
     var usernameInput = $("input[name='username']").val();
+    var emailInput = $("input[name='email']").val();
     var passwordInput = $("input[name='password']").val();
     var user = {
       name: nameInput,
       username: usernameInput,
+      email: emailInput,
       password: passwordInput
     }
     $.ajax({
