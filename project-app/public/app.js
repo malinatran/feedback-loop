@@ -232,8 +232,9 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("input[name='comments']").val();
-    var feeling = $("input[name='feeling']");
+    var comments = $("textarea[name='comments']").val();
+    console.log(comments)
+    var feeling = $("input[name='feeling']").val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
@@ -244,6 +245,7 @@ $(function() {
       feeling: feeling,
       happy_hr_suggestion: happy_hr_suggestion,
     };
+    console.log(surveyResponseData)
   // document.cookie is irrelevant. It grabs the user's _id from the cookie on the server side
     $.ajax({
       url: "/surveys",
@@ -573,7 +575,7 @@ $(function() {
   // Delete user profile > deleteUserProfile
   $('body').on('click', '#delete-user-profile-btn', confirmDelete);
 
-  // 12a.
+  // 12.
   $('body').on('click', '.thumbs-up', likeSuggestion);
 
   // 12b.
