@@ -232,8 +232,9 @@ $(function() {
     var teaching_quality = $("input[name='teaching_quality']").val();
     var comfort_level = $("input[name='comfort_level']").val();
     var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("input[name='comments']").val();
-    var feeling = $("input[name='feeling']");
+    var comments = $("textarea[name='comments']").val();
+    console.log(comments)
+    var feeling = $("input[name='feeling']").val();
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var surveyResponseData = {
       date: date,
@@ -244,6 +245,7 @@ $(function() {
       feeling: feeling,
       happy_hr_suggestion: happy_hr_suggestion,
     };
+    console.log(surveyResponseData)
   // document.cookie is irrelevant. It grabs the user's _id from the cookie on the server side
     $.ajax({
       url: "/surveys",
@@ -383,6 +385,7 @@ $(function() {
     var lesson_score = $("input[name='lesson_score']").val();
     var comments = $("textarea[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
+    console.log(feeling)
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     // Setting data object for ajax
     var surveyUpdateData = {
@@ -498,6 +501,17 @@ $(function() {
     });
   };
 
+  var dislikeSuggestion = function() {
+    var $this = $(this);
+    var $likes = $('.glyphicon');
+    var num = parseInt($likes.text());
+    num--;
+    $likes.html('&nbsp;<strong>' + num + '</strong>');
+    $.post('surveys/' + $this.data('survey_id') + '/dislike').done(function(data) {
+      console.log(data);
+    });
+  };
+
   // CLICK FUNCTIONS
   // 0. 
   // Homepage button > renderHomepage
@@ -564,6 +578,9 @@ $(function() {
 
   // 12.
   $('body').on('click', '.thumbs-up', likeSuggestion);
+
+  // 12b.
+  $('body').on('click', '.thumbs-down', dislikeSuggestion)
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
