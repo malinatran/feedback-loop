@@ -385,6 +385,7 @@ $(function() {
     var lesson_score = $("input[name='lesson_score']").val();
     var comments = $("textarea[name='comments']").val();
     var feeling = $("input[name='feeling']").val();
+    console.log(feeling)
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     // Setting data object for ajax
     var surveyUpdateData = {
