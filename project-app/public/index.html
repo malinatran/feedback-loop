@@ -318,8 +318,11 @@
         <ul class="people_list">
           {{#each surveys}}
           <li>{{happy_hr_suggestion}}
+          <!-- Tried formatting dislike similarly to like, but have no idea how you did it -->
+            
             <button type="button" class="btn btn-default thumbs-up" aria-label="Thumbs Up" data-survey_id="{{_id}}">
               <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">&nbsp;<strong>{{happy_hr_suggestion_likes}}</strong></span>
+            <button type="button" data-survey_id="{{_id}}" class="btn btn-default thumbs-down"aria-label="Thumbs Up">dislike</button>
             </button>
           </li>
           {{/each}}

@@ -249,6 +249,14 @@ app.post('/surveys/:id/like', function(req, res) {
   });
 });
 
+app.post('/surveys/:id/dislike', function(req, res) {
+  SurveyResponse.findByIdAndUpdate({ _id: req.params.id }, {$inc: {happy_hr_suggestion_likes: -1}}, function (err, data) {
+    res.send(true);
+  });
+});
+
+
+
 // yelp.search({ term: 'food', location: 'Brooklyn' })
 //   .then(function (data) {
 //     res.send(data);

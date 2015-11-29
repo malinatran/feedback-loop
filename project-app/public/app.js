@@ -498,6 +498,17 @@ $(function() {
     });
   };
 
+  var dislikeSuggestion = function() {
+    var $this = $(this);
+    var $likes = $('.glyphicon');
+    var num = parseInt($likes.text());
+    num--;
+    $likes.html('&nbsp;<strong>' + num + '</strong>');
+    $.post('surveys/' + $this.data('survey_id') + '/dislike').done(function(data) {
+      console.log(data);
+    });
+  };
+
   // CLICK FUNCTIONS
   // 0. 
   // Homepage button > renderHomepage
@@ -562,8 +573,11 @@ $(function() {
   // Delete user profile > deleteUserProfile
   $('body').on('click', '#delete-user-profile-btn', confirmDelete);
 
-  // 12.
+  // 12a.
   $('body').on('click', '.thumbs-up', likeSuggestion);
+
+  // 12b.
+  $('body').on('click', '.thumbs-down', dislikeSuggestion)
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
