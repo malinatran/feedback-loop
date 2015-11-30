@@ -125,6 +125,7 @@ $(function() {
     $('#dashboard-container').show();
     $('#signup-container').hide();
     $('#login-container').hide();
+    checkDate()
     $('body').css("background", "url(img/backgroundcolors.jpg) no-repeat center center fixed");
   };
 
@@ -229,12 +230,37 @@ $(function() {
   // 5b. createSurveyResponse
   var createSurveyResponse = function(e) {
     e.preventDefault();
-    var surveyResponseData = $('form').serialize();
+    var date = moment($("input[name='date']").val()).toDate();
+    var teaching_quality = $("input[name='teaching_quality']").val();
+    var comfort_level = $("input[name='comfort_level']").val();
+    var lesson_score = $("input[name='lesson_score']").val();
+    var comments = $("textarea[name='comments']").val();
+    var feeling = $("input[name='feeling']").val();
+    var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
+    var bar_id = $("#selected_business").val();
+    var bar_name = $("#selected_business_name").val();
+
+    var surveyResponseData = {
+      date: date,
+      teaching_quality: teaching_quality,
+      comfort_level: comfort_level,
+      lesson_score: lesson_score,
+      comments: comments,
+      feeling: feeling,
+      happy_hr_suggestion: happy_hr_suggestion,
+      selected_business: bar_id,
+      selected_business_name: bar_name,
+    };
+
     $.ajax({
       url: "/surveys",
       method: "POST",
       data: surveyResponseData
-    }).done(viewDashboard);
+    }).done(function(data){
+      data.survey.formattedDate = new Date (data.survey.date).toDateString();
+      console.log(data)
+      renderUserViewSurvey(data)
+    });
   };
 
   // 6. View user's surveys
@@ -311,6 +337,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    console.log(data)
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -518,6 +545,38 @@ $(function() {
     $('#selected_business_name').val(name);
     $(this).hide();
   };
+
+  // 14. 
+  var checkDate = function(){
+    var new_date = new Date;
+    var grab_date = new_date.getDate();
+    var grab_month = new_date.getMonth();
+    var grab_year = new_date.getFullYear();
+    var date_object = new Date(grab_year, grab_month, grab_date)
+
+
+
+    if (date_object.getDay()==0) {
+      date_object.setDate(date_object.getDate()-2)
+    }else if (date_object.getDay()==1){
+      date_object.setDate(date_object.getDate()-3)
+    }else{date_object.setDate(date_object.getDate()-1)}
+
+    var moment_date_object = moment(date_object);
+
+    $.get('/check/' + moment_date_object).done(function(data) {
+      if(data){
+        $('.alert-danger').show();
+        $('.alert-success').hide();
+
+      }else{
+        $('.alert-danger').hide();
+        $('.alert-success').show();
+      };
+    });
+  };
+
+
 
   // CLICK FUNCTIONS
   // 0. 
