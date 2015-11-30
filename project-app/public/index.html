@@ -60,6 +60,7 @@
           <div class="row text-center">
             <div class="col-md-8 col-md-offset-2">
               <p class="lead">Tighten the feedback loop by <br> sharing your experiences and contributing your ideas.</p>
+              <br><br>
             </div>
           </div>
         </div>
@@ -88,16 +89,6 @@
             </div>
           </div>
           <br><br><br>
-          <div class="row text-center">
-            <div class="col-md-12 text-center">
-              <p id="learn-more-splash">LEARN MORE</p>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-md-12 text-center">
-              <a href="#" id="arrow-splash">&#751;</a>
-            </div>
-          </div>
         </div>
 
         <!-- Login and Signup Pages -->
@@ -105,8 +96,7 @@
           <br><br>
           <div class="row text-center">
             <div class="col-md-12 text-center title">
-              <div id="login">LOGIN</div>
-              <img src="img/loop.jpg" class="small-loop"/>
+              <div id="login">&nbsp;&nbsp;LOGIN</div>
             </div>
           </div>
         </div>
@@ -115,8 +105,7 @@
           <br><br>
           <div class="row text-center">
             <div class="col-md-12 text-center title">
-              <div id="signup">SIGNUP</div>
-              <img src="img/loop.jpg" class="small-loop"/>
+              <div id="signup">&nbsp;&nbsp;&nbsp;SIGNUP</div>
             </div>
           </div>
         </div>
@@ -137,10 +126,21 @@
         </div>
 
         <div class="row text-center">
-          <div class="col-md-8 col-md-offset-2">
-            <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
-            <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
-            <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2 col-md-offset-3">
+                <img src="img/surveys-icon.png" class="dashboard-icons" id="survey-icon"/>
+                <a href="#" id="view-survey-btn" class="dashboard-btns" style="display:none">MY SURVEYS</a>
+              </div>
+              <div class="col-md-2">
+                <img src="img/analytics-icon.png" class="dashboard-icons" id="analytics-icon"/>
+                <a href="#" id="view-analytics-btn" class="dashboard-btns" style="display:none">ANALYTICS</a>
+              </div>
+              <div class="col-md-2">
+                <img src="img/survey-icon.png" class="dashboard-icons" id="survey-icon"/>
+                <a href="#" id="new-survey-btn" class="dashboard-btns" style="display:none">NEW SURVEY</a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -474,10 +474,10 @@
         </div>
         <div class="col-md-1 col-md-offset-3" style="margin-right: 40px"><img src="{{business.image_url}}" id="business-image-edit" class="img-rounded" data-id="biz-image"/></div>
         <div class="col-md-6" data-id="{{survey._id}}">
-          <img src="{{business.rating_img_url}}"/> &nbsp; {{business.review_count}} reviews <br>
+          <img src="{{business.rating_img_url}}"/> &nbsp; {{business.review_count}} {{#if business}} reviews {{/if}}<br>
           <div>{{business.location.neighborhoods.[0]}}</div>
           <div>{{business.location.address}}</div>
-          <div>{{business.location.city}}, {{business.location.state_code}} {{business.location.postal_code}}</div>
+          <div>{{business.location.city}}{{#if business}},{{/if}} {{business.location.state_code}} {{business.location.postal_code}}</div>
           <div>{{business.location.phone}}</div>
           <div>{{business.location.cross_streets}}</div>
         </div>
@@ -538,10 +538,10 @@
       <div class="col-md-12 col-md-offset-3">
         <div class="col-md-8 col-md-offset-2">
           <img src="{{business.image_url}}" class="img-rounded pull-left" id="business-image-view" data-id="biz-image"/>
-          <img src="{{business.rating_img_url}}"/> &nbsp; {{business.review_count}} reviews
+          <img src="{{business.rating_img_url}}"/> &nbsp; {{business.review_count}} {{#if business}} reviews {{/if}}
           <div>{{business.location.neighborhoods.[0]}}</div>
           <div>{{business.location.address}}</div>
-          <div>{{business.location.city}}, {{business.location.state_code}} {{business.location.postal_code}}</div>
+          <div>{{business.location.city}}{{#if business}},{{/if}} {{business.location.state_code}} {{business.location.postal_code}}</div>
           <div>{{business.location.phone}}</div>
           <div>{{business.location.cross_streets}}</div>
         </div>
