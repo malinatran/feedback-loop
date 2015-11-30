@@ -273,7 +273,7 @@ $(function() {
       if(data){
         createSurveyResponse(surveyResponseData)
       }else{
-        alert("You cannot submit two surveys for the same day")
+        alert("You cannot submit two surveys for the same day!")
       }
     });
   };
