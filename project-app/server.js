@@ -58,8 +58,13 @@ app.post('/login', function(req, res) {
     username: req.body.username,
     password_hash: md5(req.body.password)
   }, function(err, user) {
-    res.cookie('loggedInId', user.id);
-    res.send(user);
+    if(!user){
+      console.log('error');
+      res.send(false);
+    }else{
+      res.cookie('loggedInId', user.id);
+      res.send(true);
+    };
   });
 });
 
@@ -70,7 +75,7 @@ app.get('/surveys', function(req, res) {
     for (var i = 0; i < survey_responses.length; i++) {
       if ( JSON.stringify(input) == JSON.stringify(survey_responses[i].date)) {
         return false;
-      }
+      };
     };
     return true;
   };
@@ -104,8 +109,20 @@ app.post('/surveys', function(req, res) {
         user: req.cookies.loggedInId
       });
       // Saving survey
-      survey.save(function(err) {
-        res.send(survey);
+      survey.save(function(err, survey) {
+        var business_id = survey.happy_hr_suggestion_id
+        yelp.business(business_id, function(err, data) {
+          console.log(data)
+          if (err) {
+            var business = null;
+          } else {
+            var business = data;
+          };
+          res.send({
+            survey: survey,
+            business: business
+          });
+        });
       });
     };
   });
@@ -287,6 +304,39 @@ app.get('/businesses/:find/:near', function(req, res) {
       console.error(err);
     });
 });
+
+app.get('/check/:date', function(req, res){
+  var pull_date = req.params.date;
+  var pull_user_id = req.cookies.loggedInId;
+
+  SurveyResponse.find({"user": pull_user_id}).exec(function(err, data){
+
+    var check_data = function(input){
+    for (var i = 0; i < input.length; i++) {
+      var data_date_ms = (data[i].date).getTime();
+      if( data_date_ms == pull_date){
+        return false
+      }
+    };
+    return true
+    }; 
+
+    res.send(check_data(data))
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+})
 
 
 
