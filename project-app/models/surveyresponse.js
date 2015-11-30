@@ -7,8 +7,10 @@ var SurveyResponseSchema = new mongoose.Schema({
   lesson_score: Number,
   comments: String,
   feeling: String,
-  happy_hr_suggestion: String,
+  happy_hr_suggestion_id: String,
+  happy_hr_suggestion_name: String,
   happy_hr_suggestion_likes: { type: Number, default: 0 }, 
+  happy_hr_suggestion_dislikes: { type: Number, default: 0 }, 
   user: { type: mongoose.Schema.Types.ObjectId, re: 'User' },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }

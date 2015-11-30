@@ -32,10 +32,12 @@ app.listen(port);
 // Sign up new user
 app.post('/users', function(req, res) {
   password_hash = md5(req.body.password);
+  email_hash = md5(req.body.email);
   var user = new User({
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
+    email_hash: email_hash,
     password_hash: password_hash,
   });
   user.save(function(err) {
@@ -97,8 +99,8 @@ app.post('/surveys', function(req, res) {
         lesson_score: req.body.lesson_score,
         comments: req.body.comments,
         feeling: req.body.feeling,
-        happy_hr_suggestion: req.body.happy_hr_suggestion,
-        happy_hr_suggestion_likes: 0,
+        happy_hr_suggestion_id: req.body.selected_business,
+        happy_hr_suggestion_name: req.body.selected_business_name,
         user: req.cookies.loggedInId
       });
       // Saving survey
@@ -112,8 +114,7 @@ app.post('/surveys', function(req, res) {
 // View form
 app.get('/user/surveys', function(req,res) {
   // Grabbing user_id from cookies
-  user_id_pull = req.cookies.loggedInId;
-  console.log(user_id_pull);
+  var user_id_pull = req.cookies.loggedInId;
   // Finding responses w/ user id
   SurveyResponse.find({"user": user_id_pull}).sort('-date').exec(function(err, surveys) {
     res.send(surveys);
@@ -123,13 +124,33 @@ app.get('/user/surveys', function(req,res) {
 // Get individual survey
 app.get('/surveys/:id', function(req,res){
   SurveyResponse.findOne({"_id": req.params.id}).then(function(survey) {
-    res.send(survey);
+    var business_id = survey.happy_hr_suggestion_id;
+    yelp.business(business_id, function(err, data) {
+      if (err) {
+        var business = null;
+      } else {
+        var business = data;
+      };
+      res.send({
+        survey: survey,
+        business: business
+      });
+    });
   });
 });
 
-// Edit form
+// Edit individual survey
 app.put('/surveys/:id', function(req,res) {
-  SurveyResponse.findOneAndUpdate({"_id": req.params.id}, req.body, function(err, survey) {
+  SurveyResponse.findOneAndUpdate({"_id": req.params.id}, {
+    teaching_quality: req.body.teaching_quality,
+    comfort_level: req.body.comfort_level,
+    lesson_score: req.body.lesson_score,
+    comments: req.body.comments,
+    feeling: req.body.feeling,
+    happy_hr_suggestion_id: req.body.selected_business,
+    happy_hr_suggestion_name: req.body.selected_business_name,
+    user: req.cookies.loggedInId
+  }, function(err, survey) {
     if (err) {
       console.log(err)
     } else {
@@ -148,10 +169,12 @@ app.get('/users/:id', function(req, res) {
 // Edit user account
 app.put('/users/:id', function(req, res) {
   password_hash = md5(req.body.password);
+  email_hash = md5(req.body.email);
   var user = {
     name: req.body.name,
     username: req.body.username, 
     email: req.body.email,
+    email_hash: email_hash,
     password_hash: password_hash 
   };
   User.findOneAndUpdate(req.cookies.loggedInId, user, function(err, user) {
@@ -250,23 +273,20 @@ app.post('/surveys/:id/like', function(req, res) {
 });
 
 app.post('/surveys/:id/dislike', function(req, res) {
-  SurveyResponse.findByIdAndUpdate({ _id: req.params.id }, {$inc: {happy_hr_suggestion_likes: -1}}, function (err, data) {
+  SurveyResponse.findByIdAndUpdate({ _id: req.params.id }, {$inc: {happy_hr_suggestion_dislikes: 1}}, function (err, data) {
     res.send(true);
   });
 });
 
-
-
-// yelp.search({ term: 'food', location: 'Brooklyn' })
-//   .then(function (data) {
-//     res.send(data);
-//   })
-//   .catch(function (err) {
-//     console.error(err);
-// });
-
-
-
+app.get('/businesses/:find/:near', function(req, res) {
+  yelp.search({ term: req.params.find, location: req.params.near })
+    .then(function (data) {
+      res.send(data.businesses);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+});
 
 
 
