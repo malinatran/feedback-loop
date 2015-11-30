@@ -376,7 +376,8 @@ $(function() {
   // 8a. getUserEditSurvey
   var getUserEditSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
-      data.formattedDate = new Date (data.date).toDateString();
+      data.survey.formattedDate = new Date (data.survey.date).toDateString();
+      console.log(data)
       renderUserEditSurvey(data);
     });
   };
