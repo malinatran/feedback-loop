@@ -58,7 +58,7 @@ $(function() {
       }else{
         alert("Wrong username and/or password. Please re-enter your information")
         renderLoginForm()
-      }
+      };
     });
   };
 
@@ -235,7 +235,7 @@ $(function() {
   };
 
   // 5b. createSurveyResponse
-  var createSurveyResponse = function(e) {
+  var checkSurveyResponseDate = function(e) {
     e.preventDefault();
     var date = moment($("input[name='date']").val()).toDate();
     var teaching_quality = $("input[name='teaching_quality']").val();
@@ -258,6 +258,23 @@ $(function() {
       selected_business: bar_id,
       selected_business_name: bar_name,
     };
+    var date_ms = date.getTime()
+    $.ajax({
+      url: "/check/" + date_ms,
+      method: "GET",
+      data: surveyResponseData
+    }).done(function(data){
+      if(data){
+        createSurveyResponse(surveyResponseData)
+      }else{
+        alert("You cannot submit two surveys for the same day")
+      }
+    });
+  };
+
+  var createSurveyResponse = function(data){
+
+    var surveyResponseData = data
 
     $.ajax({
       url: "/surveys",
@@ -267,7 +284,7 @@ $(function() {
       data.survey.formattedDate = new Date (data.survey.date).toDateString();
       renderUserViewSurvey(data)
     });
-  };
+  }
 
   // 6. View user's surveys
   // 6a. getUserSurvey
@@ -615,7 +632,7 @@ $(function() {
   // New Survey button > renderSurveys
   $('body').on('click', '#new-survey-btn', renderSurveyForm);
   // Submit new survey > submitNewSurvey
-  $('body').on('click', '#survey-submit-btn', createSurveyResponse);
+  $('body').on('click', '#survey-submit-btn', checkSurveyResponseDate);
   // Analytics button > getSurveys
   $('body').on('click', '#view-analytics-btn', getSurveyDates);
   
