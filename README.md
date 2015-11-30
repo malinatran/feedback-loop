@@ -1,4 +1,5 @@
-## Working name: Feedback Loop
+## Feedback Loop
+
 Team Tyrion
 
 **Group Members:**
@@ -16,6 +17,7 @@ Team Tyrion
   * Moment.js
   * Emoji-Picker.js
   * Bootstrap
+  * Yelp API
 
 **App Idea:**
 Web app that manages daily 'exit tickets' – survey forms for students to give feedback to instructors – and aggregates overall feedback for student viewing. The app will create a better feedback loop for students and instructors, one that is more transparent, social, and dynamic.
@@ -93,6 +95,18 @@ Go to homepage
 11. Delete user's profile & account
   * 11a. confirmDelete
   * 11b. deleteUserProfile
+ 
+12. Like or dislike proposed happy hour location
+  * 12a. likeSuggestion
+  * 12b. dislikeSuggestion
+
+13. View businesses
+  * 13a. searchYelp
+  * 13b. renderBusinesses
+  * 13c. selectBusiness
+
+14. Check date to see if survey needs to be completed
+  * checkDate
 
 **Click functions (corresponds with above functions):**
 
@@ -139,3 +153,11 @@ Back to surveys button > getUserSurveys
 
 11. 
   * Delete user profile button > confirmDelete
+
+12.
+  * Thumbs up button > likeSuggestion
+  * Thumbs down button > dislikeSuggestion
+ 
+13. 
+  * Search icon > searchYelp
+  * Select business button > selectBusiness
