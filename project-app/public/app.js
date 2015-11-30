@@ -57,10 +57,10 @@ $(function() {
     }).done(function(data){
       if(data) {
         viewDashboard();
-      }else{
+      } else {
         alert("Wrong username and/or password. Please re-enter your information.");
         renderLoginForm();
-      }
+      };
     });
   };
 
@@ -242,7 +242,7 @@ $(function() {
   };
 
   // 5b. createSurveyResponse
-  var createSurveyResponse = function(e) {
+  var checkSurveyResponseDate = function(e) {
     e.preventDefault();
     var date = moment($("input[name='date']").val()).toDate();
     var teaching_quality = $("input[name='teaching_quality']").val();
@@ -264,6 +264,23 @@ $(function() {
       selected_business: bar_id,
       selected_business_name: bar_name,
     };
+    var date_ms = date.getTime()
+    $.ajax({
+      url: "/check/" + date_ms,
+      method: "GET",
+      data: surveyResponseData
+    }).done(function(data){
+      if(data){
+        createSurveyResponse(surveyResponseData)
+      }else{
+        alert("You cannot submit two surveys for the same day")
+      }
+    });
+  };
+
+  var createSurveyResponse = function(data){
+
+    var surveyResponseData = data
 
     $.ajax({
       url: "/surveys",
@@ -273,7 +290,7 @@ $(function() {
       data.survey.formattedDate = new Date (data.survey.date).toDateString();
       renderUserViewSurvey(data)
     });
-  };
+  }
 
   // 6. View user's surveys
   // 6a. getUserSurvey
@@ -366,7 +383,8 @@ $(function() {
   // 8a. getUserEditSurvey
   var getUserEditSurvey = function(id) {
     $.get('/surveys/'+ id).done(function(data) {
-      data.formattedDate = new Date (data.date).toDateString();
+      data.survey.formattedDate = new Date (data.survey.date).toDateString();
+      console.log(data)
       renderUserEditSurvey(data);
     });
   };
@@ -619,7 +637,7 @@ $(function() {
   // New Survey button > renderSurveys
   $('body').on('click', '#new-survey-btn', renderSurveyForm);
   // Submit new survey > submitNewSurvey
-  $('body').on('click', '#survey-submit-btn', createSurveyResponse);
+  $('body').on('click', '#survey-submit-btn', checkSurveyResponseDate);
   // Analytics button > getSurveys
   $('body').on('click', '#view-analytics-btn', getSurveyDates);
   
@@ -653,13 +671,17 @@ $(function() {
   $('body').on('click', '#delete-user-profile-btn', confirmDelete);
 
   // 12.
+  // Thumbs up > likeSuggestion
   $('body').on('click', '.thumbs-up', likeSuggestion);
+  // Thumbs down > dislikeSuggestion
   $('body').on('click', '.thumbs-down', dislikeSuggestion);
 
   // 13.
+  // Search icon > searchYelp
   $('body').on('click', '.search-icon', searchYelp);
 
   // 14.
+  // Select business button > selectBusiness
   $('body').on('click', '#biz-select-btn', selectBusiness);
 
   // If user is logged in, go directly to dashboard

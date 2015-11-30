@@ -305,7 +305,7 @@ app.get('/businesses/:find/:near', function(req, res) {
     });
 });
 
-app.get('/check/:date', function(req, res) {
+app.get('/check/:date', function(req, res){
   var pull_date = req.params.date;
   var pull_user_id = req.cookies.loggedInId;
   SurveyResponse.find({"user": pull_user_id}).exec(function(err, data){
@@ -321,9 +321,6 @@ app.get('/check/:date', function(req, res) {
     res.send(check_data(data));
   });
 });
-
-
-
 
 
 
