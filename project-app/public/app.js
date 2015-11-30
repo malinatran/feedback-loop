@@ -162,7 +162,7 @@ $(function() {
       var link = $('.analytics-by-date-btn').last();
       link.click(function() {
         // grab id from parent element
-        var date = $(this).parent().attr('data-id');
+        var date = $(this).attr('data-id');
         getAnalytics(date);
         // button calls get Analytics, which will grab relevate data for the date
         // Create new function that is called when "view analytics" is clicked
@@ -227,26 +227,9 @@ $(function() {
   };
 
   // 5b. createSurveyResponse
-  var createSurveyResponse = function() {
-    var date = moment($("input[name='date']").val()).toDate();
-    var teaching_quality = $("input[name='teaching_quality']").val();
-    var comfort_level = $("input[name='comfort_level']").val();
-    var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("textarea[name='comments']").val();
-    console.log(comments)
-    var feeling = $("input[name='feeling']").val();
-    var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
-    var surveyResponseData = {
-      date: date,
-      teaching_quality: teaching_quality,
-      comfort_level: comfort_level,
-      lesson_score: lesson_score,
-      comments: comments,
-      feeling: feeling,
-      happy_hr_suggestion: happy_hr_suggestion,
-    };
-    console.log(surveyResponseData)
-  // document.cookie is irrelevant. It grabs the user's _id from the cookie on the server side
+  var createSurveyResponse = function(e) {
+    e.preventDefault();
+    var surveyResponseData = $('form').serialize();
     $.ajax({
       url: "/surveys",
       method: "POST",
@@ -258,7 +241,6 @@ $(function() {
   // 6a. getUserSurvey
   var getUserSurveys = function(data) {
     $.get('/user/surveys').done(function(data) {
-      data.formattedDate = new Date (data.date).toDateString();
       renderUserSurveys(data);
     });
   };
@@ -291,13 +273,13 @@ $(function() {
       var link = $('.view-survey').last();
       link.click(function() {
         // Grabbing id from parent element
-        var id = $(this).parent().attr('data-id');
+        var id = $(this).attr('data-id');
         getUserViewSurvey(id);
       });
       var edit_link = $('.edit-survey');
       // Add eventlistener to edit survey
       edit_link.click(function() {
-        var id = $(this).parent().attr('data-id');
+        var id = $(this).attr('data-id');
         getUserEditSurvey(id);
       });
     };
@@ -306,8 +288,8 @@ $(function() {
   // 7. View user's survey
   // 7a. getUserViewSurvey
   var getUserViewSurvey = function(id) {
-    $.get('/surveys/'+ id).done(function(data) {
-      data.formattedDate = new Date(data.date).toDateString();
+    $.get('/surveys/'+ id).done(function(data) { 
+      data.survey.formattedDate = new Date(data.survey.date).toDateString();
       renderUserViewSurvey(data);
     });
   };
@@ -377,26 +359,10 @@ $(function() {
   };
 
   // 8c. updateSurveyResponse
-  var updateSurveyResponse = function() {
-    var date = $("input[name='date']").val();
+  var updateSurveyResponse = function(e) {
+    e.preventDefault();
+    var surveyUpdateData = $('form').serialize();
     var id = $("input[name='_id']").val();
-    var teaching_quality = $("input[name='teaching_quality']").val();
-    var comfort_level = $("input[name='comfort_level']").val();
-    var lesson_score = $("input[name='lesson_score']").val();
-    var comments = $("textarea[name='comments']").val();
-    var feeling = $("input[name='feeling']").val();
-    console.log(feeling)
-    var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
-    // Setting data object for ajax
-    var surveyUpdateData = {
-      date: date,
-      teaching_quality: teaching_quality,
-      comfort_level: comfort_level,
-      lesson_score: lesson_score,
-      comments: comments,
-      feeling: feeling,
-      happy_hr_suggestion: happy_hr_suggestion,
-    };
     // Sending put request with object data
     $.ajax({
       url: "/surveys/"+id,
@@ -503,13 +469,54 @@ $(function() {
 
   var dislikeSuggestion = function() {
     var $this = $(this);
-    var $likes = $('.glyphicon');
-    var num = parseInt($likes.text());
-    num--;
-    $likes.html('&nbsp;<strong>' + num + '</strong>');
+    var $dislikes = $this.children('.glyphicon');
+    var num = parseInt($dislikes.text());
+    num++;
+    $dislikes.html('&nbsp;<strong>' + num + '</strong>');
     $.post('surveys/' + $this.data('survey_id') + '/dislike').done(function(data) {
       console.log(data);
-    });
+    })
+  };
+
+  // 13. Search for business via Yelp
+  // 13a. searchYelp
+  var searchYelp = function() {
+    var find = $("input[name='happy_hr_suggestion']").val();
+    var near = $("input[name='happy_hr_location']").val();
+    $('.modal-mask').css('display', 'flex');
+    $.get('businesses/' + find + '/' + near).done(function(data) {
+      renderBusinesses(data);
+    })
+  };
+
+  // 13b. renderBusinesses
+  var renderBusinesses = function(data) {
+    $('.emoji-picker-icon emoji-picker fa fa-smile-o').css('display', 'none');
+    var template = Handlebars.compile($("#businesses-template").html());
+    $('#modal-results-container').append(template({
+      businesses: data
+    }));
+  };
+
+  // 13c. selectBusiness
+  var selectBusiness = function(e) {
+    e.preventDefault();
+    $('#attach-biz').empty();
+    $(this).closest('.row').addClass('selected_biz');
+    $('.modal-mask').css('display', 'none');
+    $('#biz-select-btn').hide();
+    $('#happy_hr_suggestion').val("");
+    $('#happy_hr_location').val("");
+    $('#modal-results.container').empty();
+    $('#business-image-template').css('margin-right', '15px');
+    $('.selected_biz').css('margin-top', 0);
+    $('#attach-biz').show().append($('.selected_biz'));
+    var id = $(this).data('id');
+    $('#selected_business').val(id);
+    var name = $(this).data('name');
+    console.log(name);
+    $('#selected_business_name').val(name);
+    $(this).hide();
   };
 
   // CLICK FUNCTIONS
@@ -566,7 +573,7 @@ $(function() {
   // View user profile > getUserProfile
   $('body').on('click', '#user-profile-btn', getUserProfile);
   
-  // 10
+  // 10.
   // Edit user profile > editUserProfile
   $('body').on('click', '#edit-user-profile-btn', editUserProfile);
   // Update user profile > updateUserProfile
@@ -578,9 +585,13 @@ $(function() {
 
   // 12.
   $('body').on('click', '.thumbs-up', likeSuggestion);
+  $('body').on('click', '.thumbs-down', dislikeSuggestion);
 
-  // 12b.
-  $('body').on('click', '.thumbs-down', dislikeSuggestion)
+  // 13.
+  $('body').on('click', '.search-icon', searchYelp);
+
+  // 14.
+  $('body').on('click', '#biz-select-btn', selectBusiness);
 
   // If user is logged in, go directly to dashboard
   if (document.cookie) {
