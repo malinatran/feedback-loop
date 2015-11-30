@@ -83,16 +83,12 @@ footer {
 }
 
 #login, #signup {
-  color: black;
+  color: #00bccd;
   font-family: 'Raleway', sans-serif;
   font-size: 40px;
   font-weight: 400;
   letter-spacing: 6px;
   vertical-align: bottom;
-}
-
-.small-loop {
-  width: 125px;
 }
 
 /* Dashboard */
@@ -147,6 +143,11 @@ a.dashboard-btns:active {
   top: 5px;
   box-shadow: none;
   text-decoration: none;
+}
+
+.dashboard-icons {
+  display: none;
+  height: 50px;
 }
 
 /* Headlines */

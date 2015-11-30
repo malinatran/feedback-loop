@@ -19,6 +19,7 @@ $(function() {
     $('.lead').show();
     $('#signup-container').hide();
     $('#login-container').hide();
+    $('.dashboard-icons').hide();
   };
 
   // 1. Login user
@@ -35,6 +36,7 @@ $(function() {
     $('#new-survey-headline').hide();
     $('#signup-container').hide();
     $('#login-container').show();
+    $('.dashboard-icons').hide();
     var template = Handlebars.compile($('#login-template').html());
     $('#display-container').append(template);
   };
@@ -53,11 +55,11 @@ $(function() {
       dataType: 'json',
       data: user
     }).done(function(data){
-      if(data){
-        viewDashboard()
+      if(data) {
+        viewDashboard();
       }else{
-        alert("Wrong username and/or password. Please re-enter your information")
-        renderLoginForm()
+        alert("Wrong username and/or password. Please re-enter your information.");
+        renderLoginForm();
       }
     });
   };
@@ -76,6 +78,7 @@ $(function() {
     $('#new-survey-headline').hide();
     $('#signup-container').show();
     $('#login-container').hide();
+    $('.dashboard-icons').hide();
     var template = Handlebars.compile($('#signup-template').html());
     $('#display-container').append(template);
   };
@@ -132,7 +135,8 @@ $(function() {
     $('#dashboard-container').show();
     $('#signup-container').hide();
     $('#login-container').hide();
-    checkDate()
+    $('.dashboard-icons').show();
+    checkDate();
     $('body').css("background", "url(img/backgroundcolors.jpg) no-repeat center center fixed");
   };
 
@@ -162,6 +166,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#analytics-by-date-template').html());
     for (var i=0; i < data.length; i++) {
@@ -206,6 +211,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#analytics-template').html());
     $('#display-container').append(template(input));
@@ -228,6 +234,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($('#new-survey-template').html());
     $('#display-container').append(template);
@@ -246,7 +253,6 @@ $(function() {
     var happy_hr_suggestion = $("input[name='happy_hr_suggestion']").val();
     var bar_id = $("#selected_business").val();
     var bar_name = $("#selected_business_name").val();
-
     var surveyResponseData = {
       date: date,
       teaching_quality: teaching_quality,
@@ -295,6 +301,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     // Compiling display template for surveys
     var template = Handlebars.compile($('#display-user-template').html());
@@ -343,7 +350,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
-    console.log(data)
+    $('.dashboard-icons').hide();
     // Compiling template for specific survey
     var template = Handlebars.compile($('#view-user-survey-template').html());
     $('#display-container').append(template(data));
@@ -381,6 +388,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     // Handlebars compiling template for editing survey
     var template = Handlebars.compile($('#survey-edit-template').html());
     $('#display-container').append(template(data));
@@ -431,6 +439,7 @@ $(function() {
     $('#signup-container').hide();
     $('#login-container').hide();
     $('#dashboard-container').hide();
+    $('.dashboard-icons').hide();
     $('body').css("background", "url(img/backgroundyellow.jpg) no-repeat center center fixed");
     var template = Handlebars.compile($("#user-profile-template").html());
     $('#display-container').append(template(data));
@@ -541,6 +550,7 @@ $(function() {
     $('#happy_hr_suggestion').val("");
     $('#happy_hr_location').val("");
     $('#modal-results.container').empty();
+    $('.dashboard-icons').hide();
     $('#business-image-template').css('margin-right', '15px');
     $('.selected_biz').css('margin-top', 0);
     $('#attach-biz').show().append($('.selected_biz'));
@@ -558,31 +568,25 @@ $(function() {
     var grab_date = new_date.getDate();
     var grab_month = new_date.getMonth();
     var grab_year = new_date.getFullYear();
-    var date_object = new Date(grab_year, grab_month, grab_date)
-
-
-
+    var date_object = new Date(grab_year, grab_month, grab_date);
     if (date_object.getDay()==0) {
-      date_object.setDate(date_object.getDate()-2)
-    }else if (date_object.getDay()==1){
-      date_object.setDate(date_object.getDate()-3)
-    }else{date_object.setDate(date_object.getDate()-1)}
-
+      date_object.setDate(date_object.getDate()-2);
+    } else if (date_object.getDay()==1) {
+      date_object.setDate(date_object.getDate()-3);
+    } else {
+      date_object.setDate(date_object.getDate()-1);
+    }
     var moment_date_object = moment(date_object);
-
     $.get('/check/' + moment_date_object).done(function(data) {
-      if(data){
+      if (data) {
         $('.alert-danger').show();
         $('.alert-success').hide();
-
-      }else{
+      } else {
         $('.alert-danger').hide();
         $('.alert-success').show();
       };
     });
   };
-
-
 
   // CLICK FUNCTIONS
   // 0. 
