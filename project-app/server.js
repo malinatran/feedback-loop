@@ -58,8 +58,15 @@ app.post('/login', function(req, res) {
     username: req.body.username,
     password_hash: md5(req.body.password)
   }, function(err, user) {
-    res.cookie('loggedInId', user.id);
-    res.send(user);
+    console.log(user)
+    if(!user){
+      console.log('error')
+      res.send(false)
+    }else{
+      res.cookie('loggedInId', user.id);
+      res.send(true)
+    }
+
   });
 });
 

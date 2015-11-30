@@ -52,7 +52,14 @@ $(function() {
       method: 'POST',
       dataType: 'json',
       data: user
-    }).done(viewDashboard);
+    }).done(function(data){
+      if(data){
+        viewDashboard()
+      }else{
+        alert("Wrong username and/or password. Please re-enter your information")
+        renderLoginForm()
+      }
+    });
   };
 
   // 2. Create a new user
@@ -258,7 +265,6 @@ $(function() {
       data: surveyResponseData
     }).done(function(data){
       data.survey.formattedDate = new Date (data.survey.date).toDateString();
-      console.log(data)
       renderUserViewSurvey(data)
     });
   };
