@@ -58,15 +58,13 @@ app.post('/login', function(req, res) {
     username: req.body.username,
     password_hash: md5(req.body.password)
   }, function(err, user) {
-    console.log(user)
     if(!user){
-      console.log('error')
-      res.send(false)
+      console.log('error');
+      res.send(false);
     }else{
       res.cookie('loggedInId', user.id);
-      res.send(true)
-    }
-
+      res.send(true);
+    };
   });
 });
 
@@ -77,7 +75,7 @@ app.get('/surveys', function(req, res) {
     for (var i = 0; i < survey_responses.length; i++) {
       if ( JSON.stringify(input) == JSON.stringify(survey_responses[i].date)) {
         return false;
-      }
+      };
     };
     return true;
   };
