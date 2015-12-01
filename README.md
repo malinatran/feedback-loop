@@ -42,6 +42,15 @@ Web app that manages daily 'exit tickets' – survey forms for students to give 
 **Wireframes:**
 https://drive.google.com/a/nooklyn.com/folderview?id=0B9qXBzKsKS2NcnlBVkNqV1hGUnM&usp=sharing
 
+**Post-Project Retro**
+* What aspects of your approach and attitude during this project would you like to improve upon?
+
+* What aspects of your coding process during this project would you like to improve upon?
+
+* What lines of code are you most proud of and why?
+
+* What lines of code do you understand the least and why?
+
 **Source Code Roadmap:**
 In app.js:
 
@@ -157,7 +166,7 @@ Back to surveys button > getUserSurveys
 12.
   * Thumbs up button > likeSuggestion
   * Thumbs down button > dislikeSuggestion
- 
+
 13. 
   * Search icon > searchYelp
   * Select business button > selectBusiness
