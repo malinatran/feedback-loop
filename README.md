@@ -163,7 +163,7 @@ Back to surveys button > getUserSurveys
 11. 
   * Delete user profile button > confirmDelete
 
-12.
+12. 
   * Thumbs up button > likeSuggestion
   * Thumbs down button > dislikeSuggestion
 
