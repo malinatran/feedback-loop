@@ -45,12 +45,12 @@ https://drive.google.com/a/nooklyn.com/folderview?id=0B9qXBzKsKS2NcnlBVkNqV1hGUn
 **Post-Project Retro**
 * What aspects of your approach and attitude during this project would you like to improve upon?
 (MT) Our group was fairly ambitious when we first started the project, and we were able to achieve so much which I'm really proud of. We were at first ambivalent about our project idea, but I think we were able to push through and make it interesting and engaging and keep the momentum. If we could do this again, I think we could have been more collaborative and remotely pair programmed. Regardless, I think we did a great job!  
-(PW)
+(PW) We probably could have group programmed more.  Our strategy was to try being as efficient as possible.  We would lay out a list of goals we felt we could accomplish, each chose tasks, and then re-grouped after a couple days.  While I think this strategy was the most effective/quickest way to accomplish our goals, group programming often results in a "better" code.
 (MW)
 
 * What aspects of your coding process during this project would you like to improve upon?
 (MT) We could have done remote pair programming. We did a lot more modular coding (is that a thing?) where we would delegate tasks/features and then update the master. 
-(PW)
+(PW)I probably could have explored more tools when trying to deal with Date objects.  Date objects in javscript are a pretty common problem, and I could have given moment.js a try instead of getting frustrated.
 (MW)
 
 * What lines of code are you most proud of and why?
@@ -66,12 +66,13 @@ app.get('/businesses/:find/:near', function(req, res) {
     });
 });
 ```
-(PW)
+(PW)Survey status notification: server 308-323, app 584-607
+analytics: server 209-284
 (MW)
 
 * What lines of code do you understand the least and why?
 (MT) I understand most of the code, but what I am less familiar with is the function to check the date and determine whether the user must fill out survey or not (app.js, line 584). I only used the date object for one method, but it seems like there are other ways to manipulate data through the object... getDate? setDate? 
-(PW)
+(PW)Yelp/external API related things
 (MW)
 
 **Source Code Roadmap:**
