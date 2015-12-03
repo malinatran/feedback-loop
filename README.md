@@ -54,12 +54,23 @@ https://drive.google.com/a/nooklyn.com/folderview?id=0B9qXBzKsKS2NcnlBVkNqV1hGUn
 (MW)
 
 * What lines of code are you most proud of and why?
-(MT) 
+(MT) The code block that retrieves data from the Yelp API (server.js, line 298). This was my first time using a third-party API, so that was pretty cool.
+```
+app.get('/businesses/:find/:near', function(req, res) {
+  yelp.search({ term: req.params.find, location: req.params.near })
+    .then(function (data) {
+      res.send(data.businesses);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+});
+```
 (PW)
 (MW)
 
 * What lines of code do you understand the least and why?
-(MT)
+(MT) I understand most of the code, but what I am less familiar with is the function to check the date and determine whether the user must fill out survey or not (app.js, line 584). I only used the date object for one method, but it seems like there are other ways to manipulate data through the object... getDate? setDate? 
 (PW)
 (MW)
 
