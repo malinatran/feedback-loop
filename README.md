@@ -44,12 +44,24 @@ https://drive.google.com/a/nooklyn.com/folderview?id=0B9qXBzKsKS2NcnlBVkNqV1hGUn
 
 **Post-Project Retro**
 * What aspects of your approach and attitude during this project would you like to improve upon?
+(MT) Our group was fairly ambitious when we first started the project, and we were able to achieve so much which I'm really proud of. We were at first ambivalent about our project idea, but I think we were able to push through and make it interesting and engaging and keep the momentum. If we could do this again, I think we could have been more collaborative and remotely pair programmed. Regardless, I think we did a great job!  
+(PW)
+(MW)
 
 * What aspects of your coding process during this project would you like to improve upon?
+(MT) We could have done remote pair programming. We did a lot more modular coding (is that a thing?) where we would delegate tasks/features and then update the master. 
+(PW)
+(MW)
 
 * What lines of code are you most proud of and why?
+(MT) 
+(PW)
+(MW)
 
 * What lines of code do you understand the least and why?
+(MT)
+(PW)
+(MW)
 
 **Source Code Roadmap:**
 In app.js:
